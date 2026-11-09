@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-1290266452162223">
+<script src="/assets/tavion.js"></script>
 <title>Question – Irish Theory Test Practice</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -47,7 +49,11 @@
   document.getElementById("home").onclick = function (e) {
     e.preventDefault();
     D.ask("Leave this " + (exam ? "exam" : "practice") + "? You can continue it from the home page while this tab is open.", "Leave", "Stay")
-      .then(function (ok) { if (ok) location.href = "index.html"; });
+      .then(function (ok) {
+        if (!ok) return;
+        D.track("test_leave", { test: s.test, mode: s.mode, answered: Object.keys(s.answers).length, total: total });
+        location.href = "index.html";
+      });
   };
 
   // Timer (exam only) — based on start time, so it survives page loads.
@@ -84,7 +90,12 @@
     document.getElementById("q").innerHTML = h;
 
     document.querySelectorAll(".opt").forEach(function (b) {
-      b.onclick = function () { s.answers[q.id] = +b.getAttribute("data-i"); D.store.set(s); render(); renderNav(); };
+      b.onclick = function () {
+        var first = s.answers[q.id] === undefined, pick = +b.getAttribute("data-i");
+        s.answers[q.id] = pick; D.store.set(s); render(); renderNav();
+        // First answer per question only, so changing your mind in an exam isn't double-counted.
+        if (first) D.track("question_answer", { test: s.test, mode: s.mode, topic: q.topic, question_id: q.id, correct: pick === q.a ? "yes" : "no" });
+      };
     });
     var f = document.getElementById("flag");
     if (f) f.onclick = function () { s.flags[q.id] = !s.flags[q.id]; D.store.set(s); render(); renderOverview(); };

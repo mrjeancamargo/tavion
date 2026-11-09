@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-1290266452162223">
+<script src="/assets/tavion.js"></script>
 <title>Your Result – Irish Theory Test Practice</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -42,6 +44,16 @@
   var pct = r.total ? Math.round(r.correct / r.total * 100) : 0;
   var passed = exam && r.correct >= t.passMark;
 
+  // Report the finished test once (not again if the results page is reloaded).
+  if (!s.tracked) {
+    D.track(exam ? "exam_complete" : "practice_complete", {
+      test: s.test, topic: s.topic || "all", score: r.correct, total: r.total, answered: r.answered,
+      percent: r.total ? Math.round(r.correct / r.total * 100) : 0, result: exam ? (passed ? "pass" : "fail") : "practice",
+      time_up: s.timeUp ? "yes" : "no", minutes: mins
+    });
+    s.tracked = true; D.store.set(s);
+  }
+
   document.getElementById("hero").innerHTML = (s.timeUp ? '<div class="notice">⏱ Time\'s up — your exam was submitted automatically.</div>' : "") + (exam
     ? '<p class="muted" style="margin:0">' + t.icon + ' ' + t.name + ' mock exam</p><div class="big ' + (passed ? "pass" : "fail") + '">' + r.correct + '/' + r.total + '</div>' +
       '<h1 style="margin:6px 0" class="' + (passed ? "pass" : "fail") + '">' + (passed ? "Pass 🎉" : "Not this time") + '</h1>' +
@@ -53,7 +65,7 @@
   document.getElementById("actions").innerHTML =
     '<button class="btn primary" id="again">' + (exam ? "New mock exam" : "Practise again") + '</button>' +
     '<a class="btn" href="index.html">Home</a>' +
-    '<a class="btn wa" style="color:#fff;background:#1f9d55;border:0" target="_blank" rel="noopener" href="' + share.whatsapp + '">Share on WhatsApp</a>';
+    '<a class="btn wa" style="color:#fff;background:#1f9d55;border:0" target="_blank" rel="noopener" data-track="share" data-method="whatsapp" data-label="driving_results" href="' + share.whatsapp + '">Share on WhatsApp</a>';
   document.getElementById("again").onclick = function () { exam ? D.startExam(s.test) : D.startPractice(s.test, s.topic); };
 
   var th = "";

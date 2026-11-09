@@ -30,6 +30,7 @@
     var t = window.TESTS[test];
     var ids = shuffle(pool(test)).slice(0, t.examSize).map(function (q) { return q.id; });
     store.set({ test: test, mode: "exam", ids: ids, answers: {}, flags: {}, start: Date.now(), minutes: t.minutes });
+    track("exam_start", { test: test });
     location.href = "question.html?n=1";
   }
 
@@ -37,7 +38,13 @@
     var ids = shuffle(pool(test, topic)).map(function (q) { return q.id; });
     if (!ids.length) return;
     store.set({ test: test, mode: "practice", topic: topic || null, ids: ids, answers: {}, flags: {}, start: Date.now() });
+    track("practice_start", { test: test, topic: topic || "all" });
     location.href = "question.html?n=1";
+  }
+
+  // Google Analytics events (see /assets/tavion.js). Safe to call when analytics is off.
+  function track(name, params) {
+    if (window.TAVION && window.TAVION.track) window.TAVION.track(name, params);
   }
 
   function score(s) {
@@ -76,13 +83,8 @@
   // One responsive ad unit per page. Space is reserved in CSS so the layout
   // doesn't jump when the ad loads, and it sits away from the answer buttons
   // to avoid accidental clicks (an AdSense policy requirement).
-  var client = window.SITE.adsenseClient;
-  if (client) {
-    var s = document.createElement("script");
-    s.async = true; s.crossOrigin = "anonymous";
-    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + encodeURIComponent(client);
-    document.head.appendChild(s);
-  }
+  // The AdSense script itself is loaded once for the whole site by /assets/tavion.js.
+  var client = window.SITE.adsenseClient || (window.TAVION && window.TAVION.adsenseClient) || "";
 
   function renderAd(elId, slotKey) {
     var el = document.getElementById(elId);
@@ -123,6 +125,6 @@
 
   window.DTT = {
     store: store, byId: byId, shuffle: shuffle, pool: pool, startExam: startExam,
-    startPractice: startPractice, score: score, esc: esc, shareLinks: shareLinks, renderAd: renderAd, ask: ask
+    startPractice: startPractice, score: score, esc: esc, shareLinks: shareLinks, renderAd: renderAd, ask: ask, track: track
   };
 })();
