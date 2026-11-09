@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question – Irish Theory Test Practice</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/config.js"></script>
+<script src="js/questions.js"></script>
+<script src="js/q/rules.js"></script>
+<script src="js/q/signs.js"></script>
+<script src="js/q/risk.js"></script>
+<script src="js/q/safe.js"></script>
+<script src="js/q/vulnerable.js"></script>
+<script src="js/q/control.js"></script>
+<script src="js/q/moto.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="index.html" id="home"><b>L</b> Theory Test Practice</a><span class="timer" id="timer"></span></div></header>
+<main class="wrap">
+  <div class="card" id="q"></div>
+  <div class="nav btn-row" id="nav"></div>
+  <details class="overview" id="overview"></details>
+  <div class="ad" id="ad"></div>
+</main>
+<script>
+(function () {
+  var D = DTT, s = D.store.get();
+  if (!s || !s.ids) { location.replace("index.html"); return; }
+  if (s.finished) { location.replace("results.html"); return; }
+
+  var total = s.ids.length;
+  var n = Math.max(1, Math.min(total, parseInt(new URLSearchParams(location.search).get("n"), 10) || 1));
+  var q = D.byId[s.ids[n - 1]];
+  var exam = s.mode === "exam";
+  var L = ["A", "B", "C", "D", "E"];
+
+  function go(k) { location.href = "question.html?n=" + k; } // full page load = fresh ad
+  function finish(timeUp) {
+    s.finished = true; s.end = Date.now(); if (timeUp) s.timeUp = true;
+    D.store.set(s); location.replace("results.html");
+  }
+
+  document.getElementById("home").onclick = function (e) {
+    e.preventDefault();
+    D.ask("Leave this " + (exam ? "exam" : "practice") + "? You can continue it from the home page while this tab is open.", "Leave", "Stay")
+      .then(function (ok) { if (ok) location.href = "index.html"; });
+  };
+
+  // Timer (exam only) — based on start time, so it survives page loads.
+  if (exam) {
+    var endAt = s.start + s.minutes * 60000, tEl = document.getElementById("timer");
+    var tick = function () {
+      var left = Math.max(0, endAt - Date.now()), m = Math.floor(left / 60000), sec = Math.floor(left / 1000) % 60;
+      tEl.textContent = "⏱ " + m + ":" + (sec < 10 ? "0" : "") + sec;
+      tEl.classList.toggle("low", left < 300000);
+      if (!left) finish(true);
+    };
+    tick(); setInterval(tick, 1000);
+  }
+
+  function render() {
+    var chosen = s.answers[q.id], answered = chosen !== undefined, reveal = !exam && answered;
+    var h = '<div class="qbar"><span>Question <strong>' + n + '</strong> of ' + total + '</span>' +
+      (exam ? '<button class="btn flag-btn' + (s.flags[q.id] ? " on" : "") + '" id="flag" style="min-height:38px;padding:4px 12px">' + (s.flags[q.id] ? "⚑ Flagged" : "⚐ Flag") + '</button>' : "") + '</div>' +
+      '<div class="progress"><span style="width:' + (n / total * 100) + '%"></span></div>' +
+      '<p class="topic-tag">' + D.esc(TOPICS[q.topic]) + '</p>' +
+      (q.sign && SIGNS[q.sign] ? '<div class="sign">' + SIGNS[q.sign] + '</div>' : "") +
+      '<p class="qtext">' + D.esc(q.q) + '</p><ul class="opts">';
+    q.o.forEach(function (opt, i) {
+      var cls = "opt";
+      if (reveal) { if (i === q.a) cls += " right"; else if (i === chosen) cls += " wrong"; }
+      else if (i === chosen) cls += " sel";
+      h += '<li><button class="' + cls + '" data-i="' + i + '"' + (reveal ? " disabled" : "") + '><span class="k">' + L[i] + '</span><span>' + D.esc(opt) + '</span></button></li>';
+    });
+    h += "</ul>";
+    if (reveal) {
+      var ok = chosen === q.a;
+      h += '<div class="explain' + (ok ? "" : " bad") + '"><strong>' + (ok ? "✓ Correct" : "✗ Not quite — the answer is " + L[q.a]) + '</strong>' + D.esc(q.e) + '</div>';
+    }
+    document.getElementById("q").innerHTML = h;
+
+    document.querySelectorAll(".opt").forEach(function (b) {
+      b.onclick = function () { s.answers[q.id] = +b.getAttribute("data-i"); D.store.set(s); render(); renderNav(); };
+    });
+    var f = document.getElementById("flag");
+    if (f) f.onclick = function () { s.flags[q.id] = !s.flags[q.id]; D.store.set(s); render(); renderOverview(); };
+  }
+
+  function renderNav() {
+    var last = n === total, answered = s.answers[q.id] !== undefined, h = "";
+    if (exam) {
+      h += '<button class="btn" id="prev"' + (n === 1 ? " disabled" : "") + '>← Previous</button>';
+      h += last ? '<button class="btn primary" id="end">Finish exam</button>' : '<button class="btn primary" id="next">Next →</button>';
+    } else {
+      h += last ? '<button class="btn primary" id="end"' + (answered ? "" : " disabled") + '>See results</button>'
+                : '<button class="btn primary" id="next"' + (answered ? "" : " disabled") + '>Next question →</button>';
+      h += '<button class="btn" id="end2">Finish now</button>';
+    }
+    var nav = document.getElementById("nav");
+    nav.innerHTML = h;
+    var b;
+    if ((b = document.getElementById("prev"))) b.onclick = function () { go(n - 1); };
+    if ((b = document.getElementById("next"))) b.onclick = function () { go(n + 1); };
+    if ((b = document.getElementById("end"))) b.onclick = function () {
+      if (!exam) { finish(); return; }
+      var left = total - Object.keys(s.answers).length;
+      D.ask(left ? "You have " + left + " unanswered question" + (left > 1 ? "s" : "") + ". Finish anyway?" : "Finish the exam and see your result?", "Finish exam", "Keep going")
+        .then(function (ok) { if (ok) finish(); });
+    };
+    if ((b = document.getElementById("end2"))) b.onclick = function () {
+      D.ask("Finish and see your results?", "Finish", "Keep going").then(function (ok) { if (ok) finish(); });
+    };
+  }
+
+  function renderOverview() {
+    var o = document.getElementById("overview");
+    if (!exam) { o.style.display = "none"; return; }
+    var open = o.open, h = '<summary>All questions (' + Object.keys(s.answers).length + '/' + total + ' answered)</summary><div class="qgrid">';
+    s.ids.forEach(function (id, i) {
+      var c = (s.answers[id] !== undefined ? "done " : "") + (s.flags[id] ? "flag " : "") + (i + 1 === n ? "cur" : "");
+      h += '<a class="' + c + '" href="question.html?n=' + (i + 1) + '">' + (i + 1) + '</a>';
+    });
+    o.innerHTML = h + "</div>";
+    o.open = open;
+  }
+
+  render(); renderNav(); renderOverview();
+  D.renderAd("ad", "question");
+})();
+</script>
+</body>
+</html>

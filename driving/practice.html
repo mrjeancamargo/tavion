@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practise by Topic – Irish Theory Test</title>
+<meta name="description" content="Practise Irish driver theory test questions by topic with instant answers and explanations.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/config.js"></script>
+<script src="js/questions.js"></script>
+<script src="js/q/rules.js"></script>
+<script src="js/q/signs.js"></script>
+<script src="js/q/risk.js"></script>
+<script src="js/q/safe.js"></script>
+<script src="js/q/vulnerable.js"></script>
+<script src="js/q/control.js"></script>
+<script src="js/q/moto.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="index.html"><b>L</b> Theory Test Practice</a><a href="index.html" class="small">Home</a></div></header>
+<main class="wrap">
+  <h1 id="title">Practise by topic</h1>
+  <p class="lead">Pick a topic. You'll see the correct answer and an explanation after each question.</p>
+  <div class="topic-list" id="list"></div>
+  <div class="ad" id="ad"></div>
+</main>
+<footer><div class="wrap"><p>Independent practice site, not affiliated with the RSA. <a href="privacy.html">Privacy &amp; cookies</a></p></div></footer>
+<script>
+(function () {
+  var D = DTT;
+  var test = new URLSearchParams(location.search).get("test");
+  if (!TESTS[test] || !TESTS[test].enabled) { location.replace("index.html"); return; }
+  document.getElementById("title").textContent = TESTS[test].icon + " " + TESTS[test].name + " – practise by topic";
+
+  var html = '<button class="btn primary block" data-topic="">All topics, mixed <span>' + D.pool(test).length + '</span></button>';
+  Object.keys(TOPICS).forEach(function (k) {
+    var n = D.pool(test, k).length;
+    if (n) html += '<button class="btn block" data-topic="' + k + '">' + TOPICS[k] + ' <span class="muted">' + n + '</span></button>';
+  });
+  var list = document.getElementById("list");
+  list.innerHTML = html;
+  list.querySelectorAll("button").forEach(function (b) {
+    b.onclick = function () { D.startPractice(test, b.getAttribute("data-topic")); };
+  });
+  D.renderAd("ad", "home");
+})();
+</script>
+</body>
+</html>

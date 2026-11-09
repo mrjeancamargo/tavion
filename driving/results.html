@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Result – Irish Theory Test Practice</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/config.js"></script>
+<script src="js/questions.js"></script>
+<script src="js/q/rules.js"></script>
+<script src="js/q/signs.js"></script>
+<script src="js/q/risk.js"></script>
+<script src="js/q/safe.js"></script>
+<script src="js/q/vulnerable.js"></script>
+<script src="js/q/control.js"></script>
+<script src="js/q/moto.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="index.html"><b>L</b> Theory Test Practice</a><a href="index.html" class="small">Home</a></div></header>
+<main class="wrap">
+  <div class="card result-hero" id="hero"></div>
+  <div class="btn-row" style="margin-top:14px" id="actions"></div>
+  <div class="ad" id="ad"></div>
+  <h2>By topic</h2>
+  <div class="card bars" id="topics"></div>
+  <h2>Review your answers</h2>
+  <div class="filter" id="filter"></div>
+  <div class="review" id="review"></div>
+</main>
+<footer><div class="wrap"><p>Independent practice site, not affiliated with the RSA. <a href="privacy.html">Privacy &amp; cookies</a></p></div></footer>
+<script>
+(function () {
+  var D = DTT, s = D.store.get();
+  if (!s || !s.ids) { location.replace("index.html"); return; }
+  if (!s.finished) { s.finished = true; s.end = Date.now(); D.store.set(s); }
+
+  var t = TESTS[s.test], r = D.score(s), exam = s.mode === "exam", L = ["A", "B", "C", "D", "E"];
+  var mins = Math.max(1, Math.round((s.end - s.start) / 60000));
+  var pct = r.total ? Math.round(r.correct / r.total * 100) : 0;
+  var passed = exam && r.correct >= t.passMark;
+
+  document.getElementById("hero").innerHTML = (s.timeUp ? '<div class="notice">⏱ Time\'s up — your exam was submitted automatically.</div>' : "") + (exam
+    ? '<p class="muted" style="margin:0">' + t.icon + ' ' + t.name + ' mock exam</p><div class="big ' + (passed ? "pass" : "fail") + '">' + r.correct + '/' + r.total + '</div>' +
+      '<h1 style="margin:6px 0" class="' + (passed ? "pass" : "fail") + '">' + (passed ? "Pass 🎉" : "Not this time") + '</h1>' +
+      '<p class="muted" style="margin:0">Pass mark ' + t.passMark + '/' + t.examSize + ' · ' + mins + ' min · ' + (r.total - r.answered) + ' unanswered</p>'
+    : '<p class="muted" style="margin:0">' + t.icon + ' ' + t.name + ' practice' + (s.topic ? " · " + D.esc(TOPICS[s.topic]) : "") + '</p><div class="big">' + pct + '%</div>' +
+      '<p class="muted" style="margin:0">' + r.correct + ' correct out of ' + r.answered + ' answered</p>');
+
+  var share = D.shareLinks(exam ? "I scored " + r.correct + "/" + r.total + " on a free Irish " + t.name.toLowerCase() + " theory test mock exam. Try it:" : "Practising for my Irish driver theory test here:");
+  document.getElementById("actions").innerHTML =
+    '<button class="btn primary" id="again">' + (exam ? "New mock exam" : "Practise again") + '</button>' +
+    '<a class="btn" href="index.html">Home</a>' +
+    '<a class="btn wa" style="color:#fff;background:#1f9d55;border:0" target="_blank" rel="noopener" href="' + share.whatsapp + '">Share on WhatsApp</a>';
+  document.getElementById("again").onclick = function () { exam ? D.startExam(s.test) : D.startPractice(s.test, s.topic); };
+
+  var th = "";
+  Object.keys(r.topics).forEach(function (k) {
+    var x = r.topics[k];
+    th += '<div class="bar-row"><div class="lbl"><span>' + D.esc(TOPICS[k]) + '</span><span>' + x.correct + '/' + x.total + '</span></div><div class="bar"><span style="width:' + (x.correct / x.total * 100) + '%"></span></div></div>';
+  });
+  document.getElementById("topics").innerHTML = th;
+
+  var mode = "wrong";
+  function renderReview() {
+    var h = "";
+    s.ids.forEach(function (id, i) {
+      var q = D.byId[id], ch = s.answers[id], ok = ch === q.a;
+      if (mode === "wrong" && ok) return;
+      if (!exam && ch === undefined) return;
+      h += '<div class="card"><p class="muted small">Question ' + (i + 1) + ' · ' + D.esc(TOPICS[q.topic]) + '</p>' +
+        (q.sign && SIGNS[q.sign] ? '<div class="sign" style="width:90px;height:90px;margin:6px 0">' + SIGNS[q.sign] + '</div>' : "") +
+        '<p><strong>' + D.esc(q.q) + '</strong></p>' +
+        '<p class="' + (ok ? "yes" : "no") + '">Your answer: ' + (ch === undefined ? "Not answered" : L[ch] + ". " + D.esc(q.o[ch])) + '</p>' +
+        (ok ? "" : '<p class="yes">Correct answer: ' + L[q.a] + '. ' + D.esc(q.o[q.a]) + '</p>') +
+        '<p class="muted small">' + D.esc(q.e) + '</p></div>';
+    });
+    document.getElementById("review").innerHTML = h || '<p class="muted">Nothing to show — you got every question right!</p>';
+    document.getElementById("filter").innerHTML =
+      '<button data-m="wrong" class="' + (mode === "wrong" ? "on" : "") + '">Mistakes</button><button data-m="all" class="' + (mode === "all" ? "on" : "") + '">All questions</button>';
+    document.querySelectorAll("#filter button").forEach(function (b) { b.onclick = function () { mode = b.getAttribute("data-m"); renderReview(); }; });
+  }
+  renderReview();
+  D.renderAd("ad", "results");
+})();
+</script>
+</body>
+</html>
