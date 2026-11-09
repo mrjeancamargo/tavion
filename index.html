@@ -1,197 +1,240 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IE">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TAVION LIMITED - IT Services & Consulting</title>
-    <meta name="description" content="TAVION LIMITED: Tech contracting, IT support, software automation, and consulting.">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background: #0b0f19;
-            color: #f1f5f9;
-            font-family: Inter,system-ui,sans-serif;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tavion – Free Apps for Everyday Life in Ireland</title>
+<meta name="description" content="Free, simple web apps built in Ireland. Nothing to install, no sign-up. Start with our Irish driver theory test practice.">
+<link rel="canonical" href="https://tavion.ie/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tavion.ie/">
+<meta property="og:title" content="Tavion – Free apps for everyday life in Ireland">
+<meta property="og:description" content="Nothing to install. No sign-up. Works on any phone. Try the free Irish driver theory test practice.">
+<meta property="og:image" content="https://tavion.ie/images/og-home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0f19">
+<link rel="icon" href="images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f19;
+    --surface: #0f1726;
+    --surface2: #141d2e;
+    --border: rgba(255,255,255,.08);
+    --accent: #38bdf8;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --dim: #64748b;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  [id] { scroll-margin-top: 76px; } /* keep section headings clear of the sticky menu */
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "DM Sans", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { font-family: Syne, "DM Sans", sans-serif; line-height: 1.15; margin: 0; }
 
-        .navbar {
-            background: #111827;
-            padding-top: 0.6rem;
-            padding-bottom: 0.6rem;
-        }
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(11,15,25,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: Syne, sans-serif; font-weight: 800; letter-spacing: .04em; font-size: 18px; }
+  .brand img { width: 32px; height: 32px; }
+  .links { display: flex; gap: 6px; align-items: center; }
+  .links a { text-decoration: none; color: var(--muted); font-size: 15px; padding: 8px 10px; border-radius: 8px; }
+  .links a:hover { color: var(--text); background: var(--surface2); }
+  @media (max-width: 480px) { .links .hide-sm { display: none; } }
 
-        .nav-logo {
-            height: 40px;
-            width: auto;
-        }
+  /* Hero */
+  .hero { position: relative; padding: 72px 0 48px; text-align: center; }
+  .hero::before { content: ""; position: absolute; inset: -200px 0 auto; height: 520px; background: radial-gradient(closest-side, rgba(56,189,248,.16), transparent); pointer-events: none; }
+  .eyebrow { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.25); padding: 5px 12px; border-radius: 99px; margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(34px, 7vw, 60px); font-weight: 800; max-width: 800px; margin: 0 auto; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: var(--muted); font-size: clamp(17px, 2.4vw, 20px); max-width: 600px; margin: 18px auto 28px; }
+  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 12px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 16px; }
+  .btn:hover { border-color: rgba(56,189,248,.4); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #06121c; }
+  .btn.primary:hover { background: #7dd3fc; }
+  .perks { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 28px; color: var(--dim); font-size: 14px; }
+  .perks span::before { content: "✓ "; color: #22c55e; font-weight: 700; }
+  @media (max-width: 600px) {
+    .hero { padding: 44px 0 20px; }
+    .hero p { margin: 14px auto 22px; }
+    .perks { gap: 6px 14px; margin-top: 20px; }
+    section { padding: 28px 0; }
+  }
 
-        .nav-link-services {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
+  /* Sections */
+  section { padding: 40px 0; }
+  .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .sec-head h2 { font-size: clamp(24px, 4vw, 32px); }
+  .sec-head p { color: var(--muted); margin: 6px 0 0; }
 
-            .nav-link-services:hover {
-                color: #38bdf8;
-            }
-        /* HERO */
-        .hero {
-            padding-top: 120px;
-            padding-bottom: 40px;
-            background: #0b0f19;
-            text-align: center;
-        }
+  /* App cards */
+  .apps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+  .app { --c: var(--accent); display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 20px; text-decoration: none; transition: transform .2s, border-color .2s; position: relative; overflow: hidden; }
+  .app::after { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--c); }
+  .app:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--c) 50%, transparent); }
+  .app-top { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
+  .app-icon { flex: 0 0 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; font-size: 28px; background: color-mix(in srgb, var(--c) 18%, var(--surface2)); }
+  .app h3 { font-size: 20px; }
+  .app .cat { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .app p { color: var(--muted); margin: 0 0 14px; font-size: 15px; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tags span { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .app .go { margin-top: auto; font-weight: 600; color: var(--c); }
+  .app.new { border-style: dashed; background: transparent; justify-content: center; text-align: center; align-items: center; min-height: 230px; }
+  .app.new::after { display: none; }
+  .app.new .app-icon { background: var(--surface2); margin-bottom: 12px; }
 
-            .hero h1 {
-                color: #ffffff;
-            }
+  /* Share */
+  .share-box { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; display: flex; gap: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .share-box h2 { font-size: 22px; }
+  .share-box p { color: var(--muted); margin: 6px 0 0; }
+  .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .share-btns a { color: #fff; border: 0; }
+  .share-btns .wa { background: #1f9d55; }
+  .share-btns .fb { background: #1877f2; }
+  .share-btns svg { width: 20px; height: 20px; fill: currentColor; }
 
-            .hero .lead {
-                color: #cbd5e1;
-            }
-        /* SECTIONS */
-        .section-title {
-            color: #38bdf8;
-            letter-spacing: 0.05em;
-        }
+  /* Services strip */
+  .svc { display: grid; gap: 16px; grid-template-columns: 1fr; background: linear-gradient(135deg, #0f1726, #141d2e); border: 1px solid var(--border); border-radius: 18px; padding: 24px; }
+  @media (min-width: 768px) { .svc { grid-template-columns: 1.4fr 1fr; align-items: center; padding: 32px; } }
+  .svc h2 { font-size: 22px; margin-bottom: 6px; }
+  .svc p { color: var(--muted); margin: 0; }
+  .svc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; color: var(--muted); font-size: 15px; }
+  .svc li::before { content: "→ "; color: var(--accent); }
+  .svc .btn { margin-top: 16px; }
 
-        h2, h3, h4 {
-            color: #ffffff;
-        }
-
-        p {
-            color: #cbd5e1;
-        }
-        /* CARDS */
-        .card {
-            background: #0f1726;
-            border: 1px solid rgba(255,255,255,.08);
-            color: #e2e8f0;
-            text-decoration: none;
-            transition: border-color 0.2s, transform 0.2s;
-        }
-
-            .card:hover {
-                border-color: rgba(56,189,248,0.35);
-                transform: translateY(-2px);
-            }
-
-            .card h4 {
-                color: #ffffff;
-            }
-
-            .card p {
-                color: #cbd5e1;
-            }
-
-        .card-arrow {
-            font-size: 0.8rem;
-            color: #38bdf8;
-            margin-top: 0.5rem;
-            display: block;
-        }
-
-        #contact a {
-            color: #38bdf8;
-        }
-
-            #contact a:hover {
-                color: #0ea5e9;
-            }
-
-        footer {
-            color: #9ca3af;
-        }
-    </style>
+  .contact { text-align: center; }
+  .contact h2 { font-size: 24px; margin-bottom: 8px; }
+  .contact p { color: var(--muted); margin: 0 0 16px; }
+  footer { border-top: 1px solid var(--border); padding: 28px 0 40px; color: var(--dim); font-size: 13px; text-align: center; }
+  footer a { color: var(--muted); }
+</style>
 </head>
 <body>
 
-    <!-- NAVBAR WITH LOGO -->
-    <nav class="navbar navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <img src="images/logo.png" alt="Tavion Logo" class="nav-logo">
-                <span class="fw-bold">TAVION</span>
-            </a>
-            <div class="d-flex align-items-center gap-3">
-                <a href="services.html" class="nav-link-services">Services</a>
-                <a href="#contact" class="btn btn-info btn-sm">Contact</a>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="images/mark-white.png" alt="" width="32" height="32">TAVION</a>
+    <div class="links">
+      <a href="#apps">Apps</a>
+      <a href="services.html">IT Services</a>
+      <a href="#contact" class="hide-sm">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Free web apps · Made in Ireland</span>
+    <h1>Handy apps for <span>everyday life</span> in Ireland</h1>
+    <p>Simple, free tools that work on any phone, tablet or computer. Nothing to install and no sign-up — just open and go.</p>
+    <div class="btns">
+      <a class="btn primary" href="driving/">🚗 Try the Theory Test</a>
+      <a class="btn" href="#apps">Browse all apps</a>
+    </div>
+    <div class="perks"><span>100% free</span><span>No account needed</span><span>Works on mobile</span></div>
+  </div>
+</header>
+
+<main>
+  <section id="apps">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Apps</h2>
+          <p>Tap any app to open it straight away.</p>
+        </div>
+      </div>
+
+      <div class="apps">
+        <!-- To add a new app: copy this <a class="app"> block, change the link, colour (--c), icon, text and tags. -->
+        <a class="app" href="driving/" style="--c:#34b27b">
+          <div class="app-top">
+            <div class="app-icon" aria-hidden="true">🚗</div>
+            <div>
+              <h3>Theory Test Practice</h3>
+              <div class="cat">Learning · Driving</div>
             </div>
+          </div>
+          <p>Practise for the Irish driver theory test. Timed 40-question mock exams, practice by topic and instant results for car and motorcycle.</p>
+          <div class="tags"><span>574 questions</span><span>Car</span><span>Motorcycle</span></div>
+          <span class="go">Start practising →</span>
+        </a>
+
+        <a class="app new" href="mailto:jean@tavion.ie?subject=App%20idea%20for%20Tavion">
+          <div class="app-icon" aria-hidden="true">✨</div>
+          <h3>More apps on the way</h3>
+          <p style="margin-top:8px">New free tools are being added regularly. Got an idea for something useful? Tell us.</p>
+          <span class="go">Suggest an app →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="share-box">
+        <div>
+          <h2>Know someone who'd find these useful?</h2>
+          <p>Share Tavion with friends and family — it's free for everyone.</p>
         </div>
-    </nav>
+        <div class="share-btns" id="share"></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <header class="hero">
-        <div class="container">
-            <h1 class="display-6 fw-bold">Modern, Reliable IT Solutions</h1>
-            <p class="lead mt-2">Tech contracting, IT support, software automation, and consulting.</p>
-            <a href="services.html" class="btn btn-outline-info btn-lg mt-3 me-2">Our Services</a>
-            <a href="#contact" class="btn btn-info btn-lg mt-3">Contact</a>
+  <section>
+    <div class="wrap">
+      <div class="svc">
+        <div>
+          <h2>Need IT help for your business?</h2>
+          <p>Tavion also provides technical support, automation and app development for businesses across Ireland and Europe.</p>
+          <a class="btn" href="services.html">See IT services &amp; pricing →</a>
         </div>
-    </header>
+        <ul>
+          <li>Technical &amp; managed support</li>
+          <li>Microsoft 365, identity &amp; security</li>
+          <li>Python &amp; workflow automation</li>
+          <li>Custom web &amp; app development</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <!-- SERVICES -->
-    <section class="py-4">
-        <div class="container">
-            <p class="section-title text-uppercase small mb-2">Services</p>
-            <h2 class="h3 mb-1">What we do</h2>
-            <p class="small mb-4" style="color:#64748b;">
-                <a href="services.html" style="color:#38bdf8;text-decoration:none;">View full services &amp; pricing →</a>
-            </p>
-            <div class="row g-4">
-                <div class="col-md-3">
-                    <a href="services.html#services" class="card p-3 h-100 d-block">
-                        <h4 class="h6">Tech Contracting</h4>
-                        <p class="small">Senior support for projects, migrations, and incident response.</p>
-                        <span class="card-arrow">Learn more →</span>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="services.html#services" class="card p-3 h-100 d-block">
-                        <h4 class="h6">IT Support</h4>
-                        <p class="small">M365, identity, email security, device management.</p>
-                        <span class="card-arrow">Learn more →</span>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="services.html#services" class="card p-3 h-100 d-block">
-                        <h4 class="h6">Automation</h4>
-                        <p class="small">Python, Bash, APIs, workflow automation.</p>
-                        <span class="card-arrow">Learn more →</span>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="services.html#services" class="card p-3 h-100 d-block">
-                        <h4 class="h6">Consulting & SRE</h4>
-                        <p class="small">Cloud cost control, reliability engineering, observability.</p>
-                        <span class="card-arrow">Learn more →</span>
-                    </a>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="services.html" class="btn btn-outline-info">See all services &amp; pricing</a>
-            </div>
-        </div>
-    </section>
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <p>Questions, feedback or an app idea? We'd love to hear from you.</p>
+      <a class="btn primary" href="mailto:jean@tavion.ie">jean@tavion.ie</a>
+    </div>
+  </section>
+</main>
 
-    <!-- CONTACT -->
-    <section id="contact" class="py-5 text-center">
-        <div class="container">
-            <p class="section-title text-uppercase small mb-2">Contact</p>
-            <h2 class="h4 mb-3">Get in touch</h2>
-            <p>Email: <a href="mailto:jean@tavion.ie">jean@tavion.ie</a></p>
-        </div>
-    </section>
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> TAVION LIMITED · All rights reserved · <a href="privacy.html">Privacy &amp; cookies</a></p>
+    <p>TAVION LIMITED (CRO 800757), registered office: 7 Sandy Lane, Richmond Street, Longford, N39 NY20, Ireland</p>
+  </div>
+</footer>
 
-    <footer class="py-4 text-center small">
-        © <span id="year"></span> TAVION LIMITED
-        All rights reserved <br>
-        TAVION LIMITED (CRO 800757) with registered office at
-        7 SANDY LANE, RICHMOND STREET, LONGFORD, N39NY20, IRELAND
-    </footer>
-
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  (function () {
+    var url = "https://tavion.ie/";
+    var text = "Free handy apps made in Ireland — no sign-up needed, including a free driver theory test practice:";
+    document.getElementById("share").innerHTML =
+      '<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent(text + " " + url) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</a>' +
+      '<a class="btn fb" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg>Facebook</a>';
+  })();
+</script>
 </body>
 </html>
