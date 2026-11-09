@@ -91,12 +91,29 @@
     if (!el) return;
     var slot = window.SITE.adSlots[slotKey];
     if (!client || !slot) {
-      el.innerHTML = '<span class="ad-label">Advertisement</span><div class="ad-ph">Ad space</div>';
+      // No ad unit configured yet: show a grey placeholder when testing locally,
+      // and hide the space entirely on the live site.
+      if (/localhost|127\.0\.0\.1/.test(location.hostname)) {
+        el.innerHTML = '<span class="ad-label">Advertisement</span><div class="ad-ph">Ad space</div>';
+      } else {
+        el.style.display = "none";
+      }
       return;
     }
     el.innerHTML = '<span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="' +
       esc(client) + '" data-ad-slot="' + esc(slot) + '" data-ad-format="auto" data-full-width-responsive="true"></ins>';
     try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+
+    // If Google has no ad for this visit, it marks the slot "unfilled": hide the whole space.
+    var ins = el.querySelector("ins");
+    var check = function () {
+      if (ins.getAttribute("data-ad-status") === "unfilled") { el.style.display = "none"; return true; }
+      return ins.getAttribute("data-ad-status") === "filled";
+    };
+    if (!check() && window.MutationObserver) {
+      var mo = new MutationObserver(function () { if (check()) mo.disconnect(); });
+      mo.observe(ins, { attributes: true, attributeFilter: ["data-ad-status"] });
+    }
   }
 
   // In-page confirm dialog. Native confirm()/alert() are blocked or auto-dismissed

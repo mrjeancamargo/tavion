@@ -116,6 +116,8 @@ h2 { font-size: 20px; margin: 28px 0 12px; }
 /* Ad slot: fixed reserved height so content doesn't shift */
 .ad { margin: 28px 0 0; text-align: center; min-height: 120px; }
 .ad-label { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+/* When Google has no ad to show, hide the whole space (label included) */
+.ad:has(ins.adsbygoogle[data-ad-status="unfilled"]), ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
 .ad-ph { height: 100px; border: 1px dashed var(--line); border-radius: 10px; display: grid; place-items: center; color: var(--muted); font-size: 14px; }
 
 /* Results */
