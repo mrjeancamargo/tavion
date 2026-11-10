@@ -1,0 +1,157 @@
+{
+ "source": "https://tavion.ie/salary/tax-rates.html",
+ "checked": "November 2026",
+ "currency": "EUR",
+ "notes": "usc: list of [upper limit of band, rate]; last band has no upper limit (null). prsi: employee Class A rate January-September and from 1 October.",
+ "uscExemptAtOrBelow": 13000,
+ "uscReducedRateIncomeLimit": 60000,
+ "years": {
+  "2025": {
+   "label": "2025",
+   "budget": "Budget 2025",
+   "band": {
+    "single": 44000,
+    "parent": 48000,
+    "married": 53000,
+    "secondMax": 35000
+   },
+   "credits": {
+    "personal": 2000,
+    "married": 4000,
+    "widowed": 2540,
+    "employee": 2000,
+    "earned": 2000,
+    "homeCarer": 1950,
+    "spccc": 1900,
+    "age": 245,
+    "ageMarried": 490,
+    "blind": 1950,
+    "incapChild": 3800,
+    "depRelative": 305,
+    "rentSingle": 1000,
+    "rentCouple": 2000
+   },
+   "usc": [
+    [
+     12012,
+     0.005
+    ],
+    [
+     27382,
+     0.02
+    ],
+    [
+     70044,
+     0.03
+    ],
+    [
+     null,
+     0.08
+    ]
+   ],
+   "prsi": {
+    "jan": 0.041,
+    "oct": 0.042
+   },
+   "minWage": 13.5
+  },
+  "2026": {
+   "label": "2026",
+   "budget": "Budget 2026",
+   "band": {
+    "single": 44000,
+    "parent": 48000,
+    "married": 53000,
+    "secondMax": 35000
+   },
+   "credits": {
+    "personal": 2000,
+    "married": 4000,
+    "widowed": 2540,
+    "employee": 2000,
+    "earned": 2000,
+    "homeCarer": 1950,
+    "spccc": 1900,
+    "age": 245,
+    "ageMarried": 490,
+    "blind": 1950,
+    "incapChild": 3800,
+    "depRelative": 305,
+    "rentSingle": 1000,
+    "rentCouple": 2000
+   },
+   "usc": [
+    [
+     12012,
+     0.005
+    ],
+    [
+     28700,
+     0.02
+    ],
+    [
+     70044,
+     0.03
+    ],
+    [
+     null,
+     0.08
+    ]
+   ],
+   "prsi": {
+    "jan": 0.042,
+    "oct": 0.0435
+   },
+   "minWage": 14.15
+  },
+  "2027": {
+   "label": "2027",
+   "budget": "Budget 2027",
+   "band": {
+    "single": 46500,
+    "parent": 50500,
+    "married": 55500,
+    "secondMax": 37500
+   },
+   "credits": {
+    "personal": 2125,
+    "married": 4250,
+    "widowed": 2540,
+    "employee": 2125,
+    "earned": 2125,
+    "homeCarer": 2050,
+    "spccc": 1900,
+    "age": 245,
+    "ageMarried": 490,
+    "blind": 1950,
+    "incapChild": 3800,
+    "depRelative": 305,
+    "rentSingle": 1150,
+    "rentCouple": 2300
+   },
+   "usc": [
+    [
+     12012,
+     0.005
+    ],
+    [
+     30300,
+     0.02
+    ],
+    [
+     70044,
+     0.03
+    ],
+    [
+     null,
+     0.08
+    ]
+   ],
+   "prsi": {
+    "jan": 0.0435,
+    "oct": 0.045
+   },
+   "minWage": 14.94
+  }
+ }
+}

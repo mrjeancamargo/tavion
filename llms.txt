@@ -1,0 +1,37 @@
+# Tavion
+
+> Free, simple web apps for everyday life in Ireland. No sign-up, nothing to install. Made in Ireland.
+
+## Apps
+
+- [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
+- [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
+- [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
+
+## Take-home pay: key pages
+
+- [Budget 2027 tax changes](https://tavion.ie/salary/budget-2027.html): what changed from 1 January 2027 and how much better off you are at each salary
+- [Irish tax rates 2025-2027](https://tavion.ie/salary/tax-rates.html): tax bands, credits, USC and PRSI side by side ([JSON](https://tavion.ie/salary/rates.json))
+- [Salary after tax table](https://tavion.ie/salary/salaries.html): net pay for every salary from €15,000 to €200,000
+- [Minimum wage](https://tavion.ie/salary/minimum-wage.html): €14.15 (2026), €14.94 (2027) and take-home pay
+- [Annual leave calculator](https://tavion.ie/salary/holidays.html): statutory annual leave and public holiday entitlement
+- [Bank holidays 2026 and 2027](https://tavion.ie/salary/public-holidays.html)
+- [Tax FAQ](https://tavion.ie/salary/faq.html)
+
+## Take-home pay: key facts
+
+- Income tax: 20% up to €44,000 (single, 2026) / €46,500 (2027); 40% above. Married one income €53,000 / €55,500; single parent €48,000 / €50,500.
+- Personal and Employee credits: €2,000 each in 2026; €2,125 each in 2027.
+- USC 2026: 0.5% to €12,012; 2% to €28,700; 3% to €70,044; 8% above. 2027: 2% band to €30,300. Exempt at €13,000 or less. Full medical card or 70+ with income ≤ €60,000: max 2%.
+- Employee PRSI: 4.2% (2026, 4.35% from 1 Oct); 4.35% (2027, 4.5% from 1 Oct). None at €352/week or less.
+- €30,000 after tax (single PAYE): €26,296/year (€2,191/month) in 2026; €26,514/year (€2,209/month) in 2027. Details: https://tavion.ie/salary/30000-after-tax.html
+- €40,000 after tax (single PAYE): €33,572/year (€2,798/month) in 2026; €33,778/year (€2,815/month) in 2027. Details: https://tavion.ie/salary/40000-after-tax.html
+- €50,000 after tax (single PAYE): €39,648/year (€3,304/month) in 2026; €40,339/year (€3,362/month) in 2027. Details: https://tavion.ie/salary/50000-after-tax.html
+- €60,000 after tax (single PAYE): €44,925/year (€3,744/month) in 2026; €45,601/year (€3,800/month) in 2027. Details: https://tavion.ie/salary/60000-after-tax.html
+- €80,000 after tax (single PAYE): €54,979/year (€4,582/month) in 2026; €55,625/year (€4,635/month) in 2027. Details: https://tavion.ie/salary/80000-after-tax.html
+- €100,000 after tax (single PAYE): €64,532/year (€5,378/month) in 2026; €65,148/year (€5,429/month) in 2027. Details: https://tavion.ie/salary/100000-after-tax.html
+
+## Optional
+
+- [IT services](https://tavion.ie/services.html)
+- [Privacy](https://tavion.ie/privacy.html)

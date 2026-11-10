@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-1290266452162223">
+<script src="/assets/tavion.js"></script>
+<title>Take-Home Pay Calculator Ireland 2026 & 2027 – Salary After Tax, USC & PRSI</title>
+<meta name="description" content="Free Irish salary calculator updated for Budget 2027: see your net pay after income tax, USC and PRSI per year, month, week, day and hour. Single, married, medical card and more.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://tavion.ie/salary/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tavion">
+<meta property="og:locale" content="en_IE">
+<meta property="og:url" content="https://tavion.ie/salary/">
+<meta property="og:title" content="Take-Home Pay Calculator Ireland 2026 & 2027 – Salary After Tax, USC & PRSI">
+<meta property="og:description" content="Free Irish salary calculator updated for Budget 2027: see your net pay after income tax, USC and PRSI per year, month, week, day and hour. Single, married, medical card and more.">
+<meta property="og:image" content="https://tavion.ie/salary/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#5b3fd1">
+<link rel="icon" href="../images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Irish Take-Home Pay Calculator", "url": "https://tavion.ie/salary/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "inLanguage": "en-IE", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "featureList": ["Income tax, USC and PRSI for 2025, 2026 and 2027", "Single, single parent, married one income and two incomes (joint assessment)", "Medical card and over-70 USC rates", "Pension relief and Rent Tax Credit", "Net pay per year, month, fortnight, week, day and hour", "Better-off comparison with the previous and next Budget"], "description": "Free Irish salary after tax calculator. Work out net pay after PAYE income tax, USC and PRSI for 2025, 2026 and Budget 2027."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much tax do I pay on €45,000 in Ireland?", "acceptedAnswer": {"@type": "Answer", "text": "A single PAYE employee on €45,000 pays €5,200.00 income tax, €882.82 USC and €1,906.88 PRSI in 2026, taking home €37,010.31 a year."}}, {"@type": "Question", "name": "What are the income tax rates in Ireland for 2027?", "acceptedAnswer": {"@type": "Answer", "text": "20% up to €46,500 for a single person (€55,500 for a married couple with one income) and 40% above that. Personal and employee tax credits are €2,125 each."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Take-Home Pay Calculator Ireland 2026 & 2027 – Salary After Tax, USC & PRSI", "url": "https://tavion.ie/salary/", "description": "Free Irish salary calculator updated for Budget 2027: see your net pay after income tax, USC and PRSI per year, month, week, day and hour. Single, married, medical card and more.", "inLanguage": "en-IE", "dateModified": "2026-11-10", "isPartOf": {"@type": "WebSite", "name": "Tavion", "url": "https://tavion.ie/"}, "publisher": {"@type": "Organization", "name": "Tavion", "url": "https://tavion.ie/", "logo": "https://tavion.ie/images/logo.png"}, "about": {"@type": "Thing", "name": "Income tax, USC and PRSI in Ireland"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar"><a class="logo" href="./"><b>€</b> Take-Home Pay</a><a class="small" href="../" data-track="apps_click" data-label="salary_header">More Tavion apps</a></div>
+  <nav class="tabs" aria-label="Sections"><div class="wrap"><a href="./" class="on">Calculator</a><a href="budget-2027.html">Budget 2027</a><a href="salaries.html">Salaries</a><a href="tax-rates.html">Tax rates</a><a href="holidays.html">Annual leave</a><a href="public-holidays.html">Bank holidays</a><a href="faq.html">FAQ</a></div></nav>
+</header>
+<main class="wrap">
+
+<h1>Take-home pay calculator Ireland</h1>
+<p class="lead">Enter your salary to see your take-home pay after income tax, USC and PRSI – per year, month, fortnight, week, day and hour. Updated for <strong>Budget 2027</strong>. Free, no sign-up, nothing leaves your phone.</p>
+<ul class="facts"><li>2025 · 2026 · 2027 tax years</li><li>Single, married &amp; one-parent</li><li>Medical card USC</li></ul>
+
+<form id="calc" class="card" novalidate>
+  <label for="gross" class="big-label">Your gross pay (before tax)</label>
+  <div class="money-row">
+    <div class="money"><span>€</span><input id="gross" type="text" inputmode="decimal" autocomplete="off" placeholder="45,000" aria-describedby="grossHelp"></div>
+    <select id="period" aria-label="Pay period">
+      <option value="year">per year</option><option value="month">per month</option><option value="fortnight">per fortnight</option>
+      <option value="week">per week</option><option value="day">per day</option><option value="hour">per hour</option>
+    </select>
+  </div>
+  <p id="grossHelp" class="muted small" style="margin:6px 0 0">Your salary or wages before anything is taken off.</p>
+
+  <fieldset style="margin-top:18px">
+    <legend class="sm">Tax year</legend>
+    <div class="seg" id="yearSeg" role="radiogroup" aria-label="Tax year">
+      <label><input type="radio" name="year" value="2025"><span>2025<small>Last year</small></span></label>
+      <label><input type="radio" name="year" value="2026" checked><span>2026<small>This year</small></span></label>
+      <label><input type="radio" name="year" value="2027"><span>2027<small>Budget 2027</small></span></label>
+    </div>
+  </fieldset>
+
+  <details id="adv" class="adv">
+    <summary>Advanced options <span class="muted small">– married, medical card, pension, rent…</span></summary>
+    <div class="adv-body">
+      <fieldset>
+        <legend class="sm">Your situation</legend>
+        <label class="radio"><input type="radio" name="status" value="single" checked><span>Single<small>Not married or in a civil partnership</small></span></label>
+        <label class="radio"><input type="radio" name="status" value="parent"><span>Single parent<small>You get the Single Person Child Carer Credit (main carer of a child)</small></span></label>
+        <label class="radio"><input type="radio" name="status" value="married1"><span>Married / civil partners – one income<small>Jointly assessed, only you earn</small></span></label>
+        <label class="radio"><input type="radio" name="status" value="married2"><span>Married / civil partners – both working<small>Jointly assessed, you both earn</small></span></label>
+        <label class="radio"><input type="radio" name="status" value="widowed"><span>Widowed or surviving civil partner<small>No dependent children</small></span></label>
+        <p class="muted small">Married but taxed separately (individual or separate assessment)? Choose <strong>Single</strong> – each of you is taxed on your own income.</p>
+      </fieldset>
+
+      <div id="partnerBox" class="row-card" hidden>
+        <label for="partnerGross">Your partner's gross pay per year</label>
+        <div class="money"><span>€</span><input id="partnerGross" type="text" inputmode="decimal" placeholder="30,000"></div>
+        <div class="two">
+          <label>Partner's age<input id="partnerAge" type="number" min="16" max="100" inputmode="numeric" placeholder="35"></label>
+          <label class="check" style="margin-top:30px"><input type="checkbox" id="partnerMedicalCard"><span>Partner has a full medical card</span></label>
+        </div>
+      </div>
+
+      <div class="two">
+        <label>Your age<input id="age" type="number" min="16" max="100" inputmode="numeric" placeholder="35"></label>
+        <label>Employment<select id="employment"><option value="employee">Employee (PAYE)</option><option value="self">Self-employed</option></select></label>
+      </div>
+
+      <label class="check"><input type="checkbox" id="medicalCard"><span>I have a full medical card<small class="muted"> – reduced USC if income is €60,000 or less (GP visit card doesn't count)</small></span></label>
+
+      <div class="two">
+        <label>Pension contribution (% of salary)<input id="pensionPct" type="number" min="0" max="40" step="0.5" inputmode="decimal" placeholder="0"></label>
+        <label>Rent you pay per month (€)<input id="rent" type="number" min="0" step="10" inputmode="decimal" placeholder="0"></label>
+      </div>
+      <p class="muted small" style="margin-top:4px">Rent gets the Rent Tax Credit: 20% of rent paid, up to €1,000 (2026) or €1,150 (2027) per person.</p>
+
+      <label class="check" id="homeCarerRow"><input type="checkbox" id="homeCarer"><span>My spouse/partner cares for a child, an older person or a person with a disability at home<small class="muted"> – Home Carer Tax Credit</small></span></label>
+
+      <div class="three">
+        <label>Blind people (you/partner)<select id="blind"><option value="0">None</option><option value="1">One</option><option value="2">Both</option></select></label>
+        <label>Incapacitated children<input id="incap" type="number" min="0" max="10" inputmode="numeric" placeholder="0"></label>
+        <label>Dependent relatives<input id="depRel" type="number" min="0" max="10" inputmode="numeric" placeholder="0"></label>
+      </div>
+
+      <div class="two">
+        <label>Hours you work per week<input id="hours" type="number" min="1" max="80" step="0.5" inputmode="decimal" placeholder="39"></label>
+        <label>Days you work per week<input id="days" type="number" min="1" max="7" step="0.5" inputmode="decimal" placeholder="5"></label>
+      </div>
+      <button type="button" class="btn small-btn" id="resetAdv">Reset advanced options</button>
+    </div>
+  </details>
+
+  <div class="btn-row"><button type="submit" class="btn primary">Calculate my take-home pay</button></div>
+  <p class="muted small" style="margin-bottom:0">🔒 Everything is calculated on your device. Nothing is sent to us.</p>
+</form>
+
+<div id="result" aria-live="polite"></div>
+<div class="ad" data-slot="result"></div>
+
+<h2>How your take-home pay is worked out</h2>
+<div class="card"><ol class="steps">
+<li><strong>Income tax (PAYE).</strong> 20% on income up to your standard rate band (€44,000 for a single person in 2026, €46,500 in 2027) and 40% on the rest. Your tax credits are then taken off the tax.</li>
+<li><strong>Universal Social Charge (USC).</strong> 0.5%, 2%, 3% and 8% bands on your gross income. You pay no USC if your income is €13,000 or less.</li>
+<li><strong>PRSI.</strong> 4.2% of your earnings in 2026 (rising to 4.35% from 1 October 2026) if you earn more than €352 a week.</li>
+<li><strong>What's left</strong> is your take-home (net) pay. We split it into months, weeks, days and hours using your working hours.</li>
+</ol></div>
+
+<h2>Example: €45,000 salary</h2>
+<p>A single PAYE worker on €45,000 takes home <strong>€37,010 a year (€3,084 a month)</strong> in 2026. Under Budget 2027 that becomes <strong>€37,409 (€3,117 a month)</strong> – +€398 a year. <a href="45000-after-tax.html">See the full €45,000 breakdown →</a></p>
+<div class="chip-list"><a href="25000-after-tax.html">€25k</a><a href="30000-after-tax.html">€30k</a><a href="35000-after-tax.html">€35k</a><a href="40000-after-tax.html">€40k</a><a href="45000-after-tax.html">€45k</a><a href="50000-after-tax.html">€50k</a><a href="55000-after-tax.html">€55k</a><a href="60000-after-tax.html">€60k</a><a href="70000-after-tax.html">€70k</a><a href="80000-after-tax.html">€80k</a><a href="100000-after-tax.html">€100k</a><a href="salaries.html">All salaries →</a></div>
+
+<div class="cta"><h2>What does Budget 2027 mean for you?</h2><p>See how much better off you'll be from January 2027 at every salary.</p><a class="btn" href="budget-2027.html">Budget 2027 changes</a></div>
+
+<div class="ad" data-slot="calculator"></div>
+<h2>Share it</h2><p class="muted">Know someone starting a new job or checking their payslip? Send them this.</p><div class="share"><a class="btn wa" data-track="share" data-method="whatsapp" data-label="index" target="_blank" rel="noopener" href="https://wa.me/?text=Free%20Irish%20take-home%20pay%20calculator%20%F0%9F%87%AE%F0%9F%87%AA%20Updated%20for%20Budget%202027%20%E2%80%93%20see%20exactly%20what%20you%27ll%20get%20per%20month%20and%20week%3A%20https%3A%2F%2Ftavion.ie%2Fsalary%2F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</a><a class="btn fb" data-track="share" data-method="facebook" data-label="index" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftavion.ie%2Fsalary%2F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg>Facebook</a></div>
+</main>
+<footer>
+  <div class="wrap">
+    <nav aria-label="Take-home pay pages"><a href="./">Take-home pay calculator</a><a href="budget-2027.html">Budget 2027</a><a href="salaries.html">All salaries</a><a href="tax-rates.html">Tax rates 2025–2027</a><a href="minimum-wage.html">Minimum wage</a><a href="holidays.html">Annual leave calculator</a><a href="public-holidays.html">Bank holidays</a><a href="faq.html">FAQ</a></nav>
+    <p>After tax: <a href="25000-after-tax.html">€25k</a> · <a href="30000-after-tax.html">€30k</a> · <a href="35000-after-tax.html">€35k</a> · <a href="40000-after-tax.html">€40k</a> · <a href="45000-after-tax.html">€45k</a> · <a href="50000-after-tax.html">€50k</a> · <a href="55000-after-tax.html">€55k</a> · <a href="60000-after-tax.html">€60k</a> · <a href="70000-after-tax.html">€70k</a> · <a href="80000-after-tax.html">€80k</a> · <a href="100000-after-tax.html">€100k</a></p>
+    <p>Figures checked against Revenue's tax charts and Budget 2027 (announced 6 October 2026) in November 2026. This is a free, independent tool from <a href="../">Tavion</a> and is not affiliated with Revenue or the Government of Ireland. Results are estimates for a full tax year – your payslip can differ (for example with benefit-in-kind, health insurance, emergency tax or a mid-year start). Official source: <a href="https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/tax-relief-charts/index.aspx" rel="noopener">revenue.ie</a>.</p>
+    <p><a href="../privacy.html">Privacy &amp; cookies</a> · <a href="../" data-track="apps_click" data-label="salary_footer">More free apps from Tavion</a></p>
+  </div>
+</footer>
+<script src="js/site.js"></script><script src="js/tax.js"></script><script src="js/calc.js"></script>
+</body>
+</html>

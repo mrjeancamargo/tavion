@@ -63,7 +63,7 @@ window.TAVION = {
   // ---- Event tracking ----
   // TAVION.track("exam_start", { test: "car" })
   // With Tag Manager, each call becomes a dataLayer event: { event: "exam_start", test: "car", ... }
-  var KEYS = ["label", "method", "link_url", "test", "mode", "topic", "question_id", "correct", "score", "total", "answered", "percent", "result", "time_up", "minutes"];
+  var KEYS = ["label", "method", "link_url", "test", "mode", "topic", "question_id", "correct", "score", "total", "answered", "percent", "result", "time_up", "minutes", "tax_year", "status", "salary_band", "period", "advanced"];
   CFG.track = function (name, params) {
     params = params || {};
     params.app_section = section;
