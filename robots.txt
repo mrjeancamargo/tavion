@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /driving/question.html
+Disallow: /driving/results.html
+Disallow: /tools/
+
+Sitemap: https://tavion.ie/sitemap.xml
