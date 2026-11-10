@@ -6,8 +6,8 @@
  * otherwise every visit is counted twice.
  */
 window.TAVION = {
-  gtmId: "GTM-N3GQGR49",                     // Google Tag Manager container ID
-  gaId: "",                                  // Google Analytics 4 Measurement ID ("G-..."), only if not using GTM
+  gtmId: "",                                 // Google Tag Manager container ID (e.g. "GTM-N3GQGR49") – leave empty while using gaId
+  gaId: "G-Q9DV6F3296",                      // Google Analytics 4 Measurement ID (stream "tavion", https://tavion.ie)
   adsenseClient: "ca-pub-1290266452162223"   // Google AdSense publisher ID
 };
 
