@@ -208,6 +208,7 @@ def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot=
     <nav aria-label="Rent pages"><a href="./">Rent increase calculator</a><a href="notice-period.html">Notice period calculator</a><a href="new-rules-2026.html">New rules from March 2026</a><a href="rent-pressure-zones.html">Rent Pressure Zones</a><a href="tenant-rights.html">Tenant rights</a><a href="landlord-guide.html">Landlord guide</a><a href="faq.html">FAQ</a></nav>
     <p>Rent rules by county: {footer_c} · <a href="rent-pressure-zones.html">all counties</a></p>
     <p>Information checked against the Residential Tenancies Board (RTB), Citizens Information and the Housing Agency in {CHECKED}. This is a free, independent tool from <a href="../">Tavion</a>. It is not affiliated with the RTB or the Government and is general information, not legal advice. For your own case use the official <a href="https://rtb.ie/" rel="noopener">RTB Rent Calculator and Notice of Termination templates</a>, or get free advice from <a href="https://threshold.ie/" rel="noopener">Threshold</a>.</p>
+    <p>Also free: <a href="../mortgage/" data-track="cross_app" data-label="mortgage">🔑 Mortgage calculator – how much can I borrow?</a> · <a href="../salary/" data-track="cross_app" data-label="salary">💶 Take-home pay calculator</a></p>
     <p><a href="../privacy.html">Privacy &amp; cookies</a> · <a href="../" data-track="apps_click" data-label="rent_footer">More free apps from Tavion</a></p>
   </div>
 </footer>
