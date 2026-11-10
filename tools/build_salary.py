@@ -777,6 +777,12 @@ def write_llms():
         "- [IT services](https://tavion.ie/services.html)", "- [Privacy](https://tavion.ie/privacy.html)", ""]
     with open(os.path.join(REPO, "llms.txt"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines))
+    # Other apps add their own sections to llms.txt – put them back.
+    import sys
+    sys.path.insert(0, HERE)
+    if os.path.isdir(os.path.join(REPO, "rent")):
+        import build_rent
+        build_rent.update_llms()
 
 if __name__ == "__main__":
     os.makedirs(ROOT, exist_ok=True)

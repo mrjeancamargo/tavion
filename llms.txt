@@ -7,6 +7,7 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
+- [Irish Rent Checker](https://tavion.ie/rent/): maximum legal rent increase (2% or CPI if lower) and earliest date, notice of termination periods and valid reasons under the 1 March 2026 rules; Rent Pressure Zone status by county and town; tenant and landlord guides with RTB sources.
 
 ## Take-home pay: key pages
 
@@ -30,6 +31,16 @@
 - €60,000 after tax (single PAYE): €44,925/year (€3,744/month) in 2026; €45,601/year (€3,800/month) in 2027. Details: https://tavion.ie/salary/60000-after-tax.html
 - €80,000 after tax (single PAYE): €54,979/year (€4,582/month) in 2026; €55,625/year (€4,635/month) in 2027. Details: https://tavion.ie/salary/80000-after-tax.html
 - €100,000 after tax (single PAYE): €64,532/year (€5,378/month) in 2026; €65,148/year (€5,429/month) in 2027. Details: https://tavion.ie/salary/100000-after-tax.html
+
+## Rent: key facts
+
+- Since 20 June 2025 the whole of Ireland is a Rent Pressure Zone; since 1 March 2026 a national rent control system applies to all private tenancies.
+- Rent may rise once every 12 months by at most 2% a year (pro rata) or CPI inflation if lower; 90 days' written notice sent to tenant and RTB the same day. CPI: 4.1% (September 2026).
+- Areas first designated on 20 June 2025: first review of an existing tenancy only 24 months after rent was last set.
+- New apartments (construction commenced after 10 June 2025): CPI increases, no 2% cap. AHB and cost rental: not covered.
+- Tenancies from 1 March 2026: rolling 6-year Tenancy of Minimum Duration; landlords with 4+ tenancies or companies can only terminate for tenant breach or unsuitability; small landlords (1-3) can sell during a cycle only to avoid undue hardship.
+- Landlord notice: 90 days (<6 months), 152 (6-12 months), 180 (1-7 years), 196 (7-8 years), 224 (8+ years); 28 days for breach after warning; 7 days for serious anti-social behaviour. Tenant notice: 28/35/42/56/84/112 days.
+- Pages: [Rent increase calculator](https://tavion.ie/rent/), [Notice period calculator](https://tavion.ie/rent/notice-period.html), [New rules 2026](https://tavion.ie/rent/new-rules-2026.html), [Rent Pressure Zones](https://tavion.ie/rent/rent-pressure-zones.html), [FAQ](https://tavion.ie/rent/faq.html). Sources: rtb.ie, citizensinformation.ie, housingagency.ie.
 
 ## Optional
 
