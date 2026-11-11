@@ -187,7 +187,7 @@ def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot=
     <nav aria-label="Take-home pay pages"><a href="./">Take-home pay calculator</a><a href="budget-2027.html">Budget 2027</a><a href="salaries.html">All salaries</a><a href="tax-rates.html">Tax rates 2025–2027</a><a href="minimum-wage.html">Minimum wage</a><a href="holidays.html">Annual leave calculator</a><a href="public-holidays.html">Bank holidays</a><a href="faq.html">FAQ</a></nav>
     <p>After tax: {footer_sal}</p>
     <p>Figures checked against Revenue's tax charts and Budget 2027 (announced 6 October 2026) in {CHECKED}. This is a free, independent tool from <a href="../">Tavion</a> and is not affiliated with Revenue or the Government of Ireland. Results are estimates for a full tax year – your payslip can differ (for example with benefit-in-kind, health insurance, emergency tax or a mid-year start). Official source: <a href="{REVENUE}" rel="noopener">revenue.ie</a>.</p>
-    <p>Also free: <a href="../mortgage/" data-track="cross_app" data-label="mortgage">🔑 Mortgage calculator – how much can I borrow?</a> · <a href="../rent/" data-track="cross_app" data-label="rent">🏠 Rent increase checker</a></p>
+    <p>Also free: <a href="../mortgage/" data-track="cross_app" data-label="mortgage">🔑 Mortgage calculator – how much can I borrow?</a> · <a href="../rent/" data-track="cross_app" data-label="rent">🏠 Rent increase checker</a> · <a href="../stamp-duty/" data-track="cross_app" data-label="stamp">🧾 Stamp duty calculator</a></p>
     <p><a href="../privacy.html">Privacy &amp; cookies</a> · <a href="../" data-track="apps_click" data-label="salary_footer">More free apps from Tavion</a></p>
   </div>
 </footer>
@@ -787,6 +787,9 @@ def write_llms():
     if os.path.isdir(os.path.join(REPO, "mortgage")):
         import build_mortgage
         build_mortgage.update_llms()
+    if os.path.isdir(os.path.join(REPO, "stamp-duty")):
+        import build_stamp
+        build_stamp.update_llms()
 
 if __name__ == "__main__":
     os.makedirs(ROOT, exist_ok=True)

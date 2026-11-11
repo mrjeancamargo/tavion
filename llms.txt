@@ -7,8 +7,9 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
-- [Irish Rent Checker](https://tavion.ie/rent/): maximum legal rent increase (2% or CPI if lower) and earliest date, notice of termination periods and valid reasons under the 1 March 2026 rules; Rent Pressure Zone status by county and town; tenant and landlord guides with RTB sources.
+- [Irish Stamp Duty & LPT Calculator](https://tavion.ie/stamp-duty/): stamp duty (1% / 2% / 6%, new homes ex-VAT), total costs of buying a home, and Local Property Tax 2026-2027 by band and council.
 - [Irish Mortgage Calculator](https://tavion.ie/mortgage/): how much you can borrow under Central Bank rules (4x FTB / 3.5x movers, 10% deposit), price you can afford, deposit, stamp duty and fees, Help to Buy and First Home Scheme, mover equity, repayments vs take-home pay and vs average rent by county.
+- [Irish Rent Checker](https://tavion.ie/rent/): maximum legal rent increase (2% or CPI if lower) and earliest date, notice of termination periods and valid reasons under the 1 March 2026 rules; Rent Pressure Zone status by county and town; tenant and landlord guides with RTB sources.
 
 ## Take-home pay: key pages
 
@@ -33,15 +34,6 @@
 - €80,000 after tax (single PAYE): €54,979/year (€4,582/month) in 2026; €55,625/year (€4,635/month) in 2027. Details: https://tavion.ie/salary/80000-after-tax.html
 - €100,000 after tax (single PAYE): €64,532/year (€5,378/month) in 2026; €65,148/year (€5,429/month) in 2027. Details: https://tavion.ie/salary/100000-after-tax.html
 
-## Mortgages: key facts
-
-- Central Bank limits: first-time buyers 4x gross income, second and subsequent buyers 3.5x; 90% loan-to-value (10% deposit) for homes, 70% for buy-to-let; lenders may exceed limits for 15% of lending (10% BTL). April 2026: bridging loans up to 18 months exempt from the income limit.
-- Average new mortgage rate 3.53% (August 2026); fixed 3.49%.
-- Help to Buy: up to €35,000 from 7 October 2026 (Budget 2027), max 10% of price, new homes up to €500,000, mortgage at least 70%, until end-2029. First Home Scheme: equity up to 30% (20% with Help to Buy), price ceilings €375,000–€500,000 by area.
-- Stamp duty: 1% up to €1m, 2% €1m–€1.5m, 6% above €1.5m (VAT-exclusive price on new homes).
-- Average new rent (RTB Q1 2026): national €1,839, Dublin €2,335, Cork €1,678, Galway €1,718, Limerick €1,744.
-- Pages: [Calculator](https://tavion.ie/mortgage/), [How much can I borrow by salary](https://tavion.ie/mortgage/how-much-can-i-borrow.html), [Repayment tables](https://tavion.ie/mortgage/repayments.html), [Costs of buying](https://tavion.ie/mortgage/costs-of-buying.html), [Help to Buy & First Home Scheme](https://tavion.ie/mortgage/schemes.html), [Movers](https://tavion.ie/mortgage/moving-home.html), [By county](https://tavion.ie/mortgage/counties.html), [FAQ](https://tavion.ie/mortgage/faq.html).
-
 ## Rent: key facts
 
 - Since 20 June 2025 the whole of Ireland is a Rent Pressure Zone; since 1 March 2026 a national rent control system applies to all private tenancies.
@@ -51,6 +43,23 @@
 - Tenancies from 1 March 2026: rolling 6-year Tenancy of Minimum Duration; landlords with 4+ tenancies or companies can only terminate for tenant breach or unsuitability; small landlords (1-3) can sell during a cycle only to avoid undue hardship.
 - Landlord notice: 90 days (<6 months), 152 (6-12 months), 180 (1-7 years), 196 (7-8 years), 224 (8+ years); 28 days for breach after warning; 7 days for serious anti-social behaviour. Tenant notice: 28/35/42/56/84/112 days.
 - Pages: [Rent increase calculator](https://tavion.ie/rent/), [Notice period calculator](https://tavion.ie/rent/notice-period.html), [New rules 2026](https://tavion.ie/rent/new-rules-2026.html), [Rent Pressure Zones](https://tavion.ie/rent/rent-pressure-zones.html), [FAQ](https://tavion.ie/rent/faq.html). Sources: rtb.ie, citizensinformation.ie, housingagency.ie.
+
+## Mortgages: key facts
+
+- Central Bank limits: first-time buyers 4x gross income, second and subsequent buyers 3.5x; 90% loan-to-value (10% deposit) for homes, 70% for buy-to-let; lenders may exceed limits for 15% of lending (10% BTL). April 2026: bridging loans up to 18 months exempt from the income limit.
+- Average new mortgage rate 3.53% (August 2026); fixed 3.49%.
+- Help to Buy: up to €35,000 from 7 October 2026 (Budget 2027), max 10% of price, new homes up to €500,000, mortgage at least 70%, until end-2029. First Home Scheme: equity up to 30% (20% with Help to Buy), price ceilings €375,000–€500,000 by area.
+- Stamp duty: 1% up to €1m, 2% €1m–€1.5m, 6% above €1.5m (VAT-exclusive price on new homes).
+- Average new rent (RTB Q1 2026): national €1,839, Dublin €2,335, Cork €1,678, Galway €1,718, Limerick €1,744.
+- Pages: [Calculator](https://tavion.ie/mortgage/), [How much can I borrow by salary](https://tavion.ie/mortgage/how-much-can-i-borrow.html), [Repayment tables](https://tavion.ie/mortgage/repayments.html), [Costs of buying](https://tavion.ie/mortgage/costs-of-buying.html), [Help to Buy & First Home Scheme](https://tavion.ie/mortgage/schemes.html), [Movers](https://tavion.ie/mortgage/moving-home.html), [By county](https://tavion.ie/mortgage/counties.html), [FAQ](https://tavion.ie/mortgage/faq.html).
+
+## Stamp duty & LPT: key facts
+
+- Residential stamp duty: 1% up to €1,000,000; 2% from €1m to €1.5m; 6% above €1.5m. New homes: charged on the price excluding 13.5% VAT. 10+ homes in 12 months: 15%. No first-time buyer exemption.
+- Typical buying costs on a €350,000 second-hand home: about €8,700 (stamp duty €3,500, solicitor ~€3,075, Land Registry ~€1,150, searches, valuation, survey) plus a 10% deposit.
+- LPT 2026-2030: band set by value on 1 November 2025; 19 bands from €95 (up to €240,000) to €3,110 (€1,995,001-€2,100,000); over €2.1m: 0.0906% / 0.25% / 0.3% on slices. Councils adjust by -15% to +25%.
+- LPT Local Adjustment Factors 2027: Carlow County Council +15%, Cavan County Council +25%, Clare County Council +15%, Cork City Council +15%, Cork County Council +15%, Donegal County Council +15%, Dublin City Council +0%, DÃºn Laoghaire-Rathdown County Council -15%, Fingal County Council -5%, Galway City Council +15%, Galway County Council +15%, Kerry County Council +10%, Kildare County Council +10%, Kilkenny County Council +15%, Laois County Council +20%, Leitrim County Council +25%, Limerick City and County Council +15%, Longford County Council +15%, Louth County Council +0%, Mayo County Council +10%, Meath County Council +0%, Monaghan County Council +15%, Offaly County Council +15%, Roscommon County Council +15%, Sligo County Council +25%, South Dublin County Council -7.5%, Tipperary County Council +15%, Waterford City and County Council +15%, Westmeath County Council +15%, Wexford County Council +15%, Wicklow County Council +6%.
+- Pages: [Stamp duty calculator](https://tavion.ie/stamp-duty/), [LPT calculator](https://tavion.ie/stamp-duty/lpt.html), [Stamp duty by price](https://tavion.ie/stamp-duty/prices.html), [LPT bands](https://tavion.ie/stamp-duty/lpt-bands.html), [LPT by council](https://tavion.ie/stamp-duty/lpt-councils.html), [FAQ](https://tavion.ie/stamp-duty/faq.html).
 
 ## Optional
 

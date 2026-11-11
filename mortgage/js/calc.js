@@ -102,7 +102,7 @@
     items.push(["", "Lenders can lend above " + o.multiple + "× income for a limited number of borrowers – up to about " + eur(o.maxLoanException) + " for you. Don't count on it."]);
     h += '<ul class="issues">' + items.map(function (i) { return '<li class="' + i[0] + '">' + i[1] + '</li>'; }).join("") + '</ul>';
     h += '<p class="muted small">An estimate, not a mortgage offer. Fees are typical amounts – get quotes. Compare lenders on <a href="https://www.ccpc.ie/consumers/money/mortgages/" target="_blank" rel="noopener">ccpc.ie</a>.</p>';
-    h += '<div class="res-actions"><a class="btn" href="costs-of-buying.html">All buying costs →</a><a class="btn wa" target="_blank" rel="noopener" data-track="share" data-method="whatsapp" data-label="mortgage_result" href="https://wa.me/?text=' +
+    h += '<div class="res-actions"><a class="btn" href="../stamp-duty/?price=' + o.price + (inp.newBuild ? "&new=1" : "") + '" data-track="cross_app" data-label="stamp_from_mortgage">Stamp duty &amp; fees breakdown →</a><a class="btn wa" target="_blank" rel="noopener" data-track="share" data-method="whatsapp" data-label="mortgage_result" href="https://wa.me/?text=' +
       encodeURIComponent("See how much you can borrow for a mortgage in Ireland – free calculator: " + location.origin + location.pathname) + '">Share on WhatsApp</a></div>';
     out.innerHTML = h;
     return o;

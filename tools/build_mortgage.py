@@ -94,7 +94,8 @@ def try_also(items):
     return '<div class="try"><h2 class="tl">Try also</h2><div class="try-grid">' + "".join(
         f'<a href="{h}" data-track="cross_app" data-label="{lab}"><b>{icon}</b><span><strong>{t}</strong>{d}</span></a>' for icon, t, d, h, lab in items) + "</div></div>"
 
-CROSS = [("💶", "Take-home pay calculator", "Your net pay after tax, USC and PRSI", "../salary/", "salary"),
+CROSS = [("🧾", "Stamp duty & buying costs", "Stamp duty, fees and your LPT bill", "../stamp-duty/", "stamp"),
+         ("💶", "Take-home pay calculator", "Your net pay after tax, USC and PRSI", "../salary/", "salary"),
          ("🏠", "Rent increase checker", "Is your rent increase legal?", "../rent/", "rent")]
 
 def share_html(text, url, label):
@@ -415,6 +416,7 @@ def build_counties():
 <p class="muted small">If it's a new home under €500,000, Help to Buy could give a first-time buyer up to {eur(min(35000, price * 0.1))} towards the deposit.</p>
 <div class="ad" data-slot="content"></div>
 <div class="cta"><h2>Your figures for {NAMES[k]}</h2><p>See what you can borrow and the total cash you need.</p><a class="btn" href="./?county={k}">Open the calculator</a></div>
+<p>Stamp duty and fees on a {eur(price)} home: <a href="../stamp-duty/stamp-duty-{min([x for x in range(100000, 1000001, 25000)], key=lambda x: abs(x - price))}.html">see the full breakdown →</a></p>
 <p>Renting in {NAMES[k]} while you save? <a href="../rent/rent-increase-{k}.html">Check the rent increase rules for {NAMES[k]} →</a></p>"""
         faqs = [(f"How much do I need to buy a house in {NAMES[k]}?", f"For a {eur(price)} home: a 10% deposit of {eur(price * 0.1)} plus about {eur(stamp + sum(FEES.values()))} in stamp duty and fees, and a gross income of about {eur(price * 0.9 / 4)} for a first-time buyer."),
                 (f"Is it cheaper to buy or rent in {NAMES[k]}?", f"Repaying a {eur(price * 0.9)} mortgage costs about {eur(pay)} a month over 30 years at {R['avgRate']}%, compared with an average new rent of {eur(RENT[k])} (RTB, Q1 2026). Buying also has upfront costs, insurance and maintenance.")]
@@ -451,7 +453,7 @@ def build_guides():
 {lis(["<strong>Help to Buy</strong> (new homes): up to €35,000 back on tax you've paid – it counts towards your deposit. <a href='schemes.html'>How it works</a>",
       "<strong>Get 3 quotes</strong> from solicitors – fixed fees vary by over €1,000", "<strong>Ask about cashback</strong> – some lenders pay 2–3% of the mortgage at drawdown, but compare the rate first",
       "<strong>Green mortgages</strong> – lower rates for homes with a BER of B3 or better", "Movers: your <strong>equity</strong> counts towards the deposit – <a href='moving-home.html'>see the movers guide</a>"])}
-<div class="cta"><h2>Your total cash needed</h2><p>Deposit + stamp duty + fees, worked out for your price.</p><a class="btn" href="./">Open the calculator</a></div>"""
+<div class="cta"><h2>Stamp duty for your price</h2><p>Stamp duty, every fee and your Local Property Tax – worked out for any price.</p><a class="btn" href="../stamp-duty/" data-track="cross_app" data-label="stamp">Stamp duty calculator</a></div>"""
     write("costs-of-buying.html", page("costs-of-buying.html", "Costs of Buying a House in Ireland 2026 – Deposit, Stamp Duty, Solicitor & Fees",
                                        "Every cost of buying a home in Ireland: 10% deposit, stamp duty (1%/2%/6%), solicitor, Land Registry, valuation, survey and insurance – and the total cash you need.",
                                        body, active="Costs", crumbs=[("Mortgage", "./"), ("Costs of buying", None)], h1="The real cost of buying a home",
