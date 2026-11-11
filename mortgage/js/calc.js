@@ -8,14 +8,15 @@
   function eur(n, dp) { dp = dp || 0; return (n < 0 ? "−" : "") + "€" + Math.abs(n).toLocaleString("en-IE", { minimumFractionDigits: dp, maximumFractionDigits: dp }); }
   function radio(n) { var r = form.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : null; }
   function setRadio(n, v) { var r = form.querySelector('input[name="' + n + '"][value="' + v + '"]'); if (r) r.checked = true; }
-  var MONEY = ["inc1", "inc2", "savings", "price", "htbTax", "curVal", "curMort", "var1", "var2"];
-  var OTHER = ["county", "varPct", "rate", "term", "debts", "mSave"], CHK = ["newBuild", "apartment", "htb", "fhs", "joint"];
+  var MONEY = ["inc1", "inc2", "savings", "price", "htbTax", "curVal", "curMort", "curRep", "var1", "var2", "debts", "childcare", "otherCommit"];
+  var OTHER = ["county", "varPct", "rate", "term", "mSave"], CHK = ["newBuild", "apartment", "htb", "fhs", "joint"];
 
   function sync() {
     var two = radio("who") === "2", mover = radio("buyer") === "mover";
     $("inc2Box").hidden = !two; $("var2Row").hidden = !two; $("jointRow").hidden = !two;
     $("moverBox").hidden = !mover; $("ftbOnly").hidden = mover;
     $("htbTaxRow").hidden = !$("htb").checked;
+    $("curRepRow").hidden = !(mover && radio("selling") === "no");
   }
   function save() {
     var s = { buyer: radio("buyer"), who: radio("who"), selling: radio("selling") };
@@ -28,7 +29,7 @@
       MONEY.concat(OTHER).forEach(function (k) { if (s[k] != null && s[k] !== "") $(k).value = s[k]; });
       CHK.forEach(function (k) { if (s[k] != null) $(k).checked = s[k]; });
       ["buyer", "who", "selling"].forEach(function (k) { if (s[k]) setRadio(k, s[k]); });
-      if (s.price || s.newBuild || s.htb || s.fhs || s.var1 || s.rate || s.term || s.debts || s.buyer === "mover") $("adv").open = true;
+      if (s.price || s.newBuild || s.htb || s.fhs || s.var1 || s.rate || s.term || s.debts || s.childcare || s.otherCommit || s.buyer === "mover") $("adv").open = true;
     }
     var q = new URLSearchParams(location.search);
     if (q.get("inc1")) $("inc1").value = Number(num(q.get("inc1"))).toLocaleString("en-IE");
@@ -46,7 +47,8 @@
       htb: $("htb").checked, htbTaxPaid: num($("htbTax").value) || null, fhs: $("fhs").checked,
       rate: num($("rate").value) || M.RULES.avgRate, term: num($("term").value) || 30,
       currentValue: num($("curVal").value), currentMortgage: num($("curMort").value), selling: radio("selling") !== "no",
-      otherDebts: num($("debts").value), monthlySavings: num($("mSave").value)
+      otherDebts: num($("debts").value), childcare: num($("childcare").value), otherCommitments: num($("otherCommit").value),
+      currentRepayment: num($("curRep").value), monthlySavings: num($("mSave").value)
     };
   }
 
@@ -58,10 +60,13 @@
     if (!inp.incomes[0]) { out.innerHTML = ""; return null; }
     var o = M.calc(inp), h = "";
     var who = radio("who") === "2" ? "you can borrow together" : "you can borrow";
-    h += '<div class="net-hero"><div class="tl">Up to · ' + (o.buyer === "ftb" ? "first-time buyer, 4×" : "mover, 3.5×") + ' income</div><div class="amt">' + eur(o.maxLoanLTI) + '</div><p>' + who +
+    var cut = o.affordReduction > 0;
+    h += '<div class="net-hero"><div class="tl">' + (cut ? 'With your loans and outgoings' : 'Up to · ' + (o.buyer === "ftb" ? "first-time buyer, 4×" : "mover, 3.5×") + ' income') + '</div><div class="amt">' + eur(o.maxLoan) + '</div><p>' + who +
       ' · homes up to about <strong>' + eur(o.maxPrice) + '</strong>' + (o.usingTarget ? '' : ' with your savings') + '</p></div>';
+    if (cut) h += '<div class="card"><dl class="dl"><dt>Central Bank limit (' + o.multiple + '× income)</dt><dd>' + eur(o.maxLoanLTI) + '</dd><dt>Your commitments (' + eur(o.commitTotal) + ' a month)</dt><dd style="color:var(--bad)">−' + eur(o.affordReduction) +
+      '</dd><dt><strong>What a lender may offer</strong></dt><dd>' + eur(o.maxLoan) + '</dd></dl><p class="muted small" style="margin:8px 0 0">Estimate: commitments tested at ' + o.stressRate + '% (your rate + 2). Each lender uses its own test.</p></div>';
     if (o.depositLimited && !o.usingTarget) {
-      h += '<div class="callout warn">💡 <strong>Your savings are what hold you back, not your income.</strong> To use your full ' + eur(o.maxLoanLTI) + ' mortgage (a home of about ' + eur(o.fullPrice) +
+      h += '<div class="callout warn">💡 <strong>Your savings are what hold you back, not your income.</strong> To use your full ' + eur(o.maxLoan) + ' mortgage (a home of about ' + eur(o.fullPrice) +
         ') you\'d need about <strong>' + eur(o.savingsForMax) + '</strong> for the deposit and costs' + (o.buyer === "ftb" && !inp.newBuild ? ' – or less with Help to Buy on a new home' : '') + '.</div>';
     }
     // purchase summary
@@ -87,7 +92,7 @@
     if (o.netMonthly) {
       var sh = o.debtShare || o.repaymentShare, cls = sh > 40 ? "bad" : sh > 33 ? "warn" : "";
       h += '<div class="card"><div class="tl">Repayment vs take-home pay</div><div class="meter ' + cls + '"><span style="width:' + Math.min(100, sh) + '%"></span></div><p class="small" style="margin:0">' +
-        eur(o.monthly) + (inp.otherDebts ? ' + ' + eur(inp.otherDebts) + ' other loans' : '') + ' is <strong>' + Math.round(sh) + '%</strong> of your take-home pay of about ' + eur(o.netMonthly) + ' a month. <a href="../salary/?gross=' + (inp.incomes[0] || "") + '">See your take-home pay →</a></p></div>';
+        eur(o.monthly) + (o.commitTotal ? ' + ' + eur(o.commitTotal) + ' of commitments' : '') + ' is <strong>' + Math.round(sh) + '%</strong> of your take-home pay of about ' + eur(o.netMonthly) + ' a month. <a href="../salary/?gross=' + (inp.incomes[0] || "") + '">See your take-home pay →</a></p></div>';
     }
     // rent comparison
     var cheaper = o.rentDiff > 0;
@@ -99,7 +104,7 @@
     o.notes.forEach(function (w) { items.push(["", w]); });
     if (o.buyer === "ftb" && !inp.htb && inp.newBuild) items.push(["ok", "Buying new? Tick <strong>Help to Buy</strong> – up to €35,000 towards your deposit."]);
     if (o.buyer === "ftb" && !inp.newBuild) items.push(["", "Help to Buy and the First Home Scheme are for new homes. Second-hand? Look at the <a href='https://localauthorityhomeloan.ie/' target='_blank' rel='noopener'>Local Authority Home Loan</a> if your income is lower."]);
-    items.push(["", "Lenders can lend above " + o.multiple + "× income for a limited number of borrowers – up to about " + eur(o.maxLoanException) + " for you. Don't count on it."]);
+    if (!cut) items.push(["", "Lenders can lend above " + o.multiple + "× income for a limited number of borrowers – up to about " + eur(o.maxLoanException) + " for you. Don't count on it."]);
     h += '<ul class="issues">' + items.map(function (i) { return '<li class="' + i[0] + '">' + i[1] + '</li>'; }).join("") + '</ul>';
     h += '<p class="muted small">An estimate, not a mortgage offer. Fees are typical amounts – get quotes. Compare lenders on <a href="https://www.ccpc.ie/consumers/money/mortgages/" target="_blank" rel="noopener">ccpc.ie</a>.</p>';
     h += '<div class="res-actions"><a class="btn" href="../stamp-duty/?price=' + o.price + (inp.newBuild ? "&new=1" : "") + '" data-track="cross_app" data-label="stamp_from_mortgage">Stamp duty &amp; fees breakdown →</a><a class="btn wa" target="_blank" rel="noopener" data-track="share" data-method="whatsapp" data-label="mortgage_result" href="https://wa.me/?text=' +
@@ -132,7 +137,7 @@
   form.addEventListener("change", function () { go(false); });
   form.addEventListener("submit", function (e) { e.preventDefault(); go(true); });
   $("resetAdv").addEventListener("click", function () {
-    ["price", "htbTax", "curVal", "curMort", "var1", "var2", "varPct", "rate", "term", "debts", "mSave"].forEach(function (k) { $(k).value = ""; });
+    ["price", "htbTax", "curVal", "curMort", "curRep", "var1", "var2", "varPct", "rate", "term", "debts", "childcare", "otherCommit", "mSave"].forEach(function (k) { $(k).value = ""; });
     ["newBuild", "apartment", "htb", "fhs"].forEach(function (k) { $(k).checked = false; }); render();
   });
   render();

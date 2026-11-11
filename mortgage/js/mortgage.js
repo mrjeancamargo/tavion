@@ -19,7 +19,11 @@
     htbMax: 35000, htbPct: 0.10, htbPriceCap: 500000, htbMinLtv: 0.70,
     fhsMax: 0.30, fhsMaxWithHtb: 0.20,
     avgRate: 3.53, avgFixed: 3.49, rateMonth: "August 2026",
-    vat: 0.135, maxTerm: 35
+    vat: 0.135, maxTerm: 35,
+    // Lender affordability (estimate) when you have loans or outgoings, tested at the mortgage rate + 2 points.
+    // The more generous of: (a) what 40% of take-home pay minus commitments can repay, or (b) the income limit minus
+    // the loan your commitments could repay – never above the income limit. Lenders' own tests vary.
+    stress: 2, affordPct: 0.40, warnShare: 40
   };
   // RTB Rent Index Q1 2026 – standardised average monthly rent, new tenancies. National €1,839.
   var RENT = { national: 1839, dublin: 2335, wicklow: 1888, kildare: 1852, limerick: 1744, galway: 1718, meath: 1706, cork: 1678, louth: 1526,
@@ -122,8 +126,31 @@
     var fhsShare = fhsOn ? Math.min(+inp.fhsPct || 30, htbOn ? RULES.fhsMaxWithHtb * 100 : RULES.fhsMax * 100) / 100 : 0;
     var ceil = FHS[inp.county] ? FHS[inp.county][inp.apartment ? 1 : 0] : null;
 
+    // ---- lender affordability: loans and outgoings reduce what you can borrow
+    var netM = netMonthly(new Date().getFullYear() >= 2027 ? 2027 : 2026, inc.map(function (x, i) { return x + (vari[i] || 0); }), inp.joint !== false);
+    var C = {
+      loans: Math.max(0, +inp.otherDebts || 0),           // car, personal, credit union, credit card, buy-now-pay-later
+      childcare: Math.max(0, +inp.childcare || 0),
+      other: Math.max(0, +inp.otherCommitments || 0),     // maintenance, other fixed commitments
+      keptMortgage: (buyer === "mover" && inp.selling === false) ? Math.max(0, +inp.currentRepayment || 0) : 0
+    };
+    var commit = C.loans + C.childcare + C.other + C.keptMortgage;
+    var stressRate = rate + RULES.stress;
+    function borrowWith(c) {
+      if (c <= 0) return o.maxLoanLTI;
+      var afford = netM ? loanFromPayment(Math.max(0, netM * RULES.affordPct - c), stressRate, term) : 0;
+      var deduct = o.maxLoanLTI - loanFromPayment(c, stressRate, term);
+      return r0(Math.max(0, Math.min(o.maxLoanLTI, Math.max(afford, deduct))));
+    }
+    o.commitments = C; o.commitTotal = r0(commit); o.stressRate = r2(stressRate);
+    o.maxLoan = borrowWith(commit);
+    o.affordReduction = o.maxLoanLTI - o.maxLoan;
+    o.limitedBy = o.affordReduction > 0 ? "commitments" : "income";
+    if (buyer === "mover" && inp.selling === false && !C.keptMortgage && o.currentMortgage > 0)
+      o.tips.push("Add the monthly repayment on the home you're keeping (Advanced options) – lenders count it.");
+
     // ---- maximum price you could reach
-    var maxLoan = o.maxLoanLTI;
+    var maxLoan = o.maxLoan;
     function htbFor(price) {
       if (!htbOn || !inp.newBuild || price > RULES.htbPriceCap) return 0;
       var v = Math.min(RULES.htbMax, price * RULES.htbPct);
@@ -172,7 +199,8 @@
     o.loan = r0(loan); o.ltv = price ? r2(loan / price * 100) : 0; o.lti = income ? r2(loan / income) : 0;
     o.minDeposit = minDeposit; o.deposit = r0(depositFromYou);
     o.loanOverLti = loan > o.maxLoanLTI + 1;
-    if (o.loanOverLti) o.warnings.push("This needs a mortgage of " + r0(loan).toLocaleString("en-IE") + ", above the " + mult + "× income limit (" + o.maxLoanLTI.toLocaleString("en-IE") + "). You'd need a lender's exception (they can lend above the limit for a share of their loans) or a bigger deposit.");
+    if (o.loanOverLti) o.warnings.push("This needs a mortgage of €" + r0(loan).toLocaleString("en-IE") + ", above the " + mult + "× income limit (€" + o.maxLoanLTI.toLocaleString("en-IE") + "). You'd need a lender's exception (they can lend above the limit for a share of their loans) or a bigger deposit.");
+    else if (loan > o.maxLoan + 1) o.warnings.push("This needs a mortgage of €" + r0(loan).toLocaleString("en-IE") + ", but with your loans and outgoings a lender may only offer about €" + o.maxLoan.toLocaleString("en-IE") + ". Clearing a loan or a bigger deposit would help.");
     if (fhsOn && htbOn && htb > 0 && htb < RULES.htbMax && price * RULES.htbPct > htb + 1) o.notes.push("Help to Buy is limited by the income tax you paid in the last 4 years – we estimated it from your salary. Check your exact figure in Revenue myAccount.");
     if (htbOn && inp.newBuild && loan < price * RULES.htbMinLtv) o.warnings.push("Help to Buy needs a mortgage of at least 70% of the price.");
 
@@ -191,15 +219,19 @@
     o.monthly = r2(pm); o.totalRepaid = r0(pm * term * 12); o.totalInterest = r0(pm * term * 12 - loan);
     o.monthlyPlus2 = r2(payment(loan, rate + 2, term));
     o.monthly35 = r2(payment(loan, rate, 35)); o.monthly25 = r2(payment(loan, rate, 25));
-    var netM = netMonthly(new Date().getFullYear() >= 2027 ? 2027 : 2026, inc.map(function (x, i) { return x + (vari[i] || 0); }), inp.joint !== false);
     if (netM) {
       o.netMonthly = r0(netM);
       o.repaymentShare = r2(pm / netM * 100);
-      var other = Math.max(0, +inp.otherDebts || 0);
-      o.debtShare = r2((pm + other) / netM * 100);
-      if (o.debtShare > 40) o.warnings.push("Your mortgage" + (other ? " plus other loans" : "") + " would take " + Math.round(o.debtShare) + "% of your take-home pay. Lenders usually want this well below 40% – it may be hard to get approval.");
-      else if (o.debtShare > 33) o.tips.push("Repayments would be " + Math.round(o.debtShare) + "% of your take-home pay – manageable, but lenders will look closely at your spending and savings record.");
-      if (other) o.notes.push("Other loans (" + other + " a month) don't change the Central Bank income limit, but lenders take them off what you can afford – clear them before applying if you can.");
+      o.debtShare = r2((pm + commit) / netM * 100);
+      o.stressShare = r2((payment(loan, stressRate, term) + commit) / netM * 100);
+      if (o.debtShare > RULES.warnShare) o.warnings.push("Your mortgage" + (commit ? " plus your other commitments" : "") + " would take " + Math.round(o.debtShare) + "% of your take-home pay. Lenders usually want this well below 40% – it may be hard to get approval.");
+      else if (o.debtShare > 33) o.tips.push("Repayments" + (commit ? " and commitments" : "") + " would be " + Math.round(o.debtShare) + "% of your take-home pay – manageable, but lenders will look closely at your spending and savings record.");
+    }
+    if (commit > 0) {
+      o.notes.push("Your commitments of €" + r0(commit).toLocaleString("en-IE") + " a month reduce what you can borrow by about €" + o.affordReduction.toLocaleString("en-IE") +
+        " (tested at " + o.stressRate + "%). Lenders look at your last 3–6 months of bank statements, including buy-now-pay-later and credit card repayments.");
+      var gain = borrowWith(commit - C.loans) - o.maxLoan;
+      if (C.loans && gain > 1000) o.tips.push("Clearing your €" + r0(C.loans).toLocaleString("en-IE") + " a month of loan repayments before you apply could add about €" + gain.toLocaleString("en-IE") + " to what you can borrow.");
     }
     // ---- rent comparison
     var avgRent = RENT[inp.county] || RENT.national;

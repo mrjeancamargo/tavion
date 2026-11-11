@@ -225,6 +225,7 @@ def build_index():
           <label>Value now<div class="money"><span>€</span><input id="curVal" type="text" inputmode="decimal" placeholder="350,000"></div></label>
           <label>Mortgage left<div class="money"><span>€</span><input id="curMort" type="text" inputmode="decimal" placeholder="150,000"></div></label>
         </div>
+        <label id="curRepRow" hidden>Its monthly repayment (you'll keep paying it)<div class="money"><span>€</span><input id="curRep" type="text" inputmode="decimal" placeholder="1,100"></div></label>
       </div>
       <div class="two">
         <label>Bonus / overtime / commission per year (you)<div class="money"><span>€</span><input id="var1" type="text" inputmode="decimal" placeholder="0"></div></label>
@@ -236,10 +237,16 @@ def build_index():
         <label>Interest rate (%)<input id="rate" type="number" min="0" max="15" step="0.05" inputmode="decimal" placeholder="{R['avgRate']}"></label>
         <label>Term (years)<input id="term" type="number" min="5" max="35" step="1" inputmode="numeric" placeholder="30"></label>
       </div>
-      <div class="two">
-        <label>Other loan repayments per month (car, credit card)<input id="debts" type="number" min="0" step="10" inputmode="decimal" placeholder="0"></label>
-        <label>You can save per month<input id="mSave" type="number" min="0" step="50" inputmode="decimal" placeholder="0"></label>
+      <div class="row-card" style="margin-top:14px">
+        <strong>Your loans and outgoings</strong>
+        <p class="muted small" style="margin:4px 0 0">Lenders take these off what you can afford. Add what you pay each month.</p>
+        <label>Loan repayments per month <small class="muted">– car, personal, credit union, credit card, buy now pay later</small><div class="money"><span>€</span><input id="debts" type="text" inputmode="decimal" placeholder="0"></div></label>
+        <div class="two">
+          <label>Childcare per month<div class="money"><span>€</span><input id="childcare" type="text" inputmode="decimal" placeholder="0"></div></label>
+          <label>Other fixed commitments <small class="muted">– maintenance etc.</small><div class="money"><span>€</span><input id="otherCommit" type="text" inputmode="decimal" placeholder="0"></div></label>
+        </div>
       </div>
+      <label>You can save per month<input id="mSave" type="number" min="0" step="50" inputmode="decimal" placeholder="0"></label>
       <button type="button" class="btn small-btn" id="resetAdv">Reset advanced options</button>
     </div>
   </details>
@@ -556,6 +563,7 @@ def build_faq():
     FAQ = [
         ("How much can I borrow for a mortgage in Ireland?", "First-time buyers up to 4× gross income and second and subsequent buyers up to 3.5×. Couples combine their incomes. Lenders can go above this for a limited number of borrowers."),
         ("How much deposit do I need?", "At least 10% of the price for a home you'll live in, and 30% for buy-to-let. You also need money for stamp duty and fees."),
+        ("Do my loans and outgoings affect how much I can borrow?", "Yes. As well as the Central Bank's 4× / 3.5× income limit, lenders check you can afford the repayments from your take-home pay, usually at a higher test rate. Car loans, personal and credit union loans, credit card and buy-now-pay-later repayments, childcare and maintenance all reduce what they'll lend. Add them in the calculator's advanced options to see the effect – and clearing a loan before you apply can add tens of thousands to your limit."),
         ("Does bonus or overtime count?", "Lenders may count some of your regular bonus, overtime or commission – often around half of the average of the last 2 years, if it's guaranteed or consistent. It varies by lender."),
         ("Can I get a mortgage on my own?", "Yes – a sole applicant can borrow up to 4× their income as a first-time buyer. Help to Buy and the First Home Scheme help close the gap on new homes."),
         ("Does my partner need to be on the mortgage?", "Only if you want their income counted. Joint applicants are both responsible for the full loan."),
