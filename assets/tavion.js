@@ -117,8 +117,12 @@ window.TAVION = {
   var views = (+store.get("tavion_views") || 0) + 1; store.set("tavion_views", views);
   var snoozed = (+store.get("tavion_install_snooze") || 0) > Date.now();
   var ua = navigator.userAgent, ios = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  var safari = ios && !/crios|fxios|edgios|fban|fbav|instagram/i.test(ua);
+  var inApp = /fban|fbav|fb_iab|instagram|line\/|whatsapp|snapchat|tiktok|musical_ly|; wv\)/i.test(ua);  // Facebook, Instagram, WhatsApp… browsers can't install
+  var iosOther = ios && !inApp && /crios|fxios|edgios|opios/i.test(ua);                                    // Chrome / Firefox / Edge on iPhone
+  var safari = ios && !inApp && !iosOther;
   var deferred = null;
+  // Make sure hidden install buttons stay hidden, whatever the page's own button styles say.
+  (function () { var s = document.createElement("style"); s.textContent = "[data-install][hidden]{display:none!important}"; head.appendChild(s); })();
 
   function css() {
     if (document.getElementById("tv-inst-css")) return;
@@ -157,15 +161,26 @@ window.TAVION = {
   }
   window.TAVION = window.TAVION || {}; window.TAVION.install = install;
 
-  // iPhone / iPad Safari: no prompt exists, so show how to do it.
+  // iPhone / iPad: Apple has no install prompt, so show how to do it – worded for the browser they're in.
   var shareIcon = '<svg class="tv-share" viewBox="0 0 14 16" aria-hidden="true"><path fill="#38bdf8" d="M7 0l3.5 3.5-1 1L7.7 2.7V10H6.3V2.7L4.5 4.5l-1-1zM1 6h3v1.4H2.4v7.2h9.2V7.4H10V6h3v10H1z"/></svg>';
-  function iosTip() { bar('<p><b>Add Tavion to your home screen</b><small>Tap ' + shareIcon + ' Share, then <b style="display:inline">Add to Home Screen</b></small></p>'); }
+  var B = function (t) { return '<b style="display:inline">' + t + '</b>'; };
+  function tip(forced) {
+    var html;
+    if (inApp) html = '<p><b>Open in your browser to install</b><small>Tap ' + B("⋯") + ' (top right) → ' + B("Open in browser") + ' / ' + B("Open in Safari") + ', then tap ' + shareIcon + ' Share → ' + B("Add to Home Screen") + '</small></p>';
+    else if (safari) html = '<p><b>Add Tavion to your home screen</b><small>Tap ' + shareIcon + ' ' + B("Share") + ' (bottom of the screen, or top on iPad), then ' + B("Add to Home Screen") + '</small></p>';
+    else if (iosOther) html = '<p><b>Add Tavion to your home screen</b><small>Tap ' + shareIcon + ' ' + B("Share") + ' in the address bar, then ' + B("Add to Home Screen") + '</small></p>';
+    else html = '<p><b>Install Tavion</b><small>Open your browser menu ' + B("⋮") + ' and choose ' + B("Install app") + ' or ' + B("Add to Home screen") + '</small></p>';
+    var old = document.querySelector(".tv-inst"); if (old && forced) old.remove();
+    bar(html);
+    if (forced) track("install_tip", { label: inApp ? "in_app" : safari ? "ios_safari" : iosOther ? "ios_other" : "other" });
+  }
   document.addEventListener("DOMContentLoaded", function () {
-    // Any element with data-install becomes an "Install" button (shown when installing is possible).
+    // Any element with data-install is an "Install" button: shown on phones (and wherever the browser can install).
+    var mobile = ios || /android/i.test(ua);
     document.querySelectorAll("[data-install]").forEach(function (el) {
-      if (safari) el.hidden = false;
-      el.addEventListener("click", function (e) { e.preventDefault(); if (deferred) install(); else if (safari) iosTip(); });
+      if (mobile || deferred) el.hidden = false;
+      el.addEventListener("click", function (e) { e.preventDefault(); if (deferred) install(); else tip(true); });
     });
-    if (safari && views >= 2 && !snoozed) setTimeout(iosTip, 4000);
+    if ((safari || iosOther) && views >= 2 && !snoozed) setTimeout(function () { tip(false); }, 4000);
   });
 })();

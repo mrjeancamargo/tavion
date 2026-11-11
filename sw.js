@@ -5,7 +5,7 @@
  * Other sites (Google Analytics, AdSense, fonts) are never touched.
  * Bump VERSION whenever this file changes.
  */
-var VERSION = "tavion-v1";
+var VERSION = "tavion-v2";
 var CORE = ["/", "/offline.html", "/assets/tavion.js", "/images/icon-192.png", "/images/favicon.png", "/manifest.webmanifest"];
 
 self.addEventListener("install", function (e) {
