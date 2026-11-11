@@ -20,6 +20,7 @@ APPS = {
     "stamp": ("🧾", "Stamp duty & property tax", "Buying costs and LPT by council", "stamp-duty/", "stamp"),
     "rent": ("🏠", "Rent increase checker", "Is your rent increase legal?", "rent/", "rent"),
     "citizenship": ("🛂", "Citizenship calculator", "When can you apply?", "citizenship/", "citizenship"),
+    "cao": ("🎓", "CAO points calculator", "Your points and the courses they get you – 2027", "cao/", "cao"),
 }
 
 def eur(n, dp=0):
