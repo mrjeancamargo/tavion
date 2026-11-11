@@ -7,10 +7,10 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
+- [Irish Mortgage Calculator](https://tavion.ie/mortgage/): how much you can borrow under Central Bank rules (4x FTB / 3.5x movers, 10% deposit), price you can afford, deposit, stamp duty and fees, Help to Buy and First Home Scheme, mover equity, repayments vs take-home pay and vs average rent by county.
 - [Irish Social Welfare Rates 2027](https://tavion.ie/welfare/): Budget 2027 weekly rates for every payment (State Pension €309.30, Jobseeker's €264, Carer's €280, Disability €264), Christmas Bonus 2026, Child Benefit dates and a calculator.
 - [Auto-Enrolment Pension Calculator](https://tavion.ie/auto-enrolment/): MyFutureFund contributions (you, employer, State), effect on take-home pay, projected pot at 66, opt-out windows and eligibility.
 - [Irish Stamp Duty & LPT Calculator](https://tavion.ie/stamp-duty/): stamp duty (1% / 2% / 6%, new homes ex-VAT), total costs of buying a home, and Local Property Tax 2026-2027 by band and council.
-- [Irish Mortgage Calculator](https://tavion.ie/mortgage/): how much you can borrow under Central Bank rules (4x FTB / 3.5x movers, 10% deposit), price you can afford, deposit, stamp duty and fees, Help to Buy and First Home Scheme, mover equity, repayments vs take-home pay and vs average rent by county.
 - [Irish Rent Checker](https://tavion.ie/rent/): maximum legal rent increase (2% or CPI if lower) and earliest date, notice of termination periods and valid reasons under the 1 March 2026 rules; Rent Pressure Zone status by county and town; tenant and landlord guides with RTB sources.
 
 ## Take-home pay: key pages
@@ -46,15 +46,6 @@
 - Landlord notice: 90 days (<6 months), 152 (6-12 months), 180 (1-7 years), 196 (7-8 years), 224 (8+ years); 28 days for breach after warning; 7 days for serious anti-social behaviour. Tenant notice: 28/35/42/56/84/112 days.
 - Pages: [Rent increase calculator](https://tavion.ie/rent/), [Notice period calculator](https://tavion.ie/rent/notice-period.html), [New rules 2026](https://tavion.ie/rent/new-rules-2026.html), [Rent Pressure Zones](https://tavion.ie/rent/rent-pressure-zones.html), [FAQ](https://tavion.ie/rent/faq.html). Sources: rtb.ie, citizensinformation.ie, housingagency.ie.
 
-## Mortgages: key facts
-
-- Central Bank limits: first-time buyers 4x gross income, second and subsequent buyers 3.5x; 90% loan-to-value (10% deposit) for homes, 70% for buy-to-let; lenders may exceed limits for 15% of lending (10% BTL). April 2026: bridging loans up to 18 months exempt from the income limit.
-- Average new mortgage rate 3.53% (August 2026); fixed 3.49%.
-- Help to Buy: up to €35,000 from 7 October 2026 (Budget 2027), max 10% of price, new homes up to €500,000, mortgage at least 70%, until end-2029. First Home Scheme: equity up to 30% (20% with Help to Buy), price ceilings €375,000–€500,000 by area.
-- Stamp duty: 1% up to €1m, 2% €1m–€1.5m, 6% above €1.5m (VAT-exclusive price on new homes).
-- Average new rent (RTB Q1 2026): national €1,839, Dublin €2,335, Cork €1,678, Galway €1,718, Limerick €1,744.
-- Pages: [Calculator](https://tavion.ie/mortgage/), [How much can I borrow by salary](https://tavion.ie/mortgage/how-much-can-i-borrow.html), [Repayment tables](https://tavion.ie/mortgage/repayments.html), [Costs of buying](https://tavion.ie/mortgage/costs-of-buying.html), [Help to Buy & First Home Scheme](https://tavion.ie/mortgage/schemes.html), [Movers](https://tavion.ie/mortgage/moving-home.html), [By county](https://tavion.ie/mortgage/counties.html), [FAQ](https://tavion.ie/mortgage/faq.html).
-
 ## Stamp duty & LPT: key facts
 
 - Residential stamp duty: 1% up to €1,000,000; 2% from €1m to €1.5m; 6% above €1.5m. New homes: charged on the price excluding 13.5% VAT. 10+ homes in 12 months: 15%. No first-time buyer exemption.
@@ -78,6 +69,15 @@
 - Christmas Bonus 2026: 100% of the weekly payment, minimum €20, week starting 7 December 2026, long-term payments only (not Fuel Allowance).
 - Jobseeker's Pay-Related Benefit (unemployed from 31 March 2025): 60% of earnings up to €450 (weeks 1-13), 55% up to €375 (14-26), 50% up to €300 (27-39); minimum €125.
 - Pages: [Calculator](https://tavion.ie/welfare/), [Rates 2027](https://tavion.ie/welfare/rates-2027.html), [Christmas Bonus](https://tavion.ie/welfare/christmas-bonus.html), [Child Benefit dates](https://tavion.ie/welfare/child-benefit-payment-dates.html), [All payments](https://tavion.ie/welfare/all-payments.html). Source: Department of Social Protection Budget 2027 factsheet, Citizens Information.
+
+## Mortgages: key facts
+
+- Central Bank limits: first-time buyers 4x gross income, second and subsequent buyers 3.5x; 90% loan-to-value (10% deposit) for homes, 70% for buy-to-let; lenders may exceed limits for 15% of lending (10% BTL). April 2026: bridging loans up to 18 months exempt from the income limit.
+- Average new mortgage rate 3.53% (August 2026); fixed 3.49%.
+- Help to Buy: up to €35,000 from 7 October 2026 (Budget 2027), max 10% of price, new homes up to €500,000, mortgage at least 70%, until end-2029. First Home Scheme: equity up to 30% (20% with Help to Buy), price ceilings €375,000–€500,000 by area.
+- Stamp duty: 1% up to €1m, 2% €1m–€1.5m, 6% above €1.5m (VAT-exclusive price on new homes).
+- Average new rent (RTB Q1 2026): national €1,839, Dublin €2,335, Cork €1,678, Galway €1,718, Limerick €1,744.
+- Pages: [Calculator](https://tavion.ie/mortgage/), [How much can I borrow by salary](https://tavion.ie/mortgage/how-much-can-i-borrow.html), [Repayment tables](https://tavion.ie/mortgage/repayments.html), [Costs of buying](https://tavion.ie/mortgage/costs-of-buying.html), [Help to Buy & First Home Scheme](https://tavion.ie/mortgage/schemes.html), [Movers](https://tavion.ie/mortgage/moving-home.html), [By county](https://tavion.ie/mortgage/counties.html), [FAQ](https://tavion.ie/mortgage/faq.html).
 
 ## Optional
 
