@@ -7,6 +7,8 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
+- [Irish Social Welfare Rates 2027](https://tavion.ie/welfare/): Budget 2027 weekly rates for every payment (State Pension €309.30, Jobseeker's €264, Carer's €280, Disability €264), Christmas Bonus 2026, Child Benefit dates and a calculator.
+- [Auto-Enrolment Pension Calculator](https://tavion.ie/auto-enrolment/): MyFutureFund contributions (you, employer, State), effect on take-home pay, projected pot at 66, opt-out windows and eligibility.
 - [Irish Stamp Duty & LPT Calculator](https://tavion.ie/stamp-duty/): stamp duty (1% / 2% / 6%, new homes ex-VAT), total costs of buying a home, and Local Property Tax 2026-2027 by band and council.
 - [Irish Mortgage Calculator](https://tavion.ie/mortgage/): how much you can borrow under Central Bank rules (4x FTB / 3.5x movers, 10% deposit), price you can afford, deposit, stamp duty and fees, Help to Buy and First Home Scheme, mover equity, repayments vs take-home pay and vs average rent by county.
 - [Irish Rent Checker](https://tavion.ie/rent/): maximum legal rent increase (2% or CPI if lower) and earliest date, notice of termination periods and valid reasons under the 1 March 2026 rules; Rent Pressure Zone status by county and town; tenant and landlord guides with RTB sources.
@@ -60,6 +62,22 @@
 - LPT 2026-2030: band set by value on 1 November 2025; 19 bands from €95 (up to €240,000) to €3,110 (€1,995,001-€2,100,000); over €2.1m: 0.0906% / 0.25% / 0.3% on slices. Councils adjust by -15% to +25%.
 - LPT Local Adjustment Factors 2027: Carlow County Council +15%, Cavan County Council +25%, Clare County Council +15%, Cork City Council +15%, Cork County Council +15%, Donegal County Council +15%, Dublin City Council +0%, DÃºn Laoghaire-Rathdown County Council -15%, Fingal County Council -5%, Galway City Council +15%, Galway County Council +15%, Kerry County Council +10%, Kildare County Council +10%, Kilkenny County Council +15%, Laois County Council +20%, Leitrim County Council +25%, Limerick City and County Council +15%, Longford County Council +15%, Louth County Council +0%, Mayo County Council +10%, Meath County Council +0%, Monaghan County Council +15%, Offaly County Council +15%, Roscommon County Council +15%, Sligo County Council +25%, South Dublin County Council -7.5%, Tipperary County Council +15%, Waterford City and County Council +15%, Westmeath County Council +15%, Wexford County Council +15%, Wicklow County Council +6%.
 - Pages: [Stamp duty calculator](https://tavion.ie/stamp-duty/), [LPT calculator](https://tavion.ie/stamp-duty/lpt.html), [Stamp duty by price](https://tavion.ie/stamp-duty/prices.html), [LPT bands](https://tavion.ie/stamp-duty/lpt-bands.html), [LPT by council](https://tavion.ie/stamp-duty/lpt-councils.html), [FAQ](https://tavion.ie/stamp-duty/faq.html).
+
+## Auto-enrolment: key facts
+
+- MyFutureFund (Ireland's auto-enrolment pension) started 1 January 2026, run by NAERSA. Auto-enrolled: employees aged 23-60 earning €20,000+ a year (or €5,000+ in 13 weeks) without a payroll pension. Opt-in: employees 18-66.
+- Contributions on gross pay up to €80,000: 2026-2028 1.5% employee / 1.5% employer / 0.5% State; 2029-2031 3/3/1; 2032-2034 4.5/4.5/1.5; 2035+ 6/6/2. No tax relief; State top-up equals 25%.
+- Opt out only in months 7-8 after enrolment (and after each rate increase); own contributions refunded; re-enrolled after 2 years. Pause (suspend) any time after 6 months for at least 12 months.
+- Access at State Pension age (66); early only for ill-health; up to 25% tax-free lump sum, remainder taxed as income.
+- Pages: [Calculator](https://tavion.ie/auto-enrolment/), [Rates by year](https://tavion.ie/auto-enrolment/contribution-rates.html), [By salary](https://tavion.ie/auto-enrolment/by-salary.html), [Opt out](https://tavion.ie/auto-enrolment/opt-out.html), [FAQ](https://tavion.ie/auto-enrolment/faq.html). Source: Citizens Information, myfuturefund.ie.
+
+## Social welfare: key facts
+
+- Budget 2027: +€10 a week on most payments from January 2027. State Pension (Contributory) €309.30 (€319.30 at 80+); Non-Contributory €298; Jobseeker's Allowance/Benefit, Illness Benefit, Disability Allowance, One-Parent Family Payment €264; Carer's Allowance €280 (€318 at 66+); Invalidity Pension €269.50; Maternity/Paternity/Parent's Benefit €309.
+- Child Support Payment €64 (under 12) / €84 (12+); Child Benefit €140 a month (unchanged), first Tuesday of each month; Fuel Allowance €43; Living Alone Increase €25; €500 Cost of Disability payment in 2027.
+- Christmas Bonus 2026: 100% of the weekly payment, minimum €20, week starting 7 December 2026, long-term payments only (not Fuel Allowance).
+- Jobseeker's Pay-Related Benefit (unemployed from 31 March 2025): 60% of earnings up to €450 (weeks 1-13), 55% up to €375 (14-26), 50% up to €300 (27-39); minimum €125.
+- Pages: [Calculator](https://tavion.ie/welfare/), [Rates 2027](https://tavion.ie/welfare/rates-2027.html), [Christmas Bonus](https://tavion.ie/welfare/christmas-bonus.html), [Child Benefit dates](https://tavion.ie/welfare/child-benefit-payment-dates.html), [All payments](https://tavion.ie/welfare/all-payments.html). Source: Department of Social Protection Budget 2027 factsheet, Citizens Information.
 
 ## Optional
 

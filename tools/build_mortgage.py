@@ -96,7 +96,8 @@ def try_also(items):
 
 CROSS = [("🧾", "Stamp duty & buying costs", "Stamp duty, fees and your LPT bill", "../stamp-duty/", "stamp"),
          ("💶", "Take-home pay calculator", "Your net pay after tax, USC and PRSI", "../salary/", "salary"),
-         ("🏠", "Rent increase checker", "Is your rent increase legal?", "../rent/", "rent")]
+         ("🏠", "Rent increase checker", "Is your rent increase legal?", "../rent/", "rent"),
+         ("🌱", "Auto-enrolment pension", "MyFutureFund: what comes out of your pay", "../auto-enrolment/", "pension")]
 
 def share_html(text, url, label):
     wa = "https://wa.me/?text=" + quote(text + " " + url, safe="")

@@ -187,7 +187,7 @@ def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot=
     <nav aria-label="Take-home pay pages"><a href="./">Take-home pay calculator</a><a href="budget-2027.html">Budget 2027</a><a href="salaries.html">All salaries</a><a href="tax-rates.html">Tax rates 2025–2027</a><a href="minimum-wage.html">Minimum wage</a><a href="holidays.html">Annual leave calculator</a><a href="public-holidays.html">Bank holidays</a><a href="faq.html">FAQ</a></nav>
     <p>After tax: {footer_sal}</p>
     <p>Figures checked against Revenue's tax charts and Budget 2027 (announced 6 October 2026) in {CHECKED}. This is a free, independent tool from <a href="../">Tavion</a> and is not affiliated with Revenue or the Government of Ireland. Results are estimates for a full tax year – your payslip can differ (for example with benefit-in-kind, health insurance, emergency tax or a mid-year start). Official source: <a href="{REVENUE}" rel="noopener">revenue.ie</a>.</p>
-    <p>Also free: <a href="../mortgage/" data-track="cross_app" data-label="mortgage">🔑 Mortgage calculator – how much can I borrow?</a> · <a href="../rent/" data-track="cross_app" data-label="rent">🏠 Rent increase checker</a> · <a href="../stamp-duty/" data-track="cross_app" data-label="stamp">🧾 Stamp duty calculator</a></p>
+    <p>Also free: <a href="../mortgage/" data-track="cross_app" data-label="mortgage">🔑 Mortgage calculator – how much can I borrow?</a> · <a href="../rent/" data-track="cross_app" data-label="rent">🏠 Rent increase checker</a> · <a href="../stamp-duty/" data-track="cross_app" data-label="stamp">🧾 Stamp duty calculator</a> · <a href="../welfare/" data-track="cross_app" data-label="welfare">🤝 Social welfare rates 2027</a> · <a href="../auto-enrolment/" data-track="cross_app" data-label="pension">🌱 Auto-enrolment pension</a></p>
     <p><a href="../privacy.html">Privacy &amp; cookies</a> · <a href="../" data-track="apps_click" data-label="salary_footer">More free apps from Tavion</a></p>
   </div>
 </footer>
@@ -309,6 +309,8 @@ def build_index():
 <h2>Example: {eur(45000)} salary</h2>
 <p>A single PAYE worker on {eur(45000)} takes home <strong>{eur(n26['net'])} a year ({eur(n26['net'] / 12)} a month)</strong> in {CURRENT}. Under Budget 2027 that becomes <strong>{eur(n27['net'])} ({eur(n27['net'] / 12)} a month)</strong> – {signed(n27['net'] - n26['net'])} a year. <a href="{slug(45000)}">See the full €45,000 breakdown →</a></p>
 <div class="chip-list">{"".join(f'<a href="{slug(a)}">{kfmt(a)}</a>' for a in POPULAR)}<a href="salaries.html">All salaries →</a></div>
+
+<div class="callout">Auto-enrolled in a pension? <strong>MyFutureFund</strong> takes 1.5% of your pay (rising to 6% by 2035), matched by your employer. <a href="../auto-enrolment/" data-track="cross_app" data-label="pension_from_salary">See what it costs you and what you'll have at 66 →</a></div>
 
 <div class="cta"><h2>What does Budget 2027 mean for you?</h2><p>See how much better off you'll be from January 2027 at every salary.</p><a class="btn" href="budget-2027.html">Budget 2027 changes</a></div>
 """
@@ -790,6 +792,10 @@ def write_llms():
     if os.path.isdir(os.path.join(REPO, "stamp-duty")):
         import build_stamp
         build_stamp.update_llms()
+    import subprocess
+    for extra in ("build_welfare.py", "build_ae.py"):
+        if os.path.exists(os.path.join(HERE, extra)):
+            subprocess.run([sys.executable, os.path.join(HERE, extra)], check=True)
 
 if __name__ == "__main__":
     os.makedirs(ROOT, exist_ok=True)
