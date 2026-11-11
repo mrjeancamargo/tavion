@@ -120,6 +120,8 @@ window.TAVION = {
   var inApp = /fban|fbav|fb_iab|instagram|line\/|whatsapp|snapchat|tiktok|musical_ly|; wv\)/i.test(ua);  // Facebook, Instagram, WhatsApp… browsers can't install
   var iosOther = ios && !inApp && /crios|fxios|edgios|opios/i.test(ua);                                    // Chrome / Firefox / Edge on iPhone
   var safari = ios && !inApp && !iosOther;
+  // Install button and bar are for phones and tablets only – never on computers.
+  var mobile = ios || /android|mobile|tablet|silk|kindle|playbook/i.test(ua);
   var deferred = null;
   // Make sure hidden install buttons stay hidden, whatever the page's own button styles say.
   (function () { var s = document.createElement("style"); s.textContent = "[data-install][hidden]{display:none!important}"; head.appendChild(s); })();
@@ -148,6 +150,7 @@ window.TAVION = {
 
   // Android / desktop: the browser tells us when the app can be installed.
   window.addEventListener("beforeinstallprompt", function (e) {
+    if (!mobile) return;                 // computers: leave it to the browser's own install icon
     e.preventDefault(); deferred = e;
     document.querySelectorAll("[data-install]").forEach(function (el) { el.hidden = false; });
     if (views >= 2 && !snoozed) bar('<p><b>Get the Tavion app</b><small>Free, no sign-up – opens from your home screen</small></p><button class="go">Install</button>', function (b) { install(); b.remove(); });
@@ -176,9 +179,8 @@ window.TAVION = {
   }
   document.addEventListener("DOMContentLoaded", function () {
     // Any element with data-install is an "Install" button: shown on phones (and wherever the browser can install).
-    var mobile = ios || /android/i.test(ua);
     document.querySelectorAll("[data-install]").forEach(function (el) {
-      if (mobile || deferred) el.hidden = false;
+      if (mobile) el.hidden = false;
       el.addEventListener("click", function (e) { e.preventDefault(); if (deferred) install(); else tip(true); });
     });
     if ((safari || iosOther) && views >= 2 && !snoozed) setTimeout(function () { tip(false); }, 4000);
