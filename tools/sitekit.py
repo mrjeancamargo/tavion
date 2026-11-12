@@ -21,6 +21,8 @@ APPS = {
     "rent": ("🏠", "Rent increase checker", "Is your rent increase legal?", "rent/", "rent"),
     "citizenship": ("🛂", "Citizenship calculator", "When can you apply?", "citizenship/", "citizenship"),
     "cao": ("🎓", "CAO points calculator", "Your points and the courses they get you – 2027", "cao/", "cao"),
+    "taxrefund": ("💸", "Am I owed a tax refund?", "Rent, medical, work from home – claim back to 2022", "tax-refund/", "taxrefund"),
+    "holidays": ("📅", "Bank holidays 2027 & leave planner", "Turn your annual leave into more days off", "bank-holidays/", "holidays"),
 }
 
 def eur(n, dp=0):

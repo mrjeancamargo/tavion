@@ -7,6 +7,8 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
+- [Bank Holidays Ireland & Leave Planner](https://tavion.ie/bank-holidays/): all Irish public holidays 2026-2030, an annual leave planner, school holiday dates 2026/27-2028/29, public holiday and annual leave rights.
+- [Tax Refund Checker](https://tavion.ie/tax-refund/): which Irish tax credits and reliefs you can claim back for 2022-2026 (rent, medical, dental, remote working, flat-rate expenses by job, carers, tuition) with estimates.
 - [CAO Points Calculator](https://tavion.ie/cao/): Leaving Cert CAO points (maths bonus, LCVP), course finder, and a page for every 2027 CAO course with 2023-2026 points, by college, county, subject and points.
 - [Auto-Enrolment Pension Calculator](https://tavion.ie/auto-enrolment/): MyFutureFund contributions (you, employer, State), effect on take-home pay, projected pot at 66, opt-out windows and eligibility.
 - [Irish Social Welfare Rates 2027](https://tavion.ie/welfare/): Budget 2027 weekly rates for every payment (State Pension €309.30, Jobseeker's €264, Carer's €280, Disability €264), Christmas Bonus 2026, Child Benefit dates and a calculator.
@@ -87,6 +89,25 @@
 - Medicine 2027: minimum 480 points + HPAT; Leaving Cert above 550 no longer moderated; HPAT weighted to max 150 (was 300).
 - QQI FET: distinction 3/merit 2/pass 1 x credits, best 120 credits x 13/12, max 390.
 - 1,475 courses at 29 colleges for 2027. Pages: [Calculator](https://tavion.ie/cao/), [All courses with points](https://tavion.ie/cao/all-courses.html), [Points table](https://tavion.ie/cao/points-table.html), [Colleges](https://tavion.ie/cao/colleges.html), [By points](https://tavion.ie/cao/courses-by-points.html), [Dates 2027](https://tavion.ie/cao/dates-2027.html). Data: [courses.json](https://tavion.ie/cao/data/courses.json). Source: cao.ie.
+
+## Tax refunds: key facts
+
+- Four-year rule: refunds can be claimed for the last four years; 2022 claims close 31 December 2026. Claim in Revenue myAccount (Review your tax for the previous 4 years > Statement of Liability > Income Tax Return).
+- Rent Tax Credit: 20% of rent, max €500 (2022-2023), €1,000 (2024-2026), €1,150 (2027-2028 per Budget 2027); double for jointly assessed couples. Not for HAP/RAS/Rent Supplement. Parents can claim for a student child.
+- Health expenses: 20% relief (nursing homes at marginal rate). Includes GP, consultant, prescriptions, physio (referred), IVF, non-routine dental (crowns, braces, root canal, implants; Med 2), gluten-free food for coeliacs and diabetic products (doctor's letter). Not routine dental, eye tests, glasses, cosmetic.
+- Remote working relief: 30% of electricity, heating and broadband x days worked at home / days in year, minus employer €3.20/day allowance, at marginal rate.
+- Flat-rate expenses: fixed yearly allowances for ~68 job categories (Revenue list); must be claimed each year.
+- Other: Home Carer credit €1,950 (2026), €2,050 (2027); SPCCC €1,900; Incapacitated Child €3,800; Dependent Relative €305; Mortgage Interest credit up to €1,250 (2023-25) / €625 (2026); landlords RPRIR €1,000 (2026); Rent-a-Room €14,000 (€16,000 from 2027); microgeneration €400 (€600 per Budget 2027); tuition 20% above €3,000 disregard.
+- Pages: [Checker](https://tavion.ie/tax-refund/), [All reliefs](https://tavion.ie/tax-refund/all-reliefs.html), [2022 deadline](https://tavion.ie/tax-refund/deadline-2022.html), [Flat-rate expenses by job](https://tavion.ie/tax-refund/flat-rate-expenses.html), [Can I claim…?](https://tavion.ie/tax-refund/can-i-claim.html). Source: revenue.ie.
+
+## Bank holidays: key facts
+
+- Ireland has 10 public holidays (St Brigid's Day added 2023: first Monday in February, or 1 February if a Friday). Good Friday, Christmas Eve and Halloween are not public holidays.
+- 2027: New Year's Day 2027-01-01; St Brigid's Day 2027-02-01; St Patrick's Day 2027-03-17; Easter Monday 2027-03-29; May Bank Holiday 2027-05-03; June Bank Holiday 2027-06-07; August Bank Holiday 2027-08-02; October Bank Holiday 2027-10-25; Christmas Day 2027-12-25; St Stephen's Day 2027-12-26. Christmas Day and St Stephen's Day 2027 fall on a weekend: employees still get the benefit (paid day off within a month, extra day of annual leave, or extra day's pay) but no automatic next-day off.
+- Entitlement: full-time immediately; part-time after 40 hours in the previous 5 weeks (non-working day = one-fifth of weekly pay). Ask 21 days before which option applies.
+- Annual leave: 4 working weeks; or 1/3 week per month with 117+ hours; or 8% of hours worked (max 4 weeks), whichever is greater.
+- School holidays 2026/27 (Circular 0018/2026): October mid-term 26-30 Oct 2026; Christmas: last day 22 Dec 2026, reopen 6 Jan 2027; February mid-term 15-19 Feb 2027 (primary must close 18-19 Feb); Easter: last day 19 Mar 2027, reopen 5 Apr 2027.
+- Pages: [2027 & planner](https://tavion.ie/bank-holidays/), [Leave planner 2027](https://tavion.ie/bank-holidays/leave-planner-2027.html), [School holidays](https://tavion.ie/bank-holidays/school-holidays.html), [Rights](https://tavion.ie/bank-holidays/public-holiday-rights.html), [Calendar file (.ics)](https://tavion.ie/bank-holidays/ireland-public-holidays.ics). Source: citizensinformation.ie, gov.ie.
 
 ## Optional
 
