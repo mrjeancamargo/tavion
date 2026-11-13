@@ -472,6 +472,52 @@
     roundabout: svg(diamond('<circle cx="50" cy="50" r="15" fill="none" stroke="#111" stroke-width="6"/><path d="M58 30l8 6-9 3zM34 58l-3-9 9 2zM60 66l-10 2 3-9z" fill="#111"/>'), "Roundabout ahead warning sign"),
     keepleft: svg('<circle cx="50" cy="50" r="46" fill="#1450a0"/><path d="M68 32L38 62" stroke="#fff" stroke-width="10" stroke-linecap="round"/><polygon points="26,74 30,48 52,70" fill="#fff"/>', "Keep left sign"),
     norightturn: svg(ring('<path d="M40 76V48h18" stroke="#111" stroke-width="9" fill="none"/><polygon points="56,36 72,48 56,60" fill="#111"/><path d="M19 81L81 19" stroke="#d0021b" stroke-width="8"/>'), "No right turn sign"),
-    noparking: svg(ring('<text x="50" y="66" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="48" fill="#111">P</text><path d="M19 81L81 19" stroke="#d0021b" stroke-width="8"/>'), "No parking sign")
+    noparking: svg(ring('<text x="50" y="66" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="48" fill="#111">P</text><path d="M19 81L81 19" stroke="#d0021b" stroke-width="8"/>'), "No parking sign"),
+    turnright: svg('<circle cx="50" cy="50" r="46" fill="#1450a0"/><path d="M38 78V50H56" stroke="#fff" stroke-width="10" fill="none"/><polygon points="54,36 74,50 54,64" fill="#fff"/>', "Turn right sign"),
+    bendright: svg(diamond('<path d="M42 78V56c0-12 6-20 16-22" stroke="#111" stroke-width="8" fill="none"/><polygon points="55,23 71,33 56,45" fill="#111"/>'), "Dangerous bend to the right warning sign"),
+    bendleft: svg(diamond('<g transform="translate(100 0) scale(-1 1)"><path d="M42 78V56c0-12 6-20 16-22" stroke="#111" stroke-width="8" fill="none"/><polygon points="55,23 71,33 56,45" fill="#111"/></g>'), "Dangerous bend to the left warning sign"),
+    sideroadleft: svg(diamond('<path d="M54 78V22" stroke="#111" stroke-width="9"/><path d="M54 50H26" stroke="#111" stroke-width="6"/>'), "Side road on the left warning sign"),
+    sideroadright: svg(diamond('<path d="M46 78V22" stroke="#111" stroke-width="9"/><path d="M46 50H74" stroke="#111" stroke-width="6"/>'), "Side road on the right warning sign"),
+    staggered: svg(diamond('<path d="M50 78V22" stroke="#111" stroke-width="9"/><path d="M50 38H26M50 62H74" stroke="#111" stroke-width="6"/>'), "Staggered crossroads warning sign"),
+    trafficlights: svg(diamond('<rect x="40" y="22" width="20" height="56" rx="5" fill="#111"/><circle cx="50" cy="33" r="6" fill="#e53935"/><circle cx="50" cy="50" r="6" fill="#ffb300"/><circle cx="50" cy="67" r="6" fill="#43a047"/>'), "Traffic lights ahead warning sign"),
+    twoway: svg(diamond('<path d="M40 30V78M60 22V70" stroke="#111" stroke-width="6"/><polygon points="31,34 40,20 49,34" fill="#111"/><polygon points="51,66 60,80 69,66" fill="#111"/>'), "Two-way traffic ahead warning sign"),
+    narrowsboth: svg(diamond('<path d="M36 78V58l8-12V24M64 78V58l-8-12V24" stroke="#111" stroke-width="7" fill="none"/>'), "Road narrows on both sides warning sign"),
+    height: svg(diamond('<polygon points="40,22 60,22 50,32" fill="#111"/><polygon points="40,78 60,78 50,68" fill="#111"/><text x="50" y="57" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="17" fill="#111">4.2m</text>'), "Height restriction warning sign")
   };
+
+  // Names and meanings for the road signs study page (signs.html).
+  // type: "regulatory" (orders), "speed", "mandatory" (blue – you must), "warning" (yellow diamonds)
+  window.SIGN_INFO = [
+    { k: "stop", type: "regulatory", name: "Stop", meaning: "Stop completely at the stop line, then go only when the way is clear. You must always stop, even if the road looks empty." },
+    { k: "yield", type: "regulatory", name: "Yield (Géill Slí)", meaning: "Give way to traffic on the major road. Slow down and stop only if you need to." },
+    { k: "noentry", type: "regulatory", name: "No entry", meaning: "No vehicles may pass this sign – often at the exit end of a one-way street." },
+    { k: "noleftturn", type: "regulatory", name: "No left turn", meaning: "You must not turn left at this junction." },
+    { k: "norightturn", type: "regulatory", name: "No right turn", meaning: "You must not turn right at this junction." },
+    { k: "nouturn", type: "regulatory", name: "No U-turn", meaning: "You must not make a U-turn here." },
+    { k: "noparking", type: "regulatory", name: "No parking", meaning: "Parking isn't allowed during the times shown on any plate under the sign." },
+    { k: "speed30", type: "speed", name: "30 km/h limit", meaning: "Maximum speed 30 km/h – common near schools, in town centres and residential areas." },
+    { k: "speed50", type: "speed", name: "50 km/h limit", meaning: "Maximum speed 50 km/h – typical in built-up areas." },
+    { k: "speed60", type: "speed", name: "60 km/h limit", meaning: "Maximum speed 60 km/h – the default on local rural roads since February 2025." },
+    { k: "speed80", type: "speed", name: "80 km/h limit", meaning: "Maximum speed 80 km/h – common on regional roads, and the limit for cars towing trailers." },
+    { k: "speed100", type: "speed", name: "100 km/h limit", meaning: "Maximum speed 100 km/h – typically national roads and dual carriageways." },
+    { k: "speed120", type: "speed", name: "120 km/h limit", meaning: "Maximum speed 120 km/h – the general motorway limit." },
+    { k: "keepleft", type: "mandatory", name: "Keep left", meaning: "You must pass to the left of the sign, for example of a traffic island." },
+    { k: "turnleft", type: "mandatory", name: "Turn left", meaning: "You must turn left." },
+    { k: "turnright", type: "mandatory", name: "Turn right", meaning: "You must turn right." },
+    { k: "aheadonly", type: "mandatory", name: "Straight ahead only", meaning: "You must go straight ahead – no turning." },
+    { k: "crossroads", type: "warning", name: "Crossroads ahead", meaning: "A crossroads is ahead. Slow down and watch for traffic from both sides." },
+    { k: "tjunction", type: "warning", name: "T-junction ahead", meaning: "The road ends at a junction ahead. Be ready to stop and turn left or right." },
+    { k: "sideroadleft", type: "warning", name: "Side road on the left", meaning: "A minor road joins from the left. Watch for vehicles pulling out." },
+    { k: "sideroadright", type: "warning", name: "Side road on the right", meaning: "A minor road joins from the right. Watch for vehicles pulling out or turning." },
+    { k: "staggered", type: "warning", name: "Staggered crossroads", meaning: "Side roads join from the left and right at slightly different points." },
+    { k: "roundabout", type: "warning", name: "Roundabout ahead", meaning: "A roundabout is ahead. Slow down and choose your lane early." },
+    { k: "bendleft", type: "warning", name: "Dangerous bend to the left", meaning: "The road bends sharply to the left. Slow down before the bend." },
+    { k: "bendright", type: "warning", name: "Dangerous bend to the right", meaning: "The road bends sharply to the right. Slow down before the bend." },
+    { k: "trafficlights", type: "warning", name: "Traffic lights ahead", meaning: "Traffic lights are ahead, possibly out of sight. Be ready to stop." },
+    { k: "twoway", type: "warning", name: "Two-way traffic", meaning: "Traffic is coming towards you – for example where a one-way section or dual carriageway ends." },
+    { k: "narrows", type: "warning", name: "Road narrows on the left", meaning: "The road gets narrower on the left. Check for traffic and adjust your position." },
+    { k: "narrowsboth", type: "warning", name: "Road narrows on both sides", meaning: "The road gets narrower on both sides. Slow down and watch for oncoming traffic." },
+    { k: "slippery", type: "warning", name: "Slippery road", meaning: "The road may be slippery. Slow down and avoid harsh braking, steering or acceleration." },
+    { k: "height", type: "warning", name: "Height restriction", meaning: "Low headroom ahead, such as a bridge. Vehicles taller than the height shown can't pass." }
+  ];
 })();

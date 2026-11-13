@@ -18,17 +18,31 @@ window.SITE = {
 // To add a new test later (e.g. truck), add an entry here, set enabled: true,
 // and tag questions in questions.js with its key in their `tests` array.
 window.TESTS = {
+  // The official BW test covers both cars (B) and tractors / work vehicles (W).
   car: {
-    name: "Car", category: "Category B", icon: "🚗",
+    name: "Car & Tractor", category: "BW test · Categories B & W", icon: "🚗",
     examSize: 40, passMark: 35, minutes: 45, enabled: true
   },
   motorcycle: {
-    name: "Motorcycle", category: "Categories AM, A1, A2, A", icon: "🏍️",
+    name: "Motorcycle", category: "AM test · Categories AM, A1, A2, A", icon: "🏍️",
     examSize: 40, passMark: 35, minutes: 45, enabled: true
   },
-  truck: { name: "Truck", category: "Categories C, C1", icon: "🚚", enabled: false },
-  bus:   { name: "Bus",   category: "Categories D, D1", icon: "🚌", enabled: false },
-  tractor: { name: "Tractor", category: "Category W", icon: "🚜", enabled: false }
+  // Truck and bus tests: 100 questions, 120 minutes, pass mark 74. Combined CD test: 140 questions, 180 minutes, pass mark 104.
+  truck: {
+    name: "Truck", category: "C test · Categories C1, C, CE", icon: "🚚",
+    examSize: 100, passMark: 74, minutes: 120, enabled: true,
+    focus: ["loads", "hours", "heavy", "profess"], focusShare: 0.6
+  },
+  bus: {
+    name: "Bus", category: "D test · Categories D1, D, DE", icon: "🚌",
+    examSize: 100, passMark: 74, minutes: 120, enabled: true,
+    focus: ["passengers", "hours", "heavy", "profess"], focusShare: 0.6
+  },
+  cd: {
+    name: "Truck & Bus", category: "CD test · combined truck and bus", icon: "🚛",
+    examSize: 140, passMark: 104, minutes: 180, enabled: true,
+    focus: ["loads", "passengers", "hours", "heavy", "profess"], focusShare: 0.6
+  }
 };
 
 // ===== Question topics =====
@@ -39,5 +53,11 @@ window.TOPICS = {
   safe:       "Safe & Responsible Driving",
   vulnerable: "Vulnerable Road Users",
   control:    "Vehicle Control & Technical",
-  moto:       "Motorcycle Riding"
+  moto:       "Motorcycle Riding",
+  tractor:    "Tractors & Work Vehicles",
+  hours:      "Drivers' Hours & Tachographs",
+  heavy:      "Heavy Vehicle Safety & Control",
+  profess:    "Licensing, CPC & Regulations",
+  loads:      "Loads, Coupling & Truck Operation",
+  passengers: "Passengers & Bus Operation"
 };

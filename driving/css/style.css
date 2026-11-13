@@ -152,3 +152,24 @@ footer a { color: var(--muted); }
   .qtext { font-size: 22px; }
   .sign { width: 160px; height: 160px; }
 }
+
+/* Road signs study page */
+.sign-tools { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin: 8px 0 4px; }
+.toggle { display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; }
+.toggle input { width: 20px; height: 20px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { min-height: 38px; padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); color: var(--text); font: inherit; font-size: 14px; cursor: pointer; }
+.chip.on { background: var(--text); color: var(--bg); }
+.sign-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.sign-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 14px 10px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); font: inherit; color: var(--text); cursor: default; }
+.sign-pic { width: 96px; height: 96px; display: block; }
+.sign-pic svg { width: 100%; height: 100%; }
+.sign-name { font-weight: 700; font-size: 15px; line-height: 1.25; }
+.sign-meaning { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.sign-hint { display: none; font-size: 13px; color: var(--sel); font-weight: 600; }
+body.quiz .sign-card { cursor: pointer; }
+body.quiz .sign-card:not(.shown) .sign-name, body.quiz .sign-card:not(.shown) .sign-meaning { display: none; }
+body.quiz .sign-card:not(.shown) .sign-hint { display: block; }
+
+.signs-link { display: flex; align-items: center; gap: 14px; margin-top: 12px; text-decoration: none; color: var(--text); }
+.signs-link > span:last-child { margin-left: auto; font-size: 20px; color: var(--muted); }

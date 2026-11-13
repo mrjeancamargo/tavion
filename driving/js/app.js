@@ -28,7 +28,15 @@
 
   function startExam(test) {
     var t = window.TESTS[test];
-    var ids = shuffle(pool(test)).slice(0, t.examSize).map(function (q) { return q.id; });
+    var all = shuffle(pool(test)), picked = all;
+    // Tests with "focus" topics (truck, bus) take a set share of each exam from those vehicle-specific topics.
+    if (t.focus) {
+      var inFocus = all.filter(function (q) { return t.focus.indexOf(q.topic) > -1; });
+      var other = all.filter(function (q) { return t.focus.indexOf(q.topic) === -1; });
+      var n = Math.min(inFocus.length, Math.round(t.examSize * (t.focusShare || 0.5)));
+      picked = shuffle(inFocus.slice(0, n).concat(other.slice(0, t.examSize - n)));
+    }
+    var ids = picked.slice(0, t.examSize).map(function (q) { return q.id; });
     store.set({ test: test, mode: "exam", ids: ids, answers: {}, flags: {}, start: Date.now(), minutes: t.minutes });
     track("exam_start", { test: test });
     location.href = "question.html?n=1";
