@@ -24,6 +24,7 @@ APPS = {
     "taxrefund": ("💸", "Am I owed a tax refund?", "Rent, medical, work from home – claim back to 2022", "tax-refund/", "taxrefund"),
     "holidays": ("📅", "Bank holidays 2027 & leave planner", "Turn your annual leave into more days off", "bank-holidays/", "holidays"),
     "solar": ("☀️", "Solar panel calculator", "Payback, SEAI grant and savings for your home", "solar/", "solar"),
+    "permit": ("💼", "Work permit salary checker", "Is your pay above the 2026 permit minimum?", "work-permit/", "permit"),
 }
 
 def eur(n, dp=0):
