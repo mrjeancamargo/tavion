@@ -7,6 +7,7 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
+- [Solar Panel Calculator](https://tavion.ie/solar/): solar PV payback, SEAI grant, savings and export income for every Irish county, with grant, battery, export, tax and planning guides.
 - [Bank Holidays Ireland & Leave Planner](https://tavion.ie/bank-holidays/): all Irish public holidays 2026-2030, an annual leave planner, school holiday dates 2026/27-2028/29, public holiday and annual leave rights.
 - [Tax Refund Checker](https://tavion.ie/tax-refund/): which Irish tax credits and reliefs you can claim back for 2022-2026 (rent, medical, dental, remote working, flat-rate expenses by job, carers, tuition) with estimates.
 - [CAO Points Calculator](https://tavion.ie/cao/): Leaving Cert CAO points (maths bonus, LCVP), course finder, and a page for every 2027 CAO course with 2023-2026 points, by college, county, subject and points.
@@ -108,6 +109,15 @@
 - Annual leave: 4 working weeks; or 1/3 week per month with 117+ hours; or 8% of hours worked (max 4 weeks), whichever is greater.
 - School holidays 2026/27 (Circular 0018/2026): October mid-term 26-30 Oct 2026; Christmas: last day 22 Dec 2026, reopen 6 Jan 2027; February mid-term 15-19 Feb 2027 (primary must close 18-19 Feb); Easter: last day 19 Mar 2027, reopen 5 Apr 2027.
 - Pages: [2027 & planner](https://tavion.ie/bank-holidays/), [Leave planner 2027](https://tavion.ie/bank-holidays/leave-planner-2027.html), [School holidays](https://tavion.ie/bank-holidays/school-holidays.html), [Rights](https://tavion.ie/bank-holidays/public-holiday-rights.html), [Calendar file (.ics)](https://tavion.ie/bank-holidays/ireland-public-holidays.ics). Source: citizensinformation.ie, gov.ie.
+
+## Solar panels: key facts
+
+- SEAI solar PV grant (homes): €700/kWp for the first 2 kWp, €200/kWp up to 4 kWp, max €1,800. €600 battery grant for 5 kWh+ (from 6 Oct 2026). Homes built and occupied before 2025 (was pre-2021). Apply and get the offer before work; 8 months to complete; post-works BER required; paid 4-6 weeks after documents.
+- Enhanced grant for qualifying welfare recipients: €3,350/kWp to 2 kWp, €850/kWp to 4 kWp, max €8,400, €9,000 with battery. Warmer Homes: solar + battery fully funded.
+- Clean Export Guarantee rates Nov 2026: 15.2c-19.5c/kWh (SSE Airtricity, Electric Ireland 19.5c). Export income tax-free up to €400/yr (2024-2028), €600 from 2027 (Budget 2027).
+- 0% VAT on solar supply and installation for homes since 1 May 2023. Rooftop solar on houses exempt from planning with no area limit since Oct 2022.
+- PVGIS yield (south, 35°): Wexford 1081 to Donegal 847 kWh/kWp/yr; average 935.
+- Pages: [Calculator](https://tavion.ie/solar/), [SEAI grant](https://tavion.ie/solar/seai-solar-grant.html), [How to apply](https://tavion.ie/solar/how-to-apply.html), [Battery grant](https://tavion.ie/solar/battery-grant.html), [Export rates](https://tavion.ie/solar/selling-electricity.html), [By county](https://tavion.ie/solar/by-county.html), [FAQ](https://tavion.ie/solar/faq.html).
 
 ## Optional
 

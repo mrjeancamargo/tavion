@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-1290266452162223">
+<script src="/assets/tavion.js"></script>
+<title>Solar Panel Calculator Ireland 2026 – Payback, SEAI Grant & Savings by County</title>
+<meta name="description" content="Free solar panel calculator for Ireland: payback years, SEAI grant (€1,800 + €600 battery), yearly savings and export income for your county, with a 25-year payback graph.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://tavion.ie/solar/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tavion">
+<meta property="og:locale" content="en_IE">
+<meta property="og:url" content="https://tavion.ie/solar/">
+<meta property="og:title" content="Solar Panel Calculator Ireland 2026 – Payback, SEAI Grant & Savings by County">
+<meta property="og:description" content="Free solar panel calculator for Ireland: payback years, SEAI grant (€1,800 + €600 battery), yearly savings and export income for your county, with a 25-year payback graph.">
+<meta property="og:image" content="https://tavion.ie/solar/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#b45309">
+<link rel="icon" href="../images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Solar Panel Calculator Ireland", "url": "https://tavion.ie/solar/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "inLanguage": "en-IE", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "description": "Calculate solar panel payback, SEAI grant, savings and export income for any Irish county, with or without a battery."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long do solar panels take to pay back in Ireland?", "acceptedAnswer": {"@type": "Answer", "text": "For a typical home with a 4 kWp system and the €1,800 SEAI grant, about 5.4 years in Dublin. It ranges from about 5 to 8 years depending on your county, roof and how much power you use in the day."}}, {"@type": "Question", "name": "How much is the SEAI solar grant?", "acceptedAnswer": {"@type": "Answer", "text": "€700 per kWp for the first 2 kWp and €200 per kWp for the next 2 kWp, up to €1,800 for 4 kWp or more. A battery of 5 kWh or more gets a further €600, so up to €2,400 in total."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Solar Panel Calculator Ireland 2026 – Payback, SEAI Grant & Savings by County", "url": "https://tavion.ie/solar/", "description": "Free solar panel calculator for Ireland: payback years, SEAI grant (€1,800 + €600 battery), yearly savings and export income for your county, with a 25-year payback graph.", "inLanguage": "en-IE", "dateModified": "2026-11-14", "isPartOf": {"@type": "WebSite", "name": "Tavion", "url": "https://tavion.ie/"}, "publisher": {"@type": "Organization", "name": "Tavion", "url": "https://tavion.ie/", "logo": "https://tavion.ie/images/logo.png"}, "citation": ["https://www.seai.ie/grants/home-energy-grants/individual-grants/solar-electricity-grant", "https://re.jrc.ec.europa.eu/pvg_tools/en/", "https://www.solarinfo.ie/microgeneration", "https://selectra.ie/energy/guides/electricity-prices-ireland"]}</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar"><a class="logo" href="./"><b>☀️</b> Solar Panel Calculator</a><a class="small" href="../" data-track="apps_click" data-label="solar_header">More Tavion apps</a></div>
+  <nav class="tabs" aria-label="Sections"><div class="wrap"><a href="./" class="on">Calculator</a><a href="seai-solar-grant.html">Grant</a><a href="how-to-apply.html">How to apply</a><a href="battery-grant.html">Battery</a><a href="selling-electricity.html">Selling power</a><a href="by-county.html">By county</a><a href="faq.html">FAQ</a></div></nav>
+</header>
+<main class="wrap">
+
+<h1>Solar panel calculator</h1>
+<p class="lead">Are solar panels worth it for your home? Pick your county, enter your electricity bill and see your payback, the SEAI grant and what you'd save every year. Free, no sign-up.</p>
+<ul class="facts"><li>SEAI grant up to €1,800</li><li>+ €600 battery grant</li><li>0% VAT</li><li>Paid ~18.5c for power you sell</li></ul>
+<form id="solarForm" class="card" novalidate>
+  <label for="county" class="big-label">Your county</label>
+  <select id="county"><option value="carlow">Carlow</option><option value="cavan">Cavan</option><option value="clare">Clare</option><option value="cork">Cork</option><option value="donegal">Donegal</option><option value="dublin" selected>Dublin</option><option value="galway">Galway</option><option value="kerry">Kerry</option><option value="kildare">Kildare</option><option value="kilkenny">Kilkenny</option><option value="laois">Laois</option><option value="leitrim">Leitrim</option><option value="limerick">Limerick</option><option value="longford">Longford</option><option value="louth">Louth</option><option value="mayo">Mayo</option><option value="meath">Meath</option><option value="monaghan">Monaghan</option><option value="offaly">Offaly</option><option value="roscommon">Roscommon</option><option value="sligo">Sligo</option><option value="tipperary">Tipperary</option><option value="waterford">Waterford</option><option value="westmeath">Westmeath</option><option value="wexford">Wexford</option><option value="wicklow">Wicklow</option></select>
+  <label for="bill" class="big-label" style="margin-top:14px">Your electricity bill every 2 months</label>
+  <div class="money"><span>€</span><input id="bill" type="text" inputmode="decimal" autocomplete="off" placeholder="250" value="250"></div>
+  <label for="facing" style="margin-top:14px">Which way does your roof face?</label>
+  <select id="facing"><option value="s">South</option><option value="sw">South-east or south-west</option><option value="ew">East or west</option><option value="nw">North-east or north-west</option><option value="n">North</option></select>
+  <fieldset style="margin-top:14px"><legend class="sm">Add a battery?</legend><div class="seg three-seg">
+    <label><input type="radio" name="battery" value="0" checked><span>No</span></label>
+    <label><input type="radio" name="battery" value="5"><span>5 kWh<small>€600 grant</small></span></label>
+    <label><input type="radio" name="battery" value="10"><span>10 kWh<small>€600 grant</small></span></label>
+  </div></fieldset>
+  <fieldset style="margin-top:14px"><legend class="sm">Is someone home during the day?</legend><div class="seg three-seg">
+    <label><input type="radio" name="home" value="out"><span>Rarely<small>out all day</small></span></label>
+    <label><input type="radio" name="home" value="mixed" checked><span>Some days</span></label>
+    <label><input type="radio" name="home" value="home"><span>Most days<small>or WFH</small></span></label>
+  </div></fieldset>
+  <label for="size" style="margin-top:14px">System size</label>
+  <select id="size"><option value="">Recommended for my bill</option><option value="2">2 kWp (about 5 panels)</option><option value="2.5">2.5 kWp (about 6.0 panels)</option><option value="3">3 kWp (about 7 panels)</option><option value="3.5">3.5 kWp (about 8.0 panels)</option><option value="4">4 kWp (about 10 panels)</option><option value="4.5">4.5 kWp (about 11.0 panels)</option><option value="5">5 kWp (about 12 panels)</option><option value="5.5">5.5 kWp (about 13.0 panels)</option><option value="6">6 kWp (about 14 panels)</option><option value="7">7 kWp (about 16 panels)</option><option value="8">8 kWp (about 19 panels)</option><option value="10">10 kWp (about 23 panels)</option></select>
+  <details id="adv" class="adv"><summary>Advanced options <span class="muted small">– your own quote, prices, roof angle, shading, loan…</span></summary><div class="adv-body">
+    <div class="two">
+      <label>Yearly use (kWh)<input id="usage" type="number" min="500" max="30000" step="100" placeholder="from your bill"></label>
+      <label>Extra use – EV or heat pump (kWh)<input id="extraKWh" type="number" min="0" max="20000" step="100" placeholder="0"></label>
+      <label>Price you pay (c/kWh)<input id="unitRate" type="number" step="0.1" min="5" max="80" placeholder="33"></label>
+      <label>Export rate (c/kWh)<input id="exportRate" type="number" step="0.1" min="0" max="50" placeholder="18.5"></label>
+      <label>Your quote for the panels (€)<input id="cost" type="number" step="50" min="0" placeholder="typical price"></label>
+      <label>Battery quote (€)<input id="battCost" type="number" step="50" min="0" placeholder="typical price"></label>
+      <label>Battery size (kWh)<input id="battSize" type="number" step="0.5" min="0" max="30" placeholder="as picked above"></label>
+      <label>Roof angle<select id="tilt"><option value="standard">Standard pitch (30–40°)</option><option value="shallow">Shallow (about 15°)</option><option value="steep">Steep (about 50°)</option><option value="flat">Flat roof</option></select></label>
+      <label>Shading<select id="shading"><option value="0">None</option><option value="5">A little (5%)</option><option value="10">Some (10%)</option><option value="20">A lot (20%)</option></select></label>
+      <label>Price rise (% a year)<input id="priceRise" type="number" step="0.5" min="-5" max="15" placeholder="1.5"></label>
+      <label>Inverter replacement, year 12 (€)<input id="inverterCost" type="number" step="50" min="0" placeholder="1000"></label>
+    </div>
+    <fieldset style="margin-top:14px"><legend class="sm">Grant</legend>
+      <label class="radio"><input type="radio" name="grant" value="standard" checked><span>Standard SEAI grant<small>Up to €1,800 + €600 battery. Home built and occupied before 2025.</small></span></label>
+      <label class="radio"><input type="radio" name="grant" value="welfare"><span>Enhanced grant – qualifying welfare payment<small>Up to €8,400 + €600 battery (up to 4 kWp).</small></span></label>
+      <label class="radio"><input type="radio" name="grant" value="none"><span>No grant<small>New home (2025+), already had a solar grant, or you skip it.</small></span></label>
+    </fieldset>
+    <label class="check"><input type="checkbox" id="loan"><span>Paying with a loan</span></label>
+    <div id="loanBox" class="two" hidden>
+      <label>Interest rate (%)<input id="loanRate" type="number" step="0.05" min="0" max="20" placeholder="3.5"></label>
+      <label>Years<input id="loanYears" type="number" step="1" min="1" max="15" placeholder="7"></label>
+    </div>
+    <button type="button" class="btn small-btn" id="resetAdv">Reset advanced options</button>
+  </div></details>
+  <div class="btn-row"><button type="submit" class="btn primary">Show my payback</button></div>
+  <p class="muted small" style="margin-bottom:0">🔒 Worked out on your device. Nothing is sent to us.</p>
+</form>
+<div id="result" aria-live="polite"></div>
+<div class="ad" data-slot="result"></div>
+<h2>Solar panels in Ireland: the short version</h2>
+<div class="card"><ol class="steps">
+<li><strong>A typical home</strong> with a €250 bill every 2 months suits a 4 kWp system (10 panels). In Dublin it makes about 3,928 kWh a year and pays back in about <strong>5.4 years</strong>.</li>
+<li><strong>The SEAI grant</strong> is €700 per kWp for the first 2 kWp and €200 per kWp up to 4 kWp – <strong>€1,800</strong> max. Since October 2026 there's also <strong>€600</strong> for a battery of 5 kWh or more. <a href="seai-solar-grant.html">Grant details →</a></li>
+<li><strong>Apply before any work starts.</strong> Then you have 8 months to install, get a BER and submit the paperwork. <a href="how-to-apply.html">Step by step →</a></li>
+<li><strong>You're paid for what you don't use</strong> – about 15–19.5c per kWh under the Clean Export Guarantee, and up to €400 a year is tax-free (€600 from 2027). <a href="selling-electricity.html">Export rates →</a></li>
+<li><strong>A battery</strong> lets you use more of your own power, but with the €600 grant a 5 kWh battery takes this example from 5.4 years to 7 years. <a href="battery-grant.html">Is a battery worth it? →</a></li>
+</ol></div>
+<h2>Payback by county (4 kWp, no battery)</h2>
+<div class="table-wrap"><table><thead><tr><th>County</th><th>kWh per kWp</th><th>Saved in year 1</th><th>Payback</th></tr></thead><tbody><tr><td><a href="solar-panels-wexford.html">Wexford</a></td><td>1081</td><td>€1,028</td><td>5 years</td></tr><tr><td><a href="solar-panels-waterford.html">Waterford</a></td><td>1047</td><td>€1,000</td><td>5.2 years</td></tr><tr><td><a href="solar-panels-wicklow.html">Wicklow</a></td><td>1003</td><td>€964</td><td>5.4 years</td></tr><tr><td><a href="solar-panels-dublin.html">Dublin</a></td><td>982</td><td>€946</td><td>5.4 years</td></tr><tr><td><a href="solar-panels-cork.html">Cork</a></td><td>972</td><td>€938</td><td>5.5 years</td></tr><tr><td><a href="solar-panels-carlow.html">Carlow</a></td><td>958</td><td>€926</td><td>5.6 years</td></tr><tr><td><a href="solar-panels-kilkenny.html">Kilkenny</a></td><td>956</td><td>€925</td><td>5.6 years</td></tr><tr><td><a href="solar-panels-louth.html">Louth</a></td><td>955</td><td>€924</td><td>5.6 years</td></tr></tbody></table></div>
+<p><a href="by-county.html">All 26 counties →</a></p>
+<div class="cta"><h2>Getting quotes?</h2><p>What to ask, red flags, and how to check a company is SEAI-registered.</p><a class="btn" href="choosing-an-installer.html">Choosing an installer</a></div>
+<div class="try"><h2 class="tl">Try also</h2><div class="try-grid"><a href="../mortgage/" data-track="cross_app" data-label="mortgage"><b>🔑</b><span><strong>How much could I borrow?</strong>Mortgage, deposit and repayments</span></a><a href="../stamp-duty/" data-track="cross_app" data-label="stamp"><b>🧾</b><span><strong>Stamp duty & property tax</strong>Buying costs and LPT by council</span></a><a href="../salary/" data-track="cross_app" data-label="salary"><b>💶</b><span><strong>Take-home pay calculator</strong>Net pay after tax, USC and PRSI – Budget 2027</span></a><a href="../tax-refund/" data-track="cross_app" data-label="taxrefund"><b>💸</b><span><strong>Am I owed a tax refund?</strong>Rent, medical, work from home – claim back to 2022</span></a></div></div>
+<div class="sources"><h2 class="tl">Sources – check them yourself</h2><ul><li><a href="https://www.seai.ie/grants/home-energy-grants/individual-grants/solar-electricity-grant" rel="noopener" target="_blank">SEAI – Solar electricity grant (solar PV)</a></li><li><a href="https://re.jrc.ec.europa.eu/pvg_tools/en/" rel="noopener" target="_blank">EU Joint Research Centre – PVGIS solar data</a></li><li><a href="https://www.solarinfo.ie/microgeneration" rel="noopener" target="_blank">Solarinfo – Export rates by supplier (checked 4 Nov 2026)</a></li><li><a href="https://selectra.ie/energy/guides/electricity-prices-ireland" rel="noopener" target="_blank">Selectra – Electricity prices in Ireland</a></li></ul></div>
+<div class="ad" data-slot="calculator"></div>
+<h2>Share it</h2><p class="muted">Know someone pricing solar panels? Send them this before they sign.</p><div class="share"><a class="btn wa" data-track="share" data-method="whatsapp" data-label="index" target="_blank" rel="noopener" href="https://wa.me/?text=Thinking%20about%20solar%20panels%3F%20This%20free%20calculator%20shows%20the%20payback%2C%20SEAI%20grant%20and%20savings%20for%20your%20county%3A%20https%3A%2F%2Ftavion.ie%2Fsolar%2F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>WhatsApp</a><a class="btn fb" data-track="share" data-method="facebook" data-label="index" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftavion.ie%2Fsolar%2F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg>Facebook</a></div>
+</main>
+<footer>
+  <div class="wrap">
+    <nav aria-label="Solar Panel Calculator pages"><a href="./">Solar panel calculator</a><a href="seai-solar-grant.html">SEAI solar grant</a><a href="how-to-apply.html">How to apply</a><a href="claim-grant-payment.html">Claiming the grant</a><a href="battery-grant.html">Battery grant</a><a href="one-stop-shop.html">One Stop Shop</a><a href="free-solar-panels.html">Free and higher grants</a><a href="selling-electricity.html">Selling electricity</a><a href="solar-income-tax.html">Tax on solar income</a><a href="solar-panel-cost.html">Cost</a><a href="are-solar-panels-worth-it.html">Is it worth it?</a><a href="by-county.html">By county</a><a href="system-sizes.html">System sizes</a><a href="roof-direction.html">Roof direction</a><a href="solar-in-winter.html">Solar in winter</a><a href="planning-permission.html">Planning</a><a href="choosing-an-installer.html">Choosing an installer</a><a href="home-energy-upgrade-loan.html">Loans</a><a href="farm-solar-grant.html">Farm grant</a><a href="business-solar-grant.html">Business grant</a><a href="faq.html">FAQ</a></nav>
+    <p>Also free from Tavion: <a href="../salary/" data-track="cross_app" data-label="salary">💶 Take-home pay calculator</a> · <a href="../welfare/" data-track="cross_app" data-label="welfare">🤝 Social welfare rates 2027</a> · <a href="../auto-enrolment/" data-track="cross_app" data-label="pension">🌱 Auto-enrolment pension calculator</a> · <a href="../mortgage/" data-track="cross_app" data-label="mortgage">🔑 How much could I borrow?</a> · <a href="../stamp-duty/" data-track="cross_app" data-label="stamp">🧾 Stamp duty & property tax</a> · <a href="../rent/" data-track="cross_app" data-label="rent">🏠 Rent increase checker</a> · <a href="../citizenship/" data-track="cross_app" data-label="citizenship">🛂 Citizenship calculator</a> · <a href="../cao/" data-track="cross_app" data-label="cao">🎓 CAO points calculator</a> · <a href="../tax-refund/" data-track="cross_app" data-label="taxrefund">💸 Am I owed a tax refund?</a> · <a href="../bank-holidays/" data-track="cross_app" data-label="holidays">📅 Bank holidays 2027 & leave planner</a></p>
+    <p>Grant rules checked against SEAI in November 2026. A free, independent tool from <a href='../'>Tavion</a>, not affiliated with SEAI, ESB Networks or any installer. Savings are estimates, not guarantees – always get quotes from SEAI-registered companies.</p>
+    <p><a href="../privacy.html">Privacy &amp; cookies</a> · <a href="../" data-track="apps_click" data-label="solar_footer">More free apps from Tavion</a></p>
+  </div>
+</footer>
+<script src="js/site.js"></script><script src="js/solar.js"></script><script src="js/calc.js"></script>
+</body>
+</html>
