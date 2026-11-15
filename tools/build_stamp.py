@@ -463,6 +463,8 @@ def update_sitemap(files):
     xml = xml.replace("\n</urlset>", "".join(f'\n  <url><loc>{BASE}{"" if fn == "index.html" else fn}</loc><lastmod>{TODAY.isoformat()}</lastmod><priority>{pr}</priority></url>' for fn, pr in files) + "\n</urlset>")
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(xml)
+    import sitemap_dates; sitemap_dates.run()
+
 
 def update_llms():
     path = os.path.join(REPO, "llms.txt")

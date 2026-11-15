@@ -781,6 +781,8 @@ def update_sitemap(files):
     xml = re.sub(r"(<loc>https://tavion\.ie/</loc><lastmod>)[^<]*", r"\g<1>" + TODAY, xml)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(xml)
+    import sitemap_dates; sitemap_dates.run()
+
 
 def write_llms():
     """llms.txt: a plain-text map of the site for AI assistants and answer engines (llmstxt.org)."""

@@ -418,7 +418,7 @@ def build_course_pages():
             app.SRC["off_" + c["code"]] = (f"{col[0]} – official {c['title']} course page", c["url"]); srcs.append("off_" + c["code"])
         app.page(c["slug"], title, desc, body, active=None, jsonld=[course_ld, faq_ld(faqs)],
                  crumbs=[("CAO points", "./"), (col[0], f"college-{col[1]}.html"), (c["code"], None)], h1=f"{c['code']} {c['title']} – CAO points",
-                 sources=srcs, cross=CROSS, priority="0.6",
+                 sources=srcs, cross=CROSS, priority="0.6", noindex=not hist,
                  share_text=f"{c['code']} {c['title']} ({col[0]}) needed {show(p26.get('r1'))} CAO points in 2026 – check your points here:")
 
 def strip_html(s): return re.sub(r"<[^>]+>", "", s).replace("&amp;", "&")

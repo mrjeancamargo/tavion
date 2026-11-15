@@ -117,7 +117,7 @@ class App:
                 f'<a class="btn fb" data-track="share" data-method="facebook" data-label="{label}" target="_blank" rel="noopener" href="{fb}">{FB_SVG}Facebook</a></div>')
 
     def page(self, filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot="content", scripts=(), share_text=None, h1=None,
-             sources=(), cross=None, cross_over=None, priority="0.6", next=None):
+             sources=(), cross=None, cross_over=None, priority="0.6", next=None, noindex=False):
         url = self.BASE if filename == "index.html" else self.BASE + filename
         nx = next if next is not None else (self.next_for(filename) if hasattr(self, "next_for") else None)
         if nx: body = insert_next(body, next_card(nx))
@@ -148,7 +148,7 @@ class App:
 <script src="/assets/tavion.js"></script>
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="robots" content="{'noindex, follow' if noindex else 'index, follow, max-snippet:-1, max-image-preview:large'}">
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tavion">
@@ -194,7 +194,7 @@ class App:
         os.makedirs(self.root, exist_ok=True)
         with open(os.path.join(self.root, filename), "w", encoding="utf-8", newline="\n") as f:
             f.write(html)
-        self.files.append((filename, priority))
+        if not noindex: self.files.append((filename, priority))
 
     def update_sitemap(self):
         path = os.path.join(os.path.dirname(self.root), "sitemap.xml")
@@ -204,6 +204,7 @@ class App:
                                                  for fn, pr in self.files) + "\n</urlset>")
         with open(path, "w", encoding="utf-8", newline="\n") as f:
             f.write(xml)
+        import sitemap_dates; sitemap_dates.run()
 
     def update_llms(self, app_line, section_title, facts_md):
         path = os.path.join(os.path.dirname(self.root), "llms.txt")

@@ -659,6 +659,8 @@ def update_sitemap(files):
     xml = xml.replace("\n</urlset>", entries + "\n</urlset>")
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(xml)
+    import sitemap_dates; sitemap_dates.run()
+
 
 def update_llms():
     path = os.path.join(REPO, "llms.txt")
