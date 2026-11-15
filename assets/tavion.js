@@ -47,12 +47,34 @@ window.TAVION = {
   }
 
   // ---- Google Analytics 4 (direct, without Tag Manager) ----
-  if (CFG.gaId && !CFG.gtmId) {
+  // Only count real people. Link checkers (Facebook/Meta, search previews, headless browsers) open a page
+  // and leave within a second without touching it – they inflated "users" and dragged engagement down.
+  // So: known bots are never counted, and everyone else is counted once they interact (scroll, tap, click,
+  // key) or keep the page open and visible for 5 seconds. Events before that are queued, then sent.
+  var UA = navigator.userAgent || "";
+  var BOT = /\bbot\b|bot\/|adsbot|crawl|spider|slurp|facebookexternalhit|meta-externalagent|meta-externalfetcher|facebot|headless|lighthouse|pagespeed|preview|python|curl|wget|phantom|puppeteer|playwright/i.test(UA) || navigator.webdriver === true;
+  var gaOn = false, queue = [];
+  function startGA(why) {
+    if (gaOn || BOT || !CFG.gaId || CFG.gtmId) return;
+    gaOn = true;
     load("https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(CFG.gaId));
     gtag("js", new Date());
     gtag("set", { app_section: section });
     gtag("config", CFG.gaId);
+    queue.forEach(function (q) { gtag("event", q[0], q[1]); }); queue = [];
+    if (/localhost|127\.0\.0\.1/.test(location.hostname)) console.info("[ga] started:", why);
   }
+  if (CFG.gaId && !CFG.gtmId && !BOT) {
+    var evs = ["scroll", "pointerdown", "keydown", "touchstart", "click"];
+    var go = function (e) { evs.forEach(function (n) { removeEventListener(n, go, true); }); startGA(e.type); };
+    evs.forEach(function (n) { addEventListener(n, go, { capture: true, passive: true }); });
+    var shown = 0, tick = setInterval(function () {
+      if (gaOn) return clearInterval(tick);
+      if (document.visibilityState === "visible") shown += 1;
+      if (shown >= 5) { clearInterval(tick); startGA("visible_5s"); }
+    }, 1000);
+  }
+  CFG.isBot = BOT;
 
   // ---- Google AdSense ----
   // Loaded once per page. Needed on every page for AdSense site approval and its consent banner.
@@ -72,8 +94,8 @@ window.TAVION = {
       KEYS.forEach(function (k) { msg[k] = undefined; }); // clear values left over from earlier events
       for (var k in params) msg[k] = params[k];
       window.dataLayer.push(msg);
-    } else if (CFG.gaId) {
-      gtag("event", name, params);
+    } else if (CFG.gaId && !BOT) {
+      if (gaOn) gtag("event", name, params); else queue.push([name, params]);
     }
     if (/localhost|127\.0\.0\.1/.test(location.hostname)) console.info("[track]", name, params);
   };
