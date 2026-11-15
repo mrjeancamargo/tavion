@@ -38,6 +38,8 @@ SRC = {
     "ccpc": ("CCPC – Mortgages (compare lenders and costs)", "https://www.ccpc.ie/consumers/money/mortgages/"),
     "rtb_index": ("RTB – Rent Index Q1 2026 (average rents by county)", "https://rtb.ie/wp-content/uploads/2026/09/RTB-Rent-Index-Q1-2026.pdf"),
     "lahl": ("Local Authority Home Loan", "https://localauthorityhomeloan.ie/"),
+    "cso_rppi": ("CSO – Residential Property Price Index August 2026", "https://www.cso.ie/en/releasesandpublications/ep/p-rppi/residentialpropertypriceindexaugust2026/"),
+    "cso_hpm07": ("CSO data table HPM07 – rolling 12-month median prices by county", "https://data.cso.ie/table/HPM07"),
     "ci_buying": ("Citizens Information – Buying a home", "https://www.citizensinformation.ie/en/housing/owning-a-home/buying-a-home/"),
 }
 
@@ -167,7 +169,7 @@ def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot=
   <div class="wrap">
     <nav aria-label="Mortgage pages"><a href="./">Mortgage calculator</a><a href="how-much-can-i-borrow.html">How much can I borrow?</a><a href="repayments.html">Repayment tables</a><a href="costs-of-buying.html">Costs of buying</a><a href="schemes.html">Help to Buy &amp; First Home Scheme</a><a href="first-time-buyers.html">First-time buyers</a><a href="moving-home.html">Moving home</a><a href="central-bank-rules.html">Central Bank rules</a><a href="faq.html">FAQ</a></nav>
     <p>How much can I borrow on: {pop}</p>
-    <p>By county: {" · ".join(f'<a href="mortgage-{k}.html">{NAMES[k]}</a>' for k in ("dublin", "cork", "galway", "limerick", "kildare", "meath", "wicklow", "louth", "waterford"))} · <a href="counties.html">all counties</a></p>
+    <p>House prices by county: {" · ".join(f'<a href="mortgage-{k}.html">{NAMES[k]}</a>' for k in ("dublin", "cork", "galway", "limerick", "kildare", "meath", "wicklow", "louth", "waterford"))} · <a href="counties.html">all counties</a> · <a href="salary-needed-to-buy-a-house.html">salary needed to buy</a></p>
     <p>Figures checked against the Central Bank of Ireland, Revenue, Citizens Information and the RTB in {CHECKED}. This is a free, independent tool from <a href="../">Tavion</a>, not financial advice and not a mortgage offer. Lenders decide what they'll lend – speak to a lender or an authorised mortgage broker, and compare costs on <a href="https://www.ccpc.ie/consumers/money/mortgages/" rel="noopener">ccpc.ie</a>.</p>
     <p><a href="../privacy.html">Privacy &amp; cookies</a> · <a href="../" data-track="apps_click" data-label="mortgage_footer">More free apps from Tavion</a></p>
   </div>
@@ -395,50 +397,121 @@ def build_repay():
                                            h1=f"{eur(L)} mortgage repayments", sources=("cbi_rates", "cbi", "rtb_index")))
 
 # ---------------------------------------------------------------- counties
+LPT = {"cork": "lpt-cork-county", "galway": "lpt-galway-county", "dublin": "lpt-dublin-city"}
+CSO = json.load(open(os.path.join(HERE, "data", "cso_house_prices.json"), encoding="utf-8"))
+CSO_A = {a: dict(zip(CSO["cols"], v)) for a, v in CSO["areas"].items()}
+CSO_PERIOD = CSO["period"]
+# county key -> (main CSO area, [extra areas shown on the page])
+AREAS = {"cork": ("Cork County", ["Cork City"]), "galway": ("Galway County", ["Galway City"]), "limerick": ("Limerick County", ["Limerick City"]),
+         "waterford": ("Waterford County", ["Waterford City"]), "dublin": ("Dublin", ["Dublin City", "Dún Laoghaire-Rathdown", "Fingal", "South Dublin"])}
+def area_of(k): return AREAS.get(k, (NAMES[k], []))
+def stamp_link(price): return f"../stamp-duty/stamp-duty-{min(range(100000, 1000001, 25000), key=lambda x: abs(x - price))}.html"
+
+def county_figures(k):
+    main, extra = area_of(k)
+    d = CSO_A[main]; P = d["median"]
+    pay, stamp = batch([{"kind": "pay", "loan": P * 0.9, "rate": R["avgRate"], "term": 30}, {"kind": "stamp", "price": P, "nb": False}])
+    fees = sum(FEES.values())
+    return dict(main=main, extra=extra, d=d, P=P, pay=pay, stamp=stamp, fees=fees, ftb_inc=P * 0.9 / 4, mover_inc=P * 0.8 / 3.5,
+                cash=P * 0.1 + stamp + fees, chg=(P / d["median_prev_year"] - 1) * 100 if d["median_prev_year"] else 0)
+
 def build_counties():
-    rows = []
-    for k in sorted(NAMES, key=lambda k: NAMES[k]):
+    F = {k: county_figures(k) for k in NAMES}
+    nat = CSO_A["All"]
+    order = sorted(NAMES, key=lambda k: F[k]["P"])
+    rank = {k: i + 1 for i, k in enumerate(sorted(NAMES, key=lambda k: -F[k]["P"]))}
+    for k in NAMES:
+        f, n = F[k], NAMES[k]; d, P = f["d"], f["P"]
         house, apt = FHS[k]
-        rows.append([f'<a href="mortgage-{k}.html">{NAMES[k]}</a>', eur(RENT[k]), eur(house), eur(apt)])
-        price = house
-        ex = batch([{"kind": "calc", "inp": {"incomes": [price * 0.9 / 4], "savings": price * 0.1 + 12000, "county": k, "price": price}},
-                    {"kind": "pay", "loan": price * 0.9, "rate": R["avgRate"], "term": 30}, {"kind": "stamp", "price": price, "nb": False}])
-        c, pay, stamp = ex
-        diff = RENT[k] - pay
-        facts = [f"The average rent for a new tenancy in County {NAMES[k]} is <strong>{eur(RENT[k])} a month</strong> (RTB Rent Index, Q1 2026).",
-                 f"Buying a {eur(price)} home with a 10% deposit means a {eur(price * 0.9)} mortgage: about <strong>{eur(pay)} a month</strong> over 30 years at {R['avgRate']}% – "
-                 + (f"<strong>{eur(diff)} less than the average rent</strong>." if diff > 0 else f"{eur(-diff)} more than the average rent."),
-                 f"To borrow {eur(price * 0.9)} a first-time buyer needs a gross income of about <strong>{eur(price * 0.9 / 4)}</strong> (single or combined).",
-                 f"First Home Scheme price ceiling in County {NAMES[k]}: {eur(house)} for houses{'' if apt == house else ', ' + eur(apt) + ' for apartments'}."]
-        if k == "cork":
-            facts.append("Cork City Council area: €500,000 First Home Scheme ceiling.")
-        if k == "galway":
-            facts.append("Galway City Council area: €475,000 First Home Scheme ceiling.")
-        body = f"""<p class="lead">Buying a home in County {NAMES[k]}? Mortgage, deposit and repayments compared with the average rent, plus Help to Buy and First Home Scheme limits.</p>
-<p class="updated">Checked {CHECKED}</p>
+        where = "County " + n if f["main"] == n else ("Dublin (all four council areas)" if k == "dublin" else f["main"] + " (outside the city)")
+        diff = RENT[k] - f["pay"]
+        vs_nat = P - nat["median"]
+        facts = [f"The median price paid for a home in {where} was <strong>{eur(P)}</strong> in the {CSO_PERIOD} (CSO) – " + (f"{eur(abs(vs_nat))} {'above' if vs_nat > 0 else 'below'} the national median of {eur(nat['median'])}." if vs_nat else "the same as the national median."),
+                 f"Prices {'rose' if f['chg'] >= 0 else 'fell'} <strong>{abs(f['chg']):.1f}%</strong> on a year earlier ({eur(d['median_prev_year'])}). {n} is the <strong>{rank[k]}{'st' if rank[k] in (1, 21) else 'nd' if rank[k] in (2, 22) else 'rd' if rank[k] in (3, 23) else 'th'} most expensive</strong> of 26 counties.",
+                 f"To buy at the median with a 10% deposit, a first-time buyer needs a gross income of about <strong>{eur(f['ftb_inc'])}</strong> – {eur(f['ftb_inc'] / 2)} each for a couple (Central Bank 4× limit).",
+                 f"Cash needed up front: about <strong>{eur(f['cash'])}</strong> – {eur(P * 0.1)} deposit, {eur(f['stamp'])} stamp duty and {eur(f['fees'])} in fees.",
+                 f"Repayments on a {eur(P * 0.9)} mortgage: about <strong>{eur(f['pay'])} a month</strong> over 30 years at {R['avgRate']}% – " + (f"{eur(diff)} less than the average new rent of {eur(RENT[k])}." if diff > 0 else f"{eur(-diff)} more than the average new rent of {eur(RENT[k])}.")]
+        if f["extra"]:
+            facts.append("Median by area: " + ", ".join(f"{a} <strong>{eur(CSO_A[a]['median'])}</strong>" for a in f["extra"]) + ".")
+        rows = [["Median price (all homes)", eur(P)], ["First-time buyers paid", eur(d["ftb"])], ["New homes", eur(d["new"])], ["Second-hand homes", eur(d["existing"])],
+                ["Mean (average) price", eur(d["mean"])], ["A year earlier", eur(d["median_prev_year"])]]
+        areas_tab = ""
+        if f["extra"]:
+            ar = [f["main"]] + f["extra"]
+            areas_tab = f"<h2>House prices across {n}</h2>" + table(["Area", "Median price", "First-time buyers", "New homes", "Income needed (FTB)"],
+                        [[a, eur(CSO_A[a]["median"]), eur(CSO_A[a]["ftb"]), eur(CSO_A[a]["new"]), eur(CSO_A[a]["median"] * 0.9 / 4)] for a in ar])
+        inc_rows = []
+        for mult, lab in ((0.8, "20% below median"), (1, "Median"), (1.2, "20% above median")):
+            pp = round(P * mult / 5000) * 5000
+            pm = batch([{"kind": "pay", "loan": pp * 0.9, "rate": R["avgRate"], "term": 30}])[0]
+            inc_rows.append([f"{lab}: {eur(pp)}", eur(pp * 0.1), eur(pp * 0.9 / 4), eur(pp * 0.8 / 3.5), eur(pm)])
+        htb_new = d["new"] <= 500000
+        neigh = [x for x in sorted(NAMES, key=lambda x: abs(F[x]["P"] - P)) if x != k][:5]
+        body = f"""<p class="lead">How much does a house cost in {n}, and what salary do you need to buy one? Real sale prices from the CSO, with the deposit, stamp duty, mortgage repayments and how it compares with renting.</p>
+<p class="updated">CSO · {CSO_PERIOD} · Checked {CHECKED}</p>
+<div class="hero-num"><div><span class="tl">Median price</span><strong>{eur(P)}</strong><span class="muted">{'+' if f['chg'] >= 0 else '−'}{abs(f['chg']):.1f}% in a year</span></div><div><span class="tl">Income needed</span><strong>{eur(f['ftb_inc'])}</strong><span class="muted">first-time buyer, 10% deposit</span></div></div>
 {key_facts(facts)}
-<h2>Example: buying a {eur(price)} home in {NAMES[k]}</h2>
-{table(["", "Amount"], [["Price", eur(price)], ["10% deposit", eur(price * 0.1)], ["Mortgage (90%)", eur(price * 0.9)], ["Stamp duty (1%)", eur(stamp)],
-    ["Solicitor, valuation, survey, Land Registry (estimate)", eur(sum(FEES.values()))], ["<strong>Cash needed</strong>", "<strong>" + eur(price * 0.1 + stamp + sum(FEES.values())) + "</strong>"],
-    ["Monthly repayment (30 yrs, " + str(R['avgRate']) + "%)", eur(pay)], ["Average new rent in " + NAMES[k], eur(RENT[k])]])}
-<p class="muted small">If it's a new home under €500,000, Help to Buy could give a first-time buyer up to {eur(min(35000, price * 0.1))} towards the deposit.</p>
+<h2>House prices in {n} at a glance</h2>
+{table(["", where], rows)}
+{areas_tab}
+<h2>Salary needed to buy in {n}</h2>
+{table(["Price", "10% deposit", "Income – first-time buyer (4×)", "Income – mover (3.5×, 20% deposit)", "Monthly repayment"], inc_rows)}
+<p class="muted small">Income is gross, single or combined. Repayments over 30 years at {R['avgRate']}% (Central Bank average new mortgage rate, {R['rateMonth']}) on a 90% mortgage.</p>
 <div class="ad" data-slot="content"></div>
-<div class="cta"><h2>Your figures for {NAMES[k]}</h2><p>See what you can borrow and the total cash you need.</p><a class="btn" href="./?county={k}">Open the calculator</a></div>
-<p>Stamp duty and fees on a {eur(price)} home: <a href="../stamp-duty/stamp-duty-{min([x for x in range(100000, 1000001, 25000)], key=lambda x: abs(x - price))}.html">see the full breakdown →</a></p>
-<p>Renting in {NAMES[k]} while you save? <a href="../rent/rent-increase-{k}.html">Check the rent increase rules for {NAMES[k]} →</a></p>"""
-        faqs = [(f"How much do I need to buy a house in {NAMES[k]}?", f"For a {eur(price)} home: a 10% deposit of {eur(price * 0.1)} plus about {eur(stamp + sum(FEES.values()))} in stamp duty and fees, and a gross income of about {eur(price * 0.9 / 4)} for a first-time buyer."),
-                (f"Is it cheaper to buy or rent in {NAMES[k]}?", f"Repaying a {eur(price * 0.9)} mortgage costs about {eur(pay)} a month over 30 years at {R['avgRate']}%, compared with an average new rent of {eur(RENT[k])} (RTB, Q1 2026). Buying also has upfront costs, insurance and maintenance.")]
-        write(f"mortgage-{k}.html", page(f"mortgage-{k}.html", f"Mortgage Calculator {NAMES[k]} 2026 – Deposit, Repayments vs Rent",
-                                         f"Buying in County {NAMES[k]}: deposit, stamp duty and repayments on a {eur(price)} home vs the average rent of {eur(RENT[k])}. First Home Scheme and Help to Buy limits.",
-                                         body, active=None, jsonld=[faq_ld(faqs)], crumbs=[("Mortgage", "./"), ("Counties", "counties.html"), (NAMES[k], None)],
-                                         h1=f"Buying a home in County {NAMES[k]}", sources=("rtb_index", "fhs", "fhs_ci", "cbi", "stamp")))
-    body = f"""<p class="lead">Average rents and First Home Scheme price ceilings in every county – and what it costs to buy instead of rent.</p>
-<p class="updated">RTB Rent Index Q1 2026 · First Home Scheme ceilings 2026 · Checked {CHECKED}</p>
-{table(["County", "Average new rent / month", "FHS ceiling – house", "FHS ceiling – apartment"], rows)}
-<p class="muted small">Counties with city councils (Cork, Galway) have higher ceilings in the city area.</p>"""
-    write("counties.html", page("counties.html", "Mortgage vs Rent by County Ireland 2026 – Average Rents & First Home Scheme Ceilings",
-                                "Buying vs renting in every Irish county: average new rents (RTB Q1 2026), First Home Scheme price ceilings, deposits and mortgage repayments.",
-                                body, crumbs=[("Mortgage", "./"), ("Counties", None)], h1="Buying vs renting in every county", sources=("rtb_index", "fhs", "fhs_ci")))
+<h2>Cash you need to buy at the median</h2>
+{table(["", "Amount"], [["Deposit (10%)", eur(P * 0.1)], ["Stamp duty (1%)", eur(f['stamp'])], ["Solicitor, valuation, survey, Land Registry (estimate)", eur(f['fees'])], ["<strong>Total cash needed</strong>", "<strong>" + eur(f['cash']) + "</strong>"]])}
+<p>{('New homes in ' + n + ' sold for a median of ' + eur(d['new']) + ' – under the €500,000 Help to Buy limit, so a first-time buyer could get up to <strong>' + eur(min(35000, d['new'] * 0.1)) + '</strong> back towards the deposit.') if htb_new else ('New homes in ' + n + ' sold for a median of ' + eur(d['new']) + ' – above the €500,000 Help to Buy limit for many buyers.')}
+First Home Scheme ceiling: {eur(house)} for houses{'' if apt == house else ', ' + eur(apt) + ' for apartments'}. <a href="schemes.html">Help to Buy and First Home Scheme →</a></p>
+<h2>Buy or rent in {n}?</h2>
+<p>The average new rent in {n} is <strong>{eur(RENT[k])} a month</strong> (RTB, Q1 2026). Repaying a {eur(P * 0.9)} mortgage costs about <strong>{eur(f['pay'])}</strong> a month – {('<strong>' + eur(diff) + ' less</strong> than renting') if diff > 0 else (eur(-diff) + ' more than renting')}. Buying also means upfront costs, insurance, property tax and repairs. <a href="../rent/rent-increase-{k}.html">Rent rules in {n} →</a></p>
+<div class="cta"><h2>Can you afford a home in {n}?</h2><p>Your income, savings and the price you're looking at.</p><a class="btn" href="./?county={k}&amp;price={round(P, -3):.0f}">Open the calculator</a></div>
+<p>Stamp duty and fees on a {eur(P)} home: <a href="{stamp_link(P)}">full breakdown →</a> · Property tax: <a href="../stamp-duty/{LPT.get(k, 'lpt-' + k)}.html">LPT in {n} →</a></p>
+<h2>Counties with similar prices</h2><div class="chip-list">{"".join(f'<a href="mortgage-{x}.html">{NAMES[x]} {eur(F[x]["P"])}</a>' for x in neigh)}<a href="counties.html">All counties →</a></div>"""
+        faqs = [(f"What is the average house price in {n}?", f"The median price paid for a home in {where} was {eur(P)} in the {CSO_PERIOD}, according to the CSO ({abs(f['chg']):.1f}% {'higher' if f['chg'] >= 0 else 'lower'} than a year earlier). First-time buyers paid a median of {eur(d['ftb'])}."),
+                (f"What salary do I need to buy a house in {n}?", f"About {eur(f['ftb_inc'])} gross (single or combined) for a first-time buyer buying at the median of {eur(P)} with a 10% deposit, under the Central Bank's 4× income limit. A couple would need about {eur(f['ftb_inc'] / 2)} each."),
+                (f"How much deposit do I need to buy in {n}?", f"10% of the price – {eur(P * 0.1)} at the median – plus about {eur(f['stamp'] + f['fees'])} for stamp duty and fees: {eur(f['cash'])} in total."),
+                (f"Is it cheaper to buy or rent in {n}?", f"A {eur(P * 0.9)} mortgage costs about {eur(f['pay'])} a month over 30 years at {R['avgRate']}%, compared with an average new rent of {eur(RENT[k])} (RTB, Q1 2026).")]
+        write(f"mortgage-{k}.html", page(f"mortgage-{k}.html", f"Average House Price {n} 2026 – {eur(P)} | Salary Needed to Buy, Deposit & Mortgage",
+                                         f"House prices in {n}: median {eur(P)} (CSO, {CSO_PERIOD}, {'+' if f['chg'] >= 0 else '−'}{abs(f['chg']):.1f}%). Salary needed to buy ({eur(f['ftb_inc'])}), deposit, stamp duty, repayments vs rent of {eur(RENT[k])}.",
+                                         body, active=None, jsonld=[faq_ld(faqs)], crumbs=[("Mortgage", "./"), ("House prices by county", "counties.html"), (n, None)],
+                                         h1=f"House prices in {n} and the salary you need", sources=("cso_rppi", "cso_hpm07", "rtb_index", "cbi", "fhs")))
+    # hub
+    rows = [[f'<a href="mortgage-{k}.html">{NAMES[k]}</a>', eur(F[k]["P"]), f"{'+' if F[k]['chg'] >= 0 else '−'}{abs(F[k]['chg']):.1f}%", eur(F[k]["d"]["ftb"]), eur(F[k]["ftb_inc"]), eur(RENT[k])] for k in sorted(NAMES, key=lambda k: -F[k]["P"])]
+    top, bot = order[-1], order[0]
+    hub_faq = [("Which county has the most expensive houses?", f"{NAMES[top]} – a median of {eur(F[top]['P'])}. Within Dublin, Dún Laoghaire-Rathdown is highest at {eur(CSO_A['Dún Laoghaire-Rathdown']['median'])}."),
+               ("Which county has the cheapest houses?", f"{NAMES[bot]} – a median of {eur(F[bot]['P'])} in the {CSO_PERIOD}."),
+               ("What is the average house price in Ireland?", f"The national median price was {eur(nat['median'])} in the {CSO_PERIOD} (CSO), up {(nat['median'] / nat['median_prev_year'] - 1) * 100:.1f}% on a year earlier. First-time buyers paid a median of {eur(nat['ftb'])}.")]
+    body = f"""<p class="lead">What do homes actually sell for in each county, and what income do you need to buy one? Median sale prices from the CSO for every county.</p>
+<p class="updated">CSO Residential Property Price Index · {CSO_PERIOD} · Checked {CHECKED}</p>
+{key_facts([f"National median: <strong>{eur(nat['median'])}</strong> ({'+' if nat['median'] >= nat['median_prev_year'] else ''}{(nat['median'] / nat['median_prev_year'] - 1) * 100:.1f}% in a year). First-time buyers: {eur(nat['ftb'])}. New homes: {eur(nat['new'])}.",
+            f"Most expensive: <strong>{NAMES[top]} {eur(F[top]['P'])}</strong> (Dún Laoghaire-Rathdown {eur(CSO_A['Dún Laoghaire-Rathdown']['median'])}).",
+            f"Cheapest: <strong>{NAMES[bot]} {eur(F[bot]['P'])}</strong>, then {NAMES[order[1]]} {eur(F[order[1]]['P'])} and {NAMES[order[2]]} {eur(F[order[2]]['P'])}.",
+            f"To buy at the national median, a first-time buyer needs about <strong>{eur(nat['median'] * 0.9 / 4)}</strong> gross income."])}
+{table(["County", "Median price", "1 year change", "First-time buyers", "Income needed (FTB)", "Average new rent"], rows)}
+<p class="muted small">Median price of household market purchases in the {CSO_PERIOD} (CSO table HPM07). Cork, Galway, Limerick and Waterford use the county area outside the city – see each county page for the city. Income needed: 90% mortgage at 4× income. Rent: RTB Rent Index Q1 2026.</p>
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(hub_faq)}
+<div class="cta"><h2>What could you afford?</h2><p>Check against your own income and savings.</p><a class="btn" href="./">Open the calculator</a></div>"""
+    write("counties.html", page("counties.html", "House Prices by County Ireland 2026 – Median Price & Salary Needed to Buy",
+                                f"Average house prices in every Irish county (CSO, {CSO_PERIOD}): national median {eur(nat['median'])}, from {NAMES[bot]} {eur(F[bot]['P'])} to {NAMES[top]} {eur(F[top]['P'])}. Salary needed, first-time buyer prices and rents.",
+                                body, jsonld=[faq_ld(hub_faq)], crumbs=[("Mortgage", "./"), ("House prices by county", None)], h1="House prices by county", sources=("cso_rppi", "cso_hpm07", "rtb_index")))
+
+    # salary needed ranking
+    rows = [[f'<a href="mortgage-{k}.html">{NAMES[k]}</a>', eur(F[k]["P"]), eur(F[k]["ftb_inc"]), eur(F[k]["ftb_inc"] / 2), eur(F[k]["cash"])] for k in order]
+    sal_faq = [("What salary do you need to buy a house in Ireland?", f"About {eur(nat['median'] * 0.9 / 4)} gross for a first-time buyer at the national median price of {eur(nat['median'])}, with a 10% deposit. It ranges from {eur(F[bot]['ftb_inc'])} in {NAMES[bot]} to {eur(F[top]['ftb_inc'])} in {NAMES[top]}."),
+               ("How is the salary needed worked out?", "First-time buyers can borrow up to 4 times their gross income and need a 10% deposit, so the income needed is 90% of the price divided by 4. Second and later buyers can borrow 3.5 times income with a 20% deposit.")]
+    body = f"""<p class="lead">What income do you need to buy an average home in each county? Ranked from the most affordable to the least.</p>
+<p class="updated">CSO {CSO_PERIOD} · Central Bank rules · Checked {CHECKED}</p>
+{key_facts([f"Nationally you need about <strong>{eur(nat['median'] * 0.9 / 4)}</strong> to buy at the median of {eur(nat['median'])} as a first-time buyer – {eur(nat['median'] * 0.9 / 8)} each for a couple.",
+            f"Most affordable: <strong>{NAMES[bot]}</strong> – about {eur(F[bot]['ftb_inc'])}.", f"Least affordable: <strong>{NAMES[top]}</strong> – about {eur(F[top]['ftb_inc'])}.",
+            "Based on the Central Bank limit of 4× income with a 10% deposit. Your bank may lend less (or more, with an exemption)."])}
+{table(["County", "Median price", "Income needed (single or joint)", "Each, for a couple", "Cash needed up front"], rows)}
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(sal_faq)}
+<p>Check your own salary: <a href="how-much-can-i-borrow.html">how much can I borrow →</a> · <a href="../salary/" data-track="cross_app" data-label="salary_from_mortgage">your take-home pay →</a></p>"""
+    write("salary-needed-to-buy-a-house.html", page("salary-needed-to-buy-a-house.html", "Salary Needed to Buy a House in Ireland 2026 – By County",
+                                f"Income needed to buy an average home in every county: {eur(nat['median'] * 0.9 / 4)} nationally, from {eur(F[bot]['ftb_inc'])} in {NAMES[bot]} to {eur(F[top]['ftb_inc'])} in {NAMES[top]}. Deposit and cash needed.",
+                                body, jsonld=[faq_ld(sal_faq)], crumbs=[("Mortgage", "./"), ("Salary needed to buy", None)], h1="Salary needed to buy a house, by county", sources=("cso_rppi", "cso_hpm07", "cbi")))
 
 # ---------------------------------------------------------------- guides
 def build_guides():
@@ -636,7 +709,8 @@ def update_llms():
 - Help to Buy: up to €35,000 from 7 October 2026 (Budget 2027), max 10% of price, new homes up to €500,000, mortgage at least 70%, until end-2029. First Home Scheme: equity up to 30% (20% with Help to Buy), price ceilings €375,000–€500,000 by area.
 - Stamp duty: 1% up to €1m, 2% €1m–€1.5m, 6% above €1.5m (VAT-exclusive price on new homes).
 - Average new rent (RTB Q1 2026): national €{RENT['national']:,}, Dublin €{RENT['dublin']:,}, Cork €{RENT['cork']:,}, Galway €{RENT['galway']:,}, Limerick €{RENT['limerick']:,}.
-- Pages: [Calculator](https://tavion.ie/mortgage/), [How much can I borrow by salary](https://tavion.ie/mortgage/how-much-can-i-borrow.html), [Repayment tables](https://tavion.ie/mortgage/repayments.html), [Costs of buying](https://tavion.ie/mortgage/costs-of-buying.html), [Help to Buy & First Home Scheme](https://tavion.ie/mortgage/schemes.html), [Movers](https://tavion.ie/mortgage/moving-home.html), [By county](https://tavion.ie/mortgage/counties.html), [FAQ](https://tavion.ie/mortgage/faq.html).
+- House prices (CSO, 12 months to August 2026): national median €400,000 (+6.7% on a year earlier; first-time buyers €409,999). Highest county Dublin €500,000 (Dún Laoghaire-Rathdown €685,000); lowest Longford €199,000. Income needed for a first-time buyer at the national median: about €90,000.
+- Pages: [Calculator](https://tavion.ie/mortgage/), [House prices by county](https://tavion.ie/mortgage/counties.html), [Salary needed to buy by county](https://tavion.ie/mortgage/salary-needed-to-buy-a-house.html), [How much can I borrow by salary](https://tavion.ie/mortgage/how-much-can-i-borrow.html), [Repayment tables](https://tavion.ie/mortgage/repayments.html), [Costs of buying](https://tavion.ie/mortgage/costs-of-buying.html), [Help to Buy & First Home Scheme](https://tavion.ie/mortgage/schemes.html), [Movers](https://tavion.ie/mortgage/moving-home.html), [By county](https://tavion.ie/mortgage/counties.html), [FAQ](https://tavion.ie/mortgage/faq.html).
 """
     txt = txt.replace("\n## Optional", facts + "\n## Optional", 1)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
@@ -646,7 +720,7 @@ if __name__ == "__main__":
     os.makedirs(ROOT, exist_ok=True)
     build_index(); build_borrow(); build_repay(); build_counties(); build_guides(); build_faq(); build_og()
     files = [("index.html", "0.9"), ("how-much-can-i-borrow.html", "0.9"), ("repayments.html", "0.8"), ("costs-of-buying.html", "0.8"), ("schemes.html", "0.8"),
-             ("moving-home.html", "0.8"), ("first-time-buyers.html", "0.8"), ("central-bank-rules.html", "0.7"), ("counties.html", "0.7"), ("faq.html", "0.7")] + \
-            [(f"borrow-{a}.html", "0.6") for a in INCOMES] + [(f"repayments-{L}.html", "0.6") for L in LOANS] + [(f"mortgage-{k}.html", "0.6") for k in NAMES]
+             ("moving-home.html", "0.8"), ("first-time-buyers.html", "0.8"), ("central-bank-rules.html", "0.7"), ("counties.html", "0.9"), ("salary-needed-to-buy-a-house.html", "0.9"), ("faq.html", "0.7")] + \
+            [(f"borrow-{a}.html", "0.6") for a in INCOMES] + [(f"repayments-{L}.html", "0.6") for L in LOANS] + [(f"mortgage-{k}.html", "0.8") for k in NAMES]
     update_sitemap(files); update_llms()
     print("Built", len(files), "pages in", os.path.normpath(ROOT))
