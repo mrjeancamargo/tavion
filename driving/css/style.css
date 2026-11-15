@@ -36,6 +36,8 @@ a { color: var(--brand); }
 
 header.top { background: var(--card); border-bottom: 1px solid var(--line); }
 header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 12px; }
+.nav-r { display: flex; align-items: center; gap: 14px; }
+header.top a.small { font-size: 14px; white-space: nowrap; }
 .logo { font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 16px; }
 .logo b { background: var(--brand); color: var(--brand-ink); border-radius: 8px; padding: 2px 7px; font-size: 14px; }
 
