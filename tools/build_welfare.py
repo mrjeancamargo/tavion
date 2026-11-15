@@ -66,7 +66,7 @@ def run(q): return node(ENGINE, NODE, q)["res"]
 TABS = [("./", "Calculator"), ("rates-2027.html", "Rates 2027"), ("christmas-bonus.html", "Christmas Bonus"), ("payment-dates.html", "Payment dates"),
         ("all-payments.html", "All payments"), ("budget-2027.html", "Budget 2027"), ("faq.html", "FAQ")]
 FOOT = ('<a href="./">Welfare calculator</a><a href="rates-2027.html">Rates 2027</a><a href="christmas-bonus.html">Christmas Bonus 2026</a><a href="child-benefit-payment-dates.html">Child Benefit dates</a>'
-        '<a href="payment-dates.html">Payment dates</a><a href="all-payments.html">All payments</a><a href="budget-2027.html">Budget 2027 changes</a><a href="faq.html">FAQ</a>')
+        '<a href="payment-dates.html">Payment dates</a><a href="fuel-allowance-payment-dates.html">Fuel Allowance dates</a><a href="lump-sum-payments.html">Bonus &amp; lump sums</a><a href="cost-of-disability-payment.html">€500 disability payment</a><a href="all-payments.html">All payments</a><a href="budget-2027.html">Budget 2027 changes</a><a href="faq.html">FAQ</a>')
 app = App("welfare", "Social Welfare Ireland", "🤝", None, "#0369a1", TABS, FOOT, SRC, None,
           "Social welfare rates 2027 – what you'll get, the Christmas Bonus and payment dates:", "Know someone on a social welfare payment? Send them this.", "welfare",
           f"Rates checked against the Department of Social Protection's Budget 2027 figures and Citizens Information in {CHECKED}. A free, independent tool from <a href='../'>Tavion</a> – not affiliated with the Department of Social Protection. Your entitlement depends on your circumstances; confirm with the Department or apply on <a href='https://services.mywelfare.ie/' rel='noopener'>MyWelfare.ie</a>.")
@@ -109,9 +109,26 @@ INFO = {
  "bereaved-partners-pension": dict(what="A weekly pension for the spouse or civil partner of someone who died, based on PRSI.", who=["Your spouse or civil partner died", "Enough PRSI contributions (yours or theirs)"], dur="Paid for life (moves to a higher rate at 66 and 80).", tip="A once-off Bereaved Parent Grant (€8,000) may also apply where a child is left without a parent.", rel=["guardians-payment", "state-pension-contributory", "living-alone-increase"]),
  "farm-assist": dict(what="A means-tested weekly payment for farmers on low incomes.", who=["Farming in Ireland", "Aged 18 to 66", "Pass a means test"], dur="Paid as long as you qualify.", tip="From July 2027 €7,500 of agri-environmental scheme income is disregarded (up from €5,000).", rel=["jobseekers-allowance", "state-pension-non-contributory", "working-family-payment"]),
  "supplementary-welfare-allowance": dict(what="A basic weekly payment if you have no income or not enough to live on, while you wait for another payment.", who=["Living in Ireland", "No or very low income", "Pass a means test"], dur="Usually short-term.", tip="Exceptional and urgent needs payments are also available through the Community Welfare Service.", rel=["jobseekers-allowance", "one-parent-family-payment", "fuel-allowance"]),
- "fuel-allowance": dict(what="A weekly payment during the heating season for people on long-term welfare payments who can't afford heating.", who=["Getting a qualifying long-term payment (or Working Family Payment)", "Living alone or only with other qualifying people", "Pass a means test – improved for single pensioners from 2027"], dur="28 weeks, from late September to April.", tip="€43 a week from January 2027 – over €1,200 for the season.", rel=["living-alone-increase", "state-pension-contributory", "working-family-payment"]),
+ "fuel-allowance": dict(what="A weekly payment during the heating season for people on long-term welfare payments who can't afford heating.", who=["Getting a qualifying long-term payment (or Working Family Payment)", "Living alone or only with other qualifying people", "Pass a means test – improved for single pensioners from 2027"], dur="28 weeks. The 2026/2027 season started in the week of Monday 28 September 2026 and runs to April 2027.", tip="€38 a week until Christmas, then €43 a week from the week of 4 January 2027 – €1,134 for the 2026/2027 season. <a href='fuel-allowance-payment-dates.html'>Fuel Allowance dates and lump sums →</a>", rel=["living-alone-increase", "state-pension-contributory", "working-family-payment"]),
  "living-alone-increase": dict(what="An extra weekly amount for people on certain payments who live alone.", who=["Getting a State Pension, Disability Allowance, Invalidity Pension, Blind Pension or certain other payments", "Living alone"], dur="Paid with your main payment.", tip="Budget 2027 raises it to €25 a week – the first increase in five years.", rel=["state-pension-contributory", "fuel-allowance", "disability-allowance"]),
- "cost-of-disability-payment": dict(what="A new once-off €500 payment in 2027 for people getting a long-term disability payment.", who=["Getting a long-term disability payment (details from the Department in 2027)"], dur="Once-off lump sum in 2027.", tip="The first ever Cost of Disability payment – further design will be co-designed with disabled people.", rel=["disability-allowance", "invalidity-pension", "blind-pension"]),
+ "cost-of-disability-payment": dict(what="A new once-off €500 payment for people getting a long-term disability payment, paid in the week starting <strong>15 February 2027</strong> with your normal payment.", who=["Getting Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit", "Paid automatically – you don't need to apply"], dur="Once-off lump sum, paid in the week starting 15 February 2027.", tip="It's paid on your usual payment day that week – a Wednesday payee gets it on Wednesday 17 February 2027.", rel=["disability-allowance", "invalidity-pension", "blind-pension"]),
+}
+
+TITLES = {
+    "cost-of-disability-payment": ("€500 Cost of Disability Payment 2027 – Paid Week of 15 February | Who Gets It",
+        "The €500 Cost of Disability payment is paid in the week starting 15 February 2027 to people on Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit. Automatic – no need to apply."),
+    "fuel-allowance": ("Fuel Allowance 2026/2027 Ireland – €38, €43 from January | Who Qualifies & Lump Sums",
+        "Fuel Allowance is €38 a week, rising to €43 from 4 January 2027. Season from 28 September 2026 to April 2027 (€1,134). Lump sums €532 and €602, who qualifies and the means test."),
+    "child-benefit": ("Child Benefit Ireland 2026–2027 – €140 a Month, Payment Dates & Who Qualifies",
+        "Child Benefit is €140 per child per month in 2026 and 2027, paid on the first Tuesday of each month. Twins, triplets, who qualifies and the payment dates."),
+}
+EXTRA_FAQ = {
+    "cost-of-disability-payment": [("When is the €500 disability payment paid?", "In the week starting 15 February 2027, on your usual payment day, with your qualifying payment."),
+                                   ("Do I need to apply for the €500 Cost of Disability payment?", "No. It's paid automatically with your Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit.")],
+    "fuel-allowance": [("When is Fuel Allowance paid?", "Weekly from the week of 28 September 2026 to April 2027, or as two lump sums: €532 in the week of 28 September 2026 and €602 in January 2027."),
+                       ("Is there a Fuel Allowance bonus or €300 lump sum this year?", "No. Budget 2027 increased the weekly rate by €5 (to €43 from January) instead.")],
+    "child-benefit": [("When is Child Benefit paid?", "On the first Tuesday of every month – Tuesday 1 December 2026 and Tuesday 5 January 2027."),
+                      ("Is there a double Child Benefit payment in 2026?", "No. Budget 2027 has no double Child Benefit payment.")],
 }
 
 def payment_pages():
@@ -128,7 +145,7 @@ def payment_pages():
             for i, (lab, _) in enumerate(fams):
                 a, b = res[i], res[n + i]
                 rows.append([lab, eur(b["weekly"], 2) if not b["missing"] and (i == 0 or p.get("qc")) else "–", eur(a["weekly"], 2), eur(a["monthly"]), eur(a["yearly"])])
-        facts = ([f"<strong>{p['name']}</strong> is <strong>{r27}</strong> from January 2027" + (f", up from {r26} in 2026 (+{eur(diff, 2 if diff % 1 else 0)})." if diff else ".")] if p["r27"] is not None else []) +                 [info["what"], "How long: " + info["dur"]]
+        facts = ([f"<strong>{p['name']}</strong>: <strong>€500</strong>, paid once in the week starting <strong>15 February 2027</strong>."] if p["freq"] == "once" else [f"<strong>{p['name']}</strong> is <strong>{r27}</strong> from January 2027" + (f", up from {r26} in 2026 (+{eur(diff, 2 if diff % 1 else 0)})." if diff else ".")] if p["r27"] is not None else []) +                 [info["what"], "How long: " + info["dur"]]
         if p.get("xmas"):
             facts.append("You get the <strong>Christmas Bonus</strong> (100% of your weekly payment) in the week starting 7 December 2026" + (" if you've been getting it for 12 months or more." if p["xmas"] == "12m" else "."))
         elif p["freq"] == "week":
@@ -159,7 +176,7 @@ def payment_pages():
         body = f"""<p class="lead">{p['name']} rates for 2026 and 2027, who qualifies, how long it's paid and the Christmas Bonus.</p>
 <p class="updated">Budget 2027 rates · Checked {CHECKED}</p>
 {key_facts(facts)}
-<div class="hero-num"><div><span class="tl">2026</span><strong>{r26}</strong></div><div><span class="tl">From January 2027</span><strong>{r27}</strong></div></div>
+{('<div class="hero-num"><div><span class="tl">Amount</span><strong>€500</strong></div><div><span class="tl">Paid</span><strong>Week of 15 Feb 2027</strong></div></div>') if p["freq"] == "once" else ('<div class="hero-num"><div><span class="tl">2026</span><strong>' + r26 + '</strong></div><div><span class="tl">From January 2027</span><strong>' + r27 + '</strong></div></div>')}
 {extra}
 {('<h2>What you get, by family (weekly)</h2>' + table(["Situation", "2026", "2027 per week", "2027 per month", "2027 per year"], rows) + '<p class="muted small">Includes the Child Support Payment (€64 under 12, €84 aged 12+ in 2027). 2026 family figures shown only where the 2026 rate is confirmed.</p>') if rows else ''}
 <div class="ad" data-slot="content"></div>
@@ -169,12 +186,14 @@ def payment_pages():
 <h2>How to apply</h2><p>Most payments can be claimed online on <a href="https://services.mywelfare.ie/" rel="noopener" target="_blank">MyWelfare.ie</a> with a verified MyGovID, or at your local Intreo Centre.</p>
 <div class="cta"><h2>Work out your total</h2><p>Add a partner, children, Living Alone Increase and Fuel Allowance.</p><a class="btn" href="./?p={key}" data-track="welfare_page_cta" data-label="{key}">Open the calculator</a></div>
 <h2>Related payments</h2><div class="chip-list">{rel}<a href="all-payments.html">All payments →</a></div>"""
-        faqs = ([(f"How much is {p['name']} in 2027?", f"{r27} from January 2027" + (f", up {eur(diff, 2 if diff % 1 else 0)} from {r26} in 2026." if diff else "."))] if p["r27"] is not None else []) + [
+        faqs = ([(f"How much is the {p['name']}?", "€500, paid once in the week starting 15 February 2027.")] if p["freq"] == "once" else [(f"How much is {p['name']} in 2027?", f"{r27} from January 2027" + (f", up {eur(diff, 2 if diff % 1 else 0)} from {r26} in 2026." if diff else "."))] if p["r27"] is not None else []) + [
                 (f"Who qualifies for {p['name']}?", "; ".join(info["who"]) + "."),
                 (f"Do you get the Christmas Bonus on {p['name']}?", ("Yes – 100% of your weekly payment, paid in the week starting 7 December 2026" + (", once you've been getting it for 12 months." if p['xmas'] == '12m' else ".")) if p.get("xmas") else "No, it isn't a qualifying payment for the Christmas Bonus.")]
         srcs = ci_src(key) + ["dsp27", "ci_rates27"] + (["ci_xmas"] if p.get("xmas") else []) + ["mywelfare"]
-        app.page(f"{key}.html", f"{p['name']} 2027 Rate Ireland – {r27} | Who Qualifies & Christmas Bonus",
-                 f"{p['name']} is {r27} from January 2027 (Budget 2027). Who qualifies, how long it's paid, family rates and whether you get the Christmas Bonus.",
+        faqs += EXTRA_FAQ.get(key, [])
+        t, d = TITLES.get(key, (f"{p['name']} 2027 Rate Ireland – {r27} | Who Qualifies & Christmas Bonus",
+                                f"{p['name']} is {r27} from January 2027 (Budget 2027). Who qualifies, how long it's paid, family rates and whether you get the Christmas Bonus."))
+        app.page(f"{key}.html", t, d,
                  body, active="All payments", jsonld=[faq_ld(faqs)], crumbs=[("Welfare", "./"), ("All payments", "all-payments.html"), (p["name"], None)],
                  h1=f"{p['name']} rates 2026 and 2027", sources=srcs, cross=cross)
 
@@ -247,7 +266,7 @@ def build_hubs():
 <p class="updated">Announced 6 October 2026 · Checked {CHECKED}</p>
 {key_facts(["<strong>€10 a week</strong> more on most payments from January 2027, including all State Pensions, Jobseeker's, Illness, Disability and Carer's payments.",
             "A <strong>€500 Cost of Disability payment</strong> in 2027 for people on a long-term disability payment.", "<strong>Child Support Payment +€6</strong> per child: €64 and €84.",
-            "<strong>Fuel Allowance €43</strong> a week (+€5) – over €1,200 for the season; better means test for single pensioners.", "<strong>Living Alone Increase €25</strong> (+€3).",
+            "<strong>Fuel Allowance €43</strong> a week (+€5) from the week of 4 January 2027 – the January lump sum rises from €532 to €602; the income limit for a single person aged 66+ rises from €534 to €653.", "<strong>Living Alone Increase €25</strong> (+€3).",
             "Working Family Payment thresholds up <strong>€30</strong> a week.", "<strong>Christmas Bonus</strong> (100%) to almost 1.4 million people in December 2026.", "No change to Child Benefit (€140)."])}
 <h2>From July 2027</h2>{lis(["Disability Allowance and Blind Pension earnings disregard up to €175 a week", "One-Parent Family Payment and Jobseeker's Transitional Payment earnings disregard up to €175",
     "Carer's Allowance income disregards up to €1,150 (single) and €2,300 (couple)", "Increase for a Qualified Adult income threshold from €310 to €340", "Farm Assist / State Pension (Non-Contributory): agri-environmental disregard €7,500"])}
@@ -293,38 +312,112 @@ def build_dates():
     d26, d27 = run([{"k": "cb", "y": 2026}, {"k": "cb", "y": 2027}])
     def nice(s):
         dt = datetime.date.fromisoformat(s); return f"{dt.strftime('%A')} {dt.day} {dt.strftime('%B %Y')}"
+    def short(s):
+        dt = datetime.date.fromisoformat(s); return f"{dt.strftime('%a')} {dt.day} {dt.strftime('%B')}"
     rows = [[datetime.date.fromisoformat(a).strftime("%B"), nice(a), nice(b)] for a, b in zip(d26, d27)]
     nxt = next((x for x in d26 + d27 if datetime.date.fromisoformat(x) >= TODAY), d27[0])
-    body = f"""<p class="lead">Child Benefit is paid on the <strong>first Tuesday of every month</strong>. Here are all the payment dates for 2026 and 2027.</p>
+    dec26 = next(x for x in d26 if x[5:7] == "12"); jan27 = d27[0]
+    cb_faq = [("When is Child Benefit paid in December 2026?", f"On {nice(dec26)} – €140 per child. The next payment is {nice(jan27)}."),
+              ("When is Child Benefit paid?", "On the first Tuesday of every month, into your bank account or at the post office."),
+              ("Is there a double Child Benefit payment in 2026?", "No. Budget 2027 didn't include a double or extra Child Benefit payment, and Child Benefit isn't part of the Christmas Bonus. The double payments you may have seen were once-off measures in earlier budgets."),
+              ("How much is Child Benefit in 2027?", "€140 per child per month – unchanged in Budget 2027. Twins get 1.5 times the rate per child, triplets and more get double."),
+              ("Is Child Benefit paid early at Christmas?", f"No – the December payment is on the first Tuesday as normal ({nice(dec26)}), well before Christmas.")]
+    body = f"""<p class="lead">Child Benefit is paid on the <strong>first Tuesday of every month</strong> – €140 per child. December 2026: <strong>{nice(dec26)}</strong>. All the dates for 2026 and 2027 are below.</p>
 <p class="updated">Checked {CHECKED}</p>
 <div class="earliest"><div class="tl">Next Child Benefit payment</div><div class="ed">{nice(nxt)}</div><div>€140 per child</div></div>
-{key_facts(["Child Benefit is <strong>€140 a month</strong> per child in 2026 and 2027 – no change in Budget 2027.", "Paid on the first Tuesday of each month into your bank account or at the post office.",
-            "Twins get 1.5 times the rate per child; triplets and more get double.", "There's no Christmas double payment of Child Benefit."])}
+{key_facts([f"<strong>December 2026:</strong> {nice(dec26)}. <strong>January 2027:</strong> {nice(jan27)}.",
+            "Child Benefit is <strong>€140 a month</strong> per child in 2026 and 2027 – no change in Budget 2027.", "Paid on the first Tuesday of each month into your bank account or at the post office.",
+            "<strong>No double payment</strong> in 2026: Budget 2027 has no double Child Benefit, and Child Benefit doesn't get the Christmas Bonus.",
+            "Twins get 1.5 times the rate per child; triplets and more get double."])}
 {table(["Month", "2026", "2027"], rows)}
 <p class="muted small">Calculated as the first Tuesday of each month. If a payment day falls on a public holiday the Department may pay on a different day – check your bank or the Department.</p>
 <div class="ad" data-slot="content"></div>
-<p>Also for families: <a href="child-support-payment.html">Child Support Payment</a> · <a href="working-family-payment.html">Working Family Payment</a> · <a href="back-to-school-allowance.html">Back to School Allowance</a> · <a href="one-parent-family-payment.html">One-Parent Family Payment</a></p>"""
-    app.page("child-benefit-payment-dates.html", "Child Benefit Payment Dates 2026 & 2027 Ireland – First Tuesday of Every Month",
-             f"Child Benefit payment dates for 2026 and 2027: paid on the first Tuesday of every month at €140 per child. Next payment: {nice(nxt)}.",
-             body, active="Payment dates", jsonld=[faq_ld([("When is Child Benefit paid?", "On the first Tuesday of every month."), ("How much is Child Benefit in 2027?", "€140 per child per month – unchanged in Budget 2027.")])],
+<h2>Child Benefit questions</h2>{faq_html(cb_faq)}
+<p>Also for families: <a href="child-support-payment.html">Child Support Payment</a> · <a href="working-family-payment.html">Working Family Payment</a> · <a href="back-to-school-allowance.html">Back to School Allowance</a> · <a href="one-parent-family-payment.html">One-Parent Family Payment</a> · <a href="payment-dates.html">All payment dates</a></p>"""
+    app.page("child-benefit-payment-dates.html", "Child Benefit Payment Dates 2026 & 2027 Ireland – Every Date (€140, First Tuesday)",
+             f"Child Benefit payment dates 2026 and 2027: first Tuesday of every month, €140 per child. December 2026: {short(dec26)}; January 2027: {short(jan27)}. No double payment in 2026.",
+             body, active="Payment dates", jsonld=[faq_ld(cb_faq)],
              crumbs=[("Welfare", "./"), ("Payment dates", "payment-dates.html"), ("Child Benefit dates", None)], h1="Child Benefit payment dates 2026 and 2027",
              sources=("ci_child-benefit", "dsp27"), cross=["salary", "mortgage", "rent"], priority="0.9")
 
-    body = f"""<p class="lead">When are social welfare payments paid in Ireland – and what happens around Christmas, the New Year and bank holidays?</p>
+    KEY = [["Week of 28 September 2026", "Fuel Allowance season starts (€38 a week). First lump sum (€532) for lump-sum payees"],
+           [nice(dec26), "Child Benefit (€140 per child)"],
+           ["Week starting Monday 7 December 2026", "<strong>Christmas Bonus</strong> (100% of your weekly payment) paid with your normal payment"],
+           ["Friday 25 &amp; Saturday 26 December 2026", "Christmas Day and St Stephen's Day – payments due on a bank holiday are usually paid early"],
+           ["Friday 1 January 2027", "New Year's Day – bank holiday"],
+           ["Week of 4 January 2027", "<strong>Budget 2027 increases</strong> start (+€10 on most payments). Fuel Allowance rises to €43. January Fuel Allowance lump sum €602"],
+           [nice(jan27), "Child Benefit (€140)"],
+           ["Week starting 15 February 2027", "<strong>€500 Cost of Disability payment</strong> (Disability Allowance, Blind Pension, Invalidity Pension, Partial Capacity Benefit)"],
+           ["April 2027", "Fuel Allowance season ends"],
+           ["First Thursday of June 2027", "Carer's Support Grant (€2,000)"],
+           ["July 2027", "Higher earnings disregards (€175 a week) and Carer's Allowance income limits"]]
+    pd_faq = [("When are social welfare payments paid?", "Most weekly payments are paid on the same day every week – the day is on your payment notice and depends on the payment and how you're paid."),
+              ("When is the Christmas Bonus 2026 paid?", "In the week starting Monday 7 December 2026, on your normal payment day."),
+              ("When do the Budget 2027 increases start?", "From your first payment in January 2027 – the week of 4 January 2027."),
+              ("When is the €500 disability payment paid?", "In the week starting 15 February 2027, with your Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit."),
+              ("When is Fuel Allowance paid?", "Weekly with your main payment from the week of 28 September 2026 to April 2027, or as two lump sums (€532 in September and €602 in January)."),
+              ("Are social welfare payments paid early at Christmas?", "Payments due on Christmas Day (Friday 25 December) or St Stephen's Day are usually paid early. The Department confirms the exact Christmas schedule in December – check gov.ie or MyWelfare.")]
+    body = f"""<p class="lead">When is social welfare paid in Ireland? Every key date from the Christmas Bonus to the January increases, Fuel Allowance and the €500 disability payment.</p>
 <p class="updated">Checked {CHECKED}</p>
-{key_facts(["Most weekly payments are paid on the <strong>same day every week</strong> – the day is shown on your payment notice (it depends on the payment and how you're paid).",
-            "<strong>Child Benefit</strong>: first Tuesday of each month. <a href='child-benefit-payment-dates.html'>All dates</a>.",
-            "<strong>Christmas Bonus</strong>: week starting 7 December 2026, with your normal payment.",
-            "<strong>New rates</strong>: Budget 2027 increases start from your first payment in January 2027.",
-            "<strong>Bank holidays</strong> (Christmas Day Friday 25 December, St Stephen's Day Saturday 26 December, New Year's Day Friday 1 January 2027): payments due on a bank holiday are usually paid early. The Department publishes the exact Christmas schedule – check gov.ie or your post office."])}
-<h2>Key dates</h2>{table(["Date", "What happens"], [["Week of 7 December 2026", "Christmas Bonus (100%) paid with your normal payment"], ["Tuesday 1 December 2026", "Child Benefit"],
-    ["Friday 25 December 2026", "Christmas Day – bank holiday"], ["Friday 1 January 2027", "New Year's Day – bank holiday"], ["First payment in January 2027", "Budget 2027 increases start (+€10 on most payments)"],
-    ["Tuesday 5 January 2027", "Child Benefit (€140)"], ["Late September 2027", "Fuel Allowance season begins"]])}
+{key_facts(["Most weekly payments are paid on the <strong>same day every week</strong> – the day is shown on your payment notice.",
+            "<strong>Christmas Bonus</strong>: week starting <strong>7 December 2026</strong>, with your normal payment. <a href='christmas-bonus.html'>Amounts →</a>",
+            f"<strong>Child Benefit</strong>: first Tuesday of each month – {short(dec26)}, then {short(jan27)}. <a href='child-benefit-payment-dates.html'>All dates →</a>",
+            "<strong>Budget 2027 increases</strong>: from the week of <strong>4 January 2027</strong> (+€10 on most payments).",
+            "<strong>€500 Cost of Disability payment</strong>: week starting <strong>15 February 2027</strong>. <a href='cost-of-disability-payment.html'>Who gets it →</a>",
+            "<strong>Fuel Allowance</strong>: €38 a week now, €43 from January. <a href='fuel-allowance-payment-dates.html'>Fuel Allowance dates →</a>"])}
+<h2>Key social welfare dates 2026–2027</h2>{table(["Date", "What happens"], KEY)}
 <div class="ad" data-slot="content"></div>
-<p>All Irish bank holidays: <a href="../salary/public-holidays.html">bank holidays 2026 and 2027 →</a></p>"""
-    app.page("payment-dates.html", "Social Welfare Payment Dates 2026–2027 Ireland – Christmas, New Year & Bank Holidays",
-             "When social welfare is paid in Ireland: weekly payment days, Child Benefit dates, Christmas Bonus week of 7 December 2026, bank holiday changes and when Budget 2027 rates start.",
-             body, active="Payment dates", crumbs=[("Welfare", "./"), ("Payment dates", None)], h1="Social welfare payment dates", sources=("ci_xmas", "ci_child-benefit", "dsp27"), cross=["salary", "rent"], priority="0.8")
+<h2>Questions about payment dates</h2>{faq_html(pd_faq)}
+<p>Is there an autumn bonus or other lump sum this year? <a href="lump-sum-payments.html">All extra payments 2026–2027 →</a> · <a href="../salary/public-holidays.html">Bank holidays 2026 and 2027 →</a></p>"""
+    app.page("payment-dates.html", "Social Welfare Payment Dates 2026–2027 Ireland – Christmas Bonus, January Increase, €500",
+             "Social welfare payment dates in Ireland: Christmas Bonus week of 7 December 2026, Child Benefit dates, Budget 2027 increases from 4 January, €500 disability payment week of 15 February 2027, Fuel Allowance.",
+             body, active="Payment dates", jsonld=[faq_ld(pd_faq)], crumbs=[("Welfare", "./"), ("Payment dates", None)], h1="Social welfare payment dates 2026–2027",
+             sources=("ci_xmas", "ci_child-benefit", "ci_fuel-allowance", "dsp27"), cross=["salary", "rent"], priority="0.9")
+
+    fa_faq = [("When does Fuel Allowance start in 2026?", "The 2026/2027 season started in the week of Monday 28 September 2026, paid on your usual payment day."),
+              ("When is the Fuel Allowance lump sum paid?", "If you take it as two lump sums, the first (€532) was paid in the week of 28 September 2026 and the second (€602) is paid in January 2027."),
+              ("How much is Fuel Allowance?", "€38 a week until the end of December 2026, then €43 a week from the week of 4 January 2027 – €1,134 for the 2026/2027 season."),
+              ("Is there a €300 Fuel Allowance lump sum this year?", "No. Budget 2027 raised the weekly rate by €5 instead of paying a once-off lump sum like the €300 payments in some earlier years."),
+              ("When does Fuel Allowance end?", "In April 2027, after 28 weeks."),
+              ("What is the Fuel Allowance income limit for over-66s?", "€534 a week for a single person aged 66 or over, rising to €653 from January 2027.")]
+    body = f"""<p class="lead">Fuel Allowance 2026/2027: when it's paid, how much, and the lump sum dates.</p>
+<p class="updated">Citizens Information · Checked {CHECKED}</p>
+<div class="hero-num"><div><span class="tl">Until December 2026</span><strong>€38</strong><span class="muted">a week</span></div><div><span class="tl">From 4 January 2027</span><strong>€43</strong><span class="muted">a week</span></div></div>
+{key_facts(["The season started in the week of <strong>Monday 28 September 2026</strong> and lasts <strong>28 weeks</strong>, to April 2027.",
+            "Paid <strong>weekly</strong> with your main payment, or as <strong>two lump sums</strong>: <strong>€532</strong> (week of 28 September 2026) and <strong>€602</strong> (January 2027).",
+            "The rate rises from €38 to <strong>€43</strong> in the week beginning <strong>4 January 2027</strong> (Budget 2027). Season total: <strong>€1,134</strong>.",
+            "<strong>No €300 lump sum</strong> this year – Budget 2027 raised the weekly rate instead.",
+            "Income limit for a single person aged 66+: €534 a week, rising to <strong>€653</strong> from January 2027.",
+            "Fuel Allowance <strong>doesn't</strong> get the Christmas Bonus. Only one Fuel Allowance is paid per household."])}
+{table(["Period", "Weeks", "Weekly", "Total"], [["28 Sept – 31 Dec 2026", "14", "€38", "€532"], ["4 Jan – April 2027", "14", "€43", "€602"], ["<strong>Season 2026/2027</strong>", "28", "", "<strong>€1,134</strong>"]])}
+<div class="ad" data-slot="content"></div>
+<h2>Fuel Allowance questions</h2>{faq_html(fa_faq)}
+<p><a href="fuel-allowance.html">Who qualifies for Fuel Allowance →</a> · <a href="household-benefits-package.html">Household Benefits Package →</a> · <a href="payment-dates.html">All payment dates →</a></p>"""
+    app.page("fuel-allowance-payment-dates.html", "Fuel Allowance Payment Dates 2026/2027 – Lump Sum Dates, €38 to €43",
+             "Fuel Allowance 2026/2027: season from the week of 28 September 2026 to April 2027. €38 a week, €43 from 4 January 2027. Lump sums €532 (September) and €602 (January). No €300 lump sum.",
+             body, active="Payment dates", jsonld=[faq_ld(fa_faq)], crumbs=[("Welfare", "./"), ("Payment dates", "payment-dates.html"), ("Fuel Allowance dates", None)], h1="Fuel Allowance payment dates 2026/2027",
+             sources=("ci_fuel-allowance", "dsp27"), cross=["salary", "rent", "solar"], priority="0.9")
+
+    ls_faq = [("Is there an autumn bonus in 2026?", "No. Budget 2027 didn't include an autumn double payment or autumn bonus."),
+              ("Is there a double Child Benefit payment in 2026?", "No. Child Benefit stays at €140 a month with no double payment."),
+              ("What extra social welfare payments are there this winter?", "The 100% Christmas Bonus (week of 7 December 2026) and the €500 Cost of Disability payment (week of 15 February 2027) for people on long-term disability payments."),
+              ("Is there a cost-of-living lump sum in 2026?", "No general cost-of-living lump sum. Budget 2027 put the money into permanent increases instead: +€10 a week on most payments and +€5 on Fuel Allowance from January 2027.")]
+    paid = [['<a href="christmas-bonus.html">Christmas Bonus</a>', "100% of your weekly payment (min €20)", "Week starting 7 December 2026", "Long-term payments"],
+            ['<a href="cost-of-disability-payment.html">Cost of Disability payment</a>', "€500 once-off", "Week starting 15 February 2027", "Disability Allowance, Blind Pension, Invalidity Pension, Partial Capacity Benefit"],
+            ['<a href="fuel-allowance-payment-dates.html">Fuel Allowance lump sum</a>', "€602", "January 2027", "Fuel Allowance lump-sum payees"],
+            ['<a href="carers-support-grant.html">Carer&#39;s Support Grant</a>', "€2,000", "First Thursday of June 2027", "Carers"]]
+    body = f"""<p class="lead">Is there an autumn bonus, a double Child Benefit or a Fuel Allowance lump sum this year? Here's what is – and isn't – being paid in 2026 and 2027.</p>
+<p class="updated">Budget 2027 · Checked {CHECKED}</p>
+<h2>Being paid</h2>{table(["Payment", "Amount", "When", "Who"], paid)}
+<h2>Not being paid this year</h2>{lis(["<strong>Autumn bonus / autumn double payment</strong> – not in Budget 2027", "<strong>Double Child Benefit</strong> – not in Budget 2027", "<strong>€300 Fuel Allowance lump sum</strong> – replaced by a €5 weekly increase",
+    "<strong>General cost-of-living lump sums</strong> – replaced by permanent weekly increases (+€10 from January 2027)"])}
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(ls_faq)}
+<div class="cta"><h2>What will you get in 2027?</h2><p>Your weekly rate after the €10 increase.</p><a class="btn" href="./">Open the calculator</a></div>"""
+    app.page("lump-sum-payments.html", "Social Welfare Bonus & Lump Sum Payments 2026–2027 – Autumn Bonus? Double Child Benefit?",
+             "Extra social welfare payments 2026–2027: Christmas Bonus (week of 7 December), €500 Cost of Disability (week of 15 February 2027), Fuel Allowance lump sum. No autumn bonus or double Child Benefit this year.",
+             body, active="Payment dates", jsonld=[faq_ld(ls_faq)], crumbs=[("Welfare", "./"), ("Payment dates", "payment-dates.html"), ("Bonus and lump sums", None)], h1="Social welfare bonus and lump sum payments 2026–2027",
+             sources=("ci_xmas", "dsp27", "gov27", "ci_fuel-allowance"), cross=["salary", "rent", "pension"], priority="0.8")
 
 def build_extras():
     body = """<p class="lead">The Back to School Clothing and Footwear Allowance helps families on social welfare or low pay with school costs.</p>
@@ -363,8 +456,9 @@ def build_faq():
            ("When is the Christmas Bonus 2026 paid?", "In the week starting 7 December 2026, with your normal payment. It's 100% of your weekly payment."),
            ("Is Child Benefit going up in 2027?", "No. Child Benefit stays at €140 a month per child."),
            ("How much is Carer's Allowance in 2027?", "€280 a week under 66 and €318 for carers aged 66 and over, plus the €2,000 Carer's Support Grant."),
-           ("What is the Cost of Disability payment?", "A new once-off €500 payment in 2027 for people on a long-term disability payment."),
-           ("How much is Fuel Allowance in 2027?", "€43 a week during the season – over €1,200 in total."),
+           ("What is the Cost of Disability payment?", "A new once-off €500 payment for people on Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit, paid in the week starting 15 February 2027."),
+           ("How much is Fuel Allowance in 2027?", "€43 a week from the week of 4 January 2027 (up from €38). For the 2026/2027 season that's €1,134 in total; lump-sum payees get €532 in September and €602 in January."),
+           ("Is there an autumn bonus or double payment in 2026?", "No. Budget 2027 has no autumn double payment, double Child Benefit or Fuel Allowance lump sum. The extras are the 100% Christmas Bonus (week of 7 December 2026) and the €500 Cost of Disability payment (week of 15 February 2027)."),
            ("What is Jobseeker's Pay-Related Benefit?", "Since 31 March 2025, people who lose their job get up to 60% of their previous earnings (max €450 a week) for the first 13 weeks, falling to 55% and 50%."),
            ("Can I work and get social welfare?", "Sometimes. Jobseeker's payments allow work of up to 3 days a week; One-Parent Family Payment and Disability Allowance have earnings disregards (€175 a week from July 2027)."),
            ("How do I apply?", "Most payments can be claimed on MyWelfare.ie with a verified MyGovID, or at your local Intreo Centre."),
