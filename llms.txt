@@ -7,8 +7,8 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
-- [Irish Mortgage Calculator](https://tavion.ie/mortgage/): how much you can borrow under Central Bank rules (4x FTB / 3.5x movers, 10% deposit), price you can afford, deposit, stamp duty and fees, Help to Buy and First Home Scheme, mover equity, repayments vs take-home pay and vs average rent by county.
 - [Irish Social Welfare Rates 2027](https://tavion.ie/welfare/): Budget 2027 weekly rates for every payment (State Pension €309.30, Jobseeker's €264, Carer's €280, Disability €264), Christmas Bonus 2026, Child Benefit dates and a calculator.
+- [Irish Mortgage Calculator](https://tavion.ie/mortgage/): how much you can borrow under Central Bank rules (4x FTB / 3.5x movers, 10% deposit), price you can afford, deposit, stamp duty and fees, Help to Buy and First Home Scheme, mover equity, repayments vs take-home pay and vs average rent by county.
 - [Tax Refund Checker](https://tavion.ie/tax-refund/): which Irish tax credits and reliefs you can claim back for 2022-2026 (rent, medical, dental, remote working, flat-rate expenses by job, carers, tuition) with estimates.
 - [Solar Panel Calculator](https://tavion.ie/solar/): solar PV payback, SEAI grant, savings and export income for every Irish county, with grant, battery, export, tax and planning guides.
 - [Bank Holidays Ireland & Leave Planner](https://tavion.ie/bank-holidays/): all Irish public holidays 2026-2030, an annual leave planner, school holiday dates 2026/27-2028/29, public holiday and annual leave rights.
@@ -111,14 +111,6 @@
 - Other: Home Carer credit €1,950 (2026), €2,050 (2027); SPCCC €1,900; Incapacitated Child €3,800; Dependent Relative €305; Mortgage Interest credit up to €1,250 (2023-25) / €625 (2026); landlords RPRIR €1,000 (2026); Rent-a-Room €14,000 (€16,000 from 2027); microgeneration €400 (€600 per Budget 2027); tuition 20% above €3,000 disregard.
 - Pages: [Checker](https://tavion.ie/tax-refund/), [All reliefs](https://tavion.ie/tax-refund/all-reliefs.html), [2022 deadline](https://tavion.ie/tax-refund/deadline-2022.html), [Flat-rate expenses by job](https://tavion.ie/tax-refund/flat-rate-expenses.html), [Can I claim…?](https://tavion.ie/tax-refund/can-i-claim.html). Source: revenue.ie.
 
-## Social welfare: key facts
-
-- Budget 2027: +€10 a week on most payments from January 2027. State Pension (Contributory) €309.30 (€319.30 at 80+); Non-Contributory €298; Jobseeker's Allowance/Benefit, Illness Benefit, Disability Allowance, One-Parent Family Payment €264; Carer's Allowance €280 (€318 at 66+); Invalidity Pension €269.50; Maternity/Paternity/Parent's Benefit €309.
-- Child Support Payment €64 (under 12) / €84 (12+); Child Benefit €140 a month (unchanged), first Tuesday of each month; Fuel Allowance €43; Living Alone Increase €25; €500 Cost of Disability payment in 2027.
-- Christmas Bonus 2026: 100% of the weekly payment, minimum €20, week starting 7 December 2026, long-term payments only (not Fuel Allowance).
-- Jobseeker's Pay-Related Benefit (unemployed from 31 March 2025): 60% of earnings up to €450 (weeks 1-13), 55% up to €375 (14-26), 50% up to €300 (27-39); minimum €125.
-- Pages: [Calculator](https://tavion.ie/welfare/), [Rates 2027](https://tavion.ie/welfare/rates-2027.html), [Christmas Bonus](https://tavion.ie/welfare/christmas-bonus.html), [Child Benefit dates](https://tavion.ie/welfare/child-benefit-payment-dates.html), [All payments](https://tavion.ie/welfare/all-payments.html). Source: Department of Social Protection Budget 2027 factsheet, Citizens Information.
-
 ## Mortgages: key facts
 
 - Central Bank limits: first-time buyers 4x gross income, second and subsequent buyers 3.5x; 90% loan-to-value (10% deposit) for homes, 70% for buy-to-let; lenders may exceed limits for 15% of lending (10% BTL). April 2026: bridging loans up to 18 months exempt from the income limit.
@@ -128,6 +120,14 @@
 - Average new rent (RTB Q1 2026): national €1,839, Dublin €2,335, Cork €1,678, Galway €1,718, Limerick €1,744.
 - House prices (CSO, 12 months to August 2026): national median €400,000 (+6.7% on a year earlier; first-time buyers €409,999). Highest county Dublin €500,000 (Dún Laoghaire-Rathdown €685,000); lowest Longford €199,000. Income needed for a first-time buyer at the national median: about €90,000.
 - Pages: [Calculator](https://tavion.ie/mortgage/), [House prices by county](https://tavion.ie/mortgage/counties.html), [Salary needed to buy by county](https://tavion.ie/mortgage/salary-needed-to-buy-a-house.html), [How much can I borrow by salary](https://tavion.ie/mortgage/how-much-can-i-borrow.html), [Repayment tables](https://tavion.ie/mortgage/repayments.html), [Costs of buying](https://tavion.ie/mortgage/costs-of-buying.html), [Help to Buy & First Home Scheme](https://tavion.ie/mortgage/schemes.html), [Movers](https://tavion.ie/mortgage/moving-home.html), [By county](https://tavion.ie/mortgage/counties.html), [FAQ](https://tavion.ie/mortgage/faq.html).
+
+## Social welfare: key facts
+
+- Budget 2027: +€10 a week on most payments from January 2027. State Pension (Contributory) €309.30 (€319.30 at 80+); Non-Contributory €298; Jobseeker's Allowance/Benefit, Illness Benefit, Disability Allowance, One-Parent Family Payment €264; Carer's Allowance €280 (€318 at 66+); Invalidity Pension €269.50; Maternity/Paternity/Parent's Benefit €309.
+- Child Support Payment €64 (under 12) / €84 (12+); Child Benefit €140 a month (unchanged), first Tuesday of each month; Fuel Allowance €43; Living Alone Increase €25; €500 Cost of Disability payment in 2027.
+- Christmas Bonus 2026: 100% of the weekly payment, minimum €20, week starting 7 December 2026, long-term payments only (not Fuel Allowance).
+- Jobseeker's Pay-Related Benefit (unemployed from 31 March 2025): 60% of earnings up to €450 (weeks 1-13), 55% up to €375 (14-26), 50% up to €300 (27-39); minimum €125.
+- Pages: [Calculator](https://tavion.ie/welfare/), [Rates 2027](https://tavion.ie/welfare/rates-2027.html), [Christmas Bonus](https://tavion.ie/welfare/christmas-bonus.html), [Child Benefit dates](https://tavion.ie/welfare/child-benefit-payment-dates.html), [All payments](https://tavion.ie/welfare/all-payments.html). Source: Department of Social Protection Budget 2027 factsheet, Citizens Information.
 
 ## Optional
 

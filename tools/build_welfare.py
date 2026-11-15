@@ -66,7 +66,7 @@ def run(q): return node(ENGINE, NODE, q)["res"]
 TABS = [("./", "Calculator"), ("rates-2027.html", "Rates 2027"), ("christmas-bonus.html", "Christmas Bonus"), ("payment-dates.html", "Payment dates"),
         ("all-payments.html", "All payments"), ("budget-2027.html", "Budget 2027"), ("faq.html", "FAQ")]
 FOOT = ('<a href="./">Welfare calculator</a><a href="rates-2027.html">Rates 2027</a><a href="christmas-bonus.html">Christmas Bonus 2026</a><a href="child-benefit-payment-dates.html">Child Benefit dates</a>'
-        '<a href="payment-dates.html">Payment dates</a><a href="fuel-allowance-payment-dates.html">Fuel Allowance dates</a><a href="lump-sum-payments.html">Bonus &amp; lump sums</a><a href="cost-of-disability-payment.html">€500 disability payment</a><a href="all-payments.html">All payments</a><a href="budget-2027.html">Budget 2027 changes</a><a href="faq.html">FAQ</a>')
+        '<a href="payment-dates.html">Payment dates</a><a href="christmas-payment-dates.html">Christmas payment dates</a><a href="fuel-allowance-payment-dates.html">Fuel Allowance dates</a><a href="lump-sum-payments.html">Bonus &amp; lump sums</a><a href="cost-of-disability-payment.html">€500 disability payment</a><a href="all-payments.html">All payments</a><a href="budget-2027.html">Budget 2027 changes</a><a href="faq.html">FAQ</a>')
 app = App("welfare", "Social Welfare Ireland", "🤝", None, "#0369a1", TABS, FOOT, SRC, None,
           "Social welfare rates 2027 – what you'll get, the Christmas Bonus and payment dates:", "Know someone on a social welfare payment? Send them this.", "welfare",
           f"Rates checked against the Department of Social Protection's Budget 2027 figures and Citizens Information in {CHECKED}. A free, independent tool from <a href='../'>Tavion</a> – not affiliated with the Department of Social Protection. Your entitlement depends on your circumstances; confirm with the Department or apply on <a href='https://services.mywelfare.ie/' rel='noopener'>MyWelfare.ie</a>.")
@@ -123,6 +123,17 @@ TITLES = {
         "Child Benefit is €140 per child per month in 2026 and 2027, paid on the first Tuesday of each month. Twins, triplets, who qualifies and the payment dates."),
 }
 EXTRA_FAQ = {
+    "illness-benefit": [("How does sick pay work in Ireland?", "If you've worked for your employer for at least 13 weeks, they must pay Statutory Sick Pay for up to 5 days a year: 70% of your normal pay, up to €110 a day, with a medical cert from day 1. From day 6 you can claim Illness Benefit from the Department of Social Protection if you have enough PRSI."),
+                        ("Can I get sick pay from my job and Illness Benefit at the same time?", "Some employers have their own sick pay scheme that pays more than the legal minimum. Many of them top up Illness Benefit to your normal pay and ask you to sign the Illness Benefit over to them – check your contract or ask HR."),
+                        ("When does Illness Benefit start?", "From day 6 of your illness if you were entitled to Statutory Sick Pay. If you've already used your 5 sick days this year, it starts from day 4 (after 3 waiting days)."),
+                        ("Do you get the Christmas Bonus on Illness Benefit?", "Only if you've been getting Illness Benefit for 12 months or more.")],
+    "disability-allowance": [("Do they check your bank account for Disability Allowance?", "Yes. Disability Allowance is means-tested, so the Department looks at your savings and income (and your partner's). You'll usually be asked for recent bank and credit union statements."),
+                             ("How much savings can you have on Disability Allowance?", "The first €50,000 of savings, investments or property (not your own home) is ignored. Only capital above €50,000 is assessed as means."),
+                             ("Can I get help to buy a bed or a couch on Disability Allowance?", "Ask your Community Welfare Officer (through your Intreo office) about an Exceptional Needs Payment – a once-off payment that can help with essential costs you can't meet from your weekly income. Many credit unions also offer low-cost 'It Makes Sense' loans to people on social welfare, which are a cheaper alternative to buy-now-pay-later plans."),
+                             ("Will my partner's carer's payment stop when I reach 66?", "No. Carer's Allowance depends on the care you need, not on which payment you get. <a href='carers-allowance.html'>Carer's Allowance and the State Pension →</a>")],
+    "carers-allowance": [("Can my spouse keep Carer's Allowance when I move to the State Pension?", "Yes. Carer's Allowance depends on the care the person needs, not on their payment, so it continues when the person cared for moves from Disability Allowance to the State Pension at 66. Because the means test counts the couple's combined income, a higher pension can reduce the Carer's Allowance rate – the first €2,000 a week of combined income is ignored (€2,300 from July 2027)."),
+                         ("Can I get Carer's Allowance and my own State Pension?", "Yes. If you get another social welfare payment, such as your own State Pension, you can keep a half-rate Carer's Allowance on top, and you still get the €2,000 Carer's Support Grant."),
+                         ("Do carers get the Christmas Bonus?", "Yes – Carer's Allowance, Carer's Benefit and half-rate Carer's Allowance all get the 100% Christmas Bonus in the week starting 7 December 2026.")],
     "cost-of-disability-payment": [("When is the €500 disability payment paid?", "In the week starting 15 February 2027, on your usual payment day, with your qualifying payment."),
                                    ("Do I need to apply for the €500 Cost of Disability payment?", "No. It's paid automatically with your Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit.")],
     "fuel-allowance": [("When is Fuel Allowance paid?", "Weekly from the week of 28 September 2026 to April 2027, or as two lump sums: €532 in the week of 28 September 2026 and €602 in January 2027."),
@@ -183,6 +194,7 @@ def payment_pages():
 <h2>Who can get {p['name']}?</h2>{lis(info['who'])}
 <h2>How long is it paid?</h2><p>{info['dur']}</p>
 <h2>Tip</h2><div class="callout">{info['tip']}</div>
+{('<h2>Your questions about ' + p['name'] + '</h2>' + faq_html(EXTRA_FAQ[key])) if key in EXTRA_FAQ else ''}
 <h2>How to apply</h2><p>Most payments can be claimed online on <a href="https://services.mywelfare.ie/" rel="noopener" target="_blank">MyWelfare.ie</a> with a verified MyGovID, or at your local Intreo Centre.</p>
 <div class="cta"><h2>Work out your total</h2><p>Add a partner, children, Living Alone Increase and Fuel Allowance.</p><a class="btn" href="./?p={key}" data-track="welfare_page_cta" data-label="{key}">Open the calculator</a></div>
 <h2>Related payments</h2><div class="chip-list">{rel}<a href="all-payments.html">All payments →</a></div>"""
@@ -276,6 +288,15 @@ def build_hubs():
              "Budget 2027 social welfare: €10 a week more from January 2027, €500 Cost of Disability payment, Child Support Payment €64/€84, Fuel Allowance €43, Living Alone €25, Christmas Bonus.",
              body, active="Budget 2027", crumbs=[("Welfare", "./"), ("Budget 2027", None)], h1="Budget 2027: social welfare changes", sources=("dsp27", "gov27", "ci_rates27"), cross=["salary", "pension", "mortgage"], priority="0.9")
 
+XMAS_Q = [("I moved from One-Parent Family Payment to Jobseeker's Transitional Payment – do I get the Christmas Bonus?", "Yes. Jobseeker's Transitional Payment is a qualifying payment in its own right, so there's no 12-month wait. You get 100% of your weekly payment in the week starting 7 December 2026."),
+    ("I moved from Illness Benefit to Disability Allowance – will I get the Christmas Bonus?", "Yes. Disability Allowance qualifies straight away, as long as you're getting it in the week the bonus is paid. (Illness Benefit on its own only qualifies once you've been getting it for 12 months.)"),
+    ("Do you get the Christmas Bonus on Supplementary Welfare Allowance?", "Only if you've been getting it for 12 months (364 days) or more. If you don't qualify, ask your Community Welfare Officer about an Exceptional Needs Payment to help with Christmas costs."),
+    ("I moved from Supplementary Welfare Allowance to Jobseeker's Allowance – am I entitled to the Christmas Bonus?", "Jobseeker's Allowance qualifies once you've been getting it for 12 months (312 days). Whether earlier time on another payment can count depends on your claim history – check with your Intreo office."),
+    ("Does Jobseeker's Benefit or Pay-Related Benefit get a double payment at Christmas?", "No. Jobseeker's Benefit and Jobseeker's Pay-Related Benefit don't get the Christmas Bonus. In previous years, though, payments due over Christmas and New Year were paid a week early, so you may get two weeks together before Christmas – that's not a bonus, and it means a gap in early January."),
+    ("I'm on half-rate Carer's Allowance – how much is my Christmas Bonus?", "100% of the half-rate Carer's Allowance you're paid each week, on top of the bonus on your main payment. If your rate is being reviewed, the bonus is based on the rate you're being paid in the week it's issued – if a review later raises your rate, ask the Department whether the difference is paid."),
+    ("I get two payments – do I get two bonuses?", "Yes. If you get two qualifying payments (for example One-Parent Family Payment and Domiciliary Care Allowance, or a half-rate Carer's Allowance with your main payment), you get a bonus for each."),
+    ("How are payments paid around Christmas and New Year?", "The Christmas Bonus is paid with your normal payment in the week starting 7 December 2026. Payments due in Christmas week and New Year week are usually paid early, which often leaves a gap in early January. <a href='christmas-payment-dates.html'>Christmas payment dates 2026 →</a>")]
+
 def build_xmas():
     qual = [k for k, p in P.items() if p.get("xmas")]
     rows = []
@@ -296,12 +317,13 @@ def build_xmas():
 <div class="ad" data-slot="result"></div>
 <h2>Christmas Bonus 2026 by payment (maximum personal rate)</h2>
 {table(["Payment", "Christmas Bonus", "Qualifies"], rows)}
+<h2>Christmas Bonus: your questions</h2>{faq_html(XMAS_Q)}
 <h2>Who doesn't get it</h2>{lis(["Fuel Allowance on its own", "Jobseeker's Benefit / Pay-Related Benefit", "Short-term Illness Benefit (under 12 months)", "Child Benefit (no Christmas double payment)", "Maternity, Paternity and Parent's Benefit"])}
 <div class="cta"><h2>Your 2027 rate</h2><p>See what you'll get from January after the €10 increase.</p><a class="btn" href="./">Open the calculator</a></div>"""
     faqs = [("When is the Christmas Bonus 2026 paid?", "In the week starting Monday 7 December 2026, on the day you normally get your payment."),
             ("How much is the Christmas Bonus 2026?", "100% of your normal weekly social welfare payment, with a minimum of €20."),
             ("Do I need to apply for the Christmas Bonus?", "No. It's paid automatically if you're getting a qualifying long-term payment."),
-            ("Is Child Benefit doubled at Christmas?", "No. Child Benefit isn't a qualifying payment for the Christmas Bonus.")]
+            ("Is Child Benefit doubled at Christmas?", "No. Child Benefit isn't a qualifying payment for the Christmas Bonus.")] + XMAS_Q
     app.page("christmas-bonus.html", "Christmas Bonus 2026 Ireland – Date (Week of 7 December), Amount & Who Qualifies",
              "Social welfare Christmas Bonus 2026: a 100% double payment in the week starting 7 December 2026. Check if you qualify and how much you'll get, payment by payment.",
              body, active="Christmas Bonus", jsonld=[faq_ld(faqs)], slot="calculator", scripts=["js/welfare.js", "js/calc.js"], crumbs=[("Welfare", "./"), ("Christmas Bonus", None)],
@@ -360,7 +382,7 @@ def build_dates():
     body = f"""<p class="lead">When is social welfare paid in Ireland? Every key date from the Christmas Bonus to the January increases, Fuel Allowance and the €500 disability payment.</p>
 <p class="updated">Checked {CHECKED}</p>
 {key_facts(["Most weekly payments are paid on the <strong>same day every week</strong> – the day is shown on your payment notice.",
-            "<strong>Christmas Bonus</strong>: week starting <strong>7 December 2026</strong>, with your normal payment. <a href='christmas-bonus.html'>Amounts →</a>",
+            "<strong>Christmas Bonus</strong>: week starting <strong>7 December 2026</strong>, with your normal payment. <a href='christmas-bonus.html'>Amounts →</a> · <a href='christmas-payment-dates.html'>Christmas and New Year payments →</a>",
             f"<strong>Child Benefit</strong>: first Tuesday of each month – {short(dec26)}, then {short(jan27)}. <a href='child-benefit-payment-dates.html'>All dates →</a>",
             "<strong>Budget 2027 increases</strong>: from the week of <strong>4 January 2027</strong> (+€10 on most payments).",
             "<strong>€500 Cost of Disability payment</strong>: week starting <strong>15 February 2027</strong>. <a href='cost-of-disability-payment.html'>Who gets it →</a>",
@@ -419,6 +441,38 @@ def build_dates():
              body, active="Payment dates", jsonld=[faq_ld(ls_faq)], crumbs=[("Welfare", "./"), ("Payment dates", "payment-dates.html"), ("Bonus and lump sums", None)], h1="Social welfare bonus and lump sum payments 2026–2027",
              sources=("ci_xmas", "dsp27", "gov27", "ci_fuel-allowance"), cross=["salary", "rent", "pension"], priority="0.8")
 
+def build_xmas_dates():
+    q = [("When is the Christmas Bonus 2026 paid?", "In the week starting Monday 7 December 2026, on your normal payment day, together with your normal weekly payment."),
+         ("Are social welfare payments paid early at Christmas?", "Usually, yes. In recent years payments due over Christmas and New Year were paid in advance, so many people got two weeks' payment together before Christmas and nothing in the first week of January. The Department confirms the 2026 schedule in December."),
+         ("Will I get paid in the first week of January 2027?", "If your New Year payment is paid early in December (as in previous years), you may get nothing that week – plan your money for the gap. Your first payment at the new Budget 2027 rate (+€10) comes in January."),
+         ("When is Child Benefit paid in December 2026?", "On Tuesday 1 December 2026, then Tuesday 5 January 2027. Child Benefit doesn't get a Christmas double payment."),
+         ("What if I need help with Christmas costs?", "If you're on a low income and not getting the Christmas Bonus, ask your Community Welfare Officer (through your Intreo office) about an Exceptional Needs Payment.")]
+    body = f"""<p class="lead">How will social welfare be paid over Christmas and New Year 2026? The Christmas Bonus, payments paid early, the January gap and the first payments at the new 2027 rates.</p>
+<p class="updated">Checked {CHECKED} · We'll update this page when the Department confirms the 2026 Christmas schedule</p>
+{key_facts(["<strong>Week starting 7 December 2026:</strong> normal payment <strong>plus the 100% Christmas Bonus</strong> (a double payment) for long-term payments. <a href='christmas-bonus.html'>Do I qualify?</a>",
+            "<strong>Christmas Day is Friday 25 December</strong>, St Stephen's Day Saturday 26 December and New Year's Day Friday 1 January 2027 – all public holidays.",
+            "In previous years, payments due in Christmas week and New Year week were <strong>paid early</strong> – often two weeks together just before Christmas.",
+            "That usually means <strong>no payment in the first week of January</strong>. Budget for the gap.",
+            "Budget 2027 increases (+€10 on most payments) start in <strong>January 2027</strong>.",
+            "The exact 2026 dates are confirmed by the Department in December – check gov.ie, MyWelfare or your post office."])}
+<h2>What to expect, week by week</h2>
+{table(["Week", "What usually happens", "Status"], [
+    ["Week of 30 November", "Normal payment. Child Benefit on Tuesday 1 December", "✅ Confirmed"],
+    ["Week of 7 December", "Normal payment <strong>+ Christmas Bonus</strong> (double payment)", "✅ Confirmed"],
+    ["Week of 14 December", "Normal payment", "✅ Normal week"],
+    ["Week of 21 December (Christmas)", "Normal payment, often <strong>plus the following week's payment in advance</strong>", "⏳ To be confirmed"],
+    ["Week of 28 December (New Year)", "Often nothing – already paid in advance", "⏳ To be confirmed"],
+    ["Week of 4 January 2027", "Payments resume at the <strong>new 2027 rates</strong>. Child Benefit Tuesday 5 January. Fuel Allowance rises to €43", "✅ Confirmed"]])}
+<div class="callout warn">Planning tip: the double payment in early December and the early payment before Christmas have to stretch until the week of 4 January. Set some aside for early January.</div>
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(q)}
+<p><a href="christmas-bonus.html">Christmas Bonus 2026: who qualifies and how much →</a> · <a href="payment-dates.html">All payment dates →</a> · <a href="lump-sum-payments.html">Other bonus and lump sum payments →</a></p>"""
+    app.page("christmas-payment-dates.html", "Social Welfare Christmas Payment Dates 2026 Ireland – Bonus, Early Payments & January Gap",
+             "Social welfare over Christmas 2026: Christmas Bonus in the week of 7 December, payments usually paid early before Christmas, the early-January gap and new 2027 rates from the week of 4 January.",
+             body, active="Payment dates", jsonld=[faq_ld(q)], crumbs=[("Welfare", "./"), ("Payment dates", "payment-dates.html"), ("Christmas payment dates", None)],
+             h1="Social welfare Christmas payment dates 2026", sources=("ci_xmas", "dsp27", "mywelfare"), cross=["salary", "rent", "pension"], priority="0.9",
+             share_text="🎄 How social welfare is paid over Christmas 2026 – Christmas Bonus, early payments and the January gap:")
+
 def build_extras():
     body = """<p class="lead">The Back to School Clothing and Footwear Allowance helps families on social welfare or low pay with school costs.</p>
 """ + key_facts(["<strong>€160</strong> for each child aged 2 to 11 (extended to 2- and 3-year-olds in Budget 2026 – check eligibility).", "<strong>€285</strong> for each child aged 12 to 22 in full-time second-level education.",
@@ -469,7 +523,7 @@ def build_faq():
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Welfare", "./"), ("FAQ", None)], h1="Social welfare FAQ", sources=("dsp27", "ci_rates27", "ci_xmas"), cross=["salary", "pension", "mortgage"])
 
 if __name__ == "__main__":
-    build_index(); payment_pages(); build_hubs(); build_xmas(); build_dates(); build_extras(); build_faq()
+    build_index(); payment_pages(); build_hubs(); build_xmas(); build_xmas_dates(); build_dates(); build_extras(); build_faq()
     og_image(os.path.join(app.root, "og.png"), "BUDGET 2027", "Social welfare", "rates 2027", "State Pension · Jobseeker's · Carer's · Child Benefit", "Christmas Bonus 2026 · payment dates",
              "tavion.ie/welfare  ·  free, no sign-up", (125, 211, 252), (3, 105, 161), (5, 40, 60))
     app.update_sitemap()
