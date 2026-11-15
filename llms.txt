@@ -7,15 +7,10 @@
 - [Irish Take-Home Pay Calculator](https://tavion.ie/salary/): salary after income tax, USC and PRSI for 2025, 2026 and 2027 (Budget 2027); single, single parent, married one/two incomes (joint assessment), medical card USC, pension, Rent Tax Credit. Net pay per year, month, fortnight, week, day and hour.
 - [Driver Theory Test Practice](https://tavion.ie/driving/): free Irish driver theory test practice for car and motorcycle, 40-question mock exams.
 - [Irish Citizenship Calculator](https://tavion.ie/citizenship/): reckonable residence days and earliest naturalisation application date from IRP stamps.
+- [Irish Stamp Duty & LPT Calculator](https://tavion.ie/stamp-duty/): stamp duty (1% / 2% / 6%, new homes ex-VAT), total costs of buying a home, and Local Property Tax 2026-2027 by band and council.
+- [Auto-Enrolment Pension Calculator](https://tavion.ie/auto-enrolment/): MyFutureFund contributions (you, employer, State), effect on take-home pay, projected pot at 66, opt-out windows and eligibility.
 - [Irish Social Welfare Rates 2027](https://tavion.ie/welfare/): Budget 2027 weekly rates for every payment (State Pension €309.30, Jobseeker's €264, Carer's €280, Disability €264), Christmas Bonus 2026, Child Benefit dates and a calculator.
 - [Irish Mortgage Calculator](https://tavion.ie/mortgage/): how much you can borrow under Central Bank rules (4x FTB / 3.5x movers, 10% deposit), price you can afford, deposit, stamp duty and fees, Help to Buy and First Home Scheme, mover equity, repayments vs take-home pay and vs average rent by county.
-- [Tax Refund Checker](https://tavion.ie/tax-refund/): which Irish tax credits and reliefs you can claim back for 2022-2026 (rent, medical, dental, remote working, flat-rate expenses by job, carers, tuition) with estimates.
-- [Solar Panel Calculator](https://tavion.ie/solar/): solar PV payback, SEAI grant, savings and export income for every Irish county, with grant, battery, export, tax and planning guides.
-- [Bank Holidays Ireland & Leave Planner](https://tavion.ie/bank-holidays/): all Irish public holidays 2026-2030, an annual leave planner, school holiday dates 2026/27-2028/29, public holiday and annual leave rights.
-- [CAO Points Calculator](https://tavion.ie/cao/): Leaving Cert CAO points (maths bonus, LCVP), course finder, and a page for every 2027 CAO course with 2023-2026 points, by college, county, subject and points.
-- [Auto-Enrolment Pension Calculator](https://tavion.ie/auto-enrolment/): MyFutureFund contributions (you, employer, State), effect on take-home pay, projected pot at 66, opt-out windows and eligibility.
-- [Work Permit Salary Checker](https://tavion.ie/work-permit/): checks a salary against Irish employment permit minimum annual remuneration from 1 March 2026 (GEP, Critical Skills, ICT, Contract for Services, care roles, graduate rates), with renewal rules and 2027 outlook.
-- [Irish Stamp Duty & LPT Calculator](https://tavion.ie/stamp-duty/): stamp duty (1% / 2% / 6%, new homes ex-VAT), total costs of buying a home, and Local Property Tax 2026-2027 by band and council.
 - [Irish Rent Checker](https://tavion.ie/rent/): maximum legal rent increase (2% or CPI if lower) and earliest date, notice of termination periods and valid reasons under the 1 March 2026 rules; Rent Pressure Zone status by county and town; tenant and landlord guides with RTB sources.
 
 ## Take-home pay: key pages
@@ -51,66 +46,6 @@
 - Landlord notice: 90 days (<6 months), 152 (6-12 months), 180 (1-7 years), 196 (7-8 years), 224 (8+ years); 28 days for breach after warning; 7 days for serious anti-social behaviour. Tenant notice: 28/35/42/56/84/112 days.
 - Pages: [Rent increase calculator](https://tavion.ie/rent/), [Notice period calculator](https://tavion.ie/rent/notice-period.html), [New rules 2026](https://tavion.ie/rent/new-rules-2026.html), [Rent Pressure Zones](https://tavion.ie/rent/rent-pressure-zones.html), [FAQ](https://tavion.ie/rent/faq.html). Sources: rtb.ie, citizensinformation.ie, housingagency.ie.
 
-## Stamp duty & LPT: key facts
-
-- Residential stamp duty: 1% up to €1,000,000; 2% from €1m to €1.5m; 6% above €1.5m. New homes: charged on the price excluding 13.5% VAT. 10+ homes in 12 months: 15%. No first-time buyer exemption.
-- Typical buying costs on a €350,000 second-hand home: about €8,700 (stamp duty €3,500, solicitor ~€3,075, Land Registry ~€1,150, searches, valuation, survey) plus a 10% deposit.
-- LPT 2026-2030: band set by value on 1 November 2025; 19 bands from €95 (up to €240,000) to €3,110 (€1,995,001-€2,100,000); over €2.1m: 0.0906% / 0.25% / 0.3% on slices. Councils adjust by -15% to +25%.
-- LPT Local Adjustment Factors 2027: Carlow County Council +15%, Cavan County Council +25%, Clare County Council +15%, Cork City Council +15%, Cork County Council +15%, Donegal County Council +15%, Dublin City Council +0%, DÃºn Laoghaire-Rathdown County Council -15%, Fingal County Council -5%, Galway City Council +15%, Galway County Council +15%, Kerry County Council +10%, Kildare County Council +10%, Kilkenny County Council +15%, Laois County Council +20%, Leitrim County Council +25%, Limerick City and County Council +15%, Longford County Council +15%, Louth County Council +0%, Mayo County Council +10%, Meath County Council +0%, Monaghan County Council +15%, Offaly County Council +15%, Roscommon County Council +15%, Sligo County Council +25%, South Dublin County Council -7.5%, Tipperary County Council +15%, Waterford City and County Council +15%, Westmeath County Council +15%, Wexford County Council +15%, Wicklow County Council +6%.
-- Pages: [Stamp duty calculator](https://tavion.ie/stamp-duty/), [LPT calculator](https://tavion.ie/stamp-duty/lpt.html), [Stamp duty by price](https://tavion.ie/stamp-duty/prices.html), [LPT bands](https://tavion.ie/stamp-duty/lpt-bands.html), [LPT by council](https://tavion.ie/stamp-duty/lpt-councils.html), [FAQ](https://tavion.ie/stamp-duty/faq.html).
-
-## Work permits: key facts
-
-- Employment permit minimum annual remuneration from 1 March 2026 (DETE), for new and renewal applications: General Employment Permit €36,605 (recent Irish graduates €34,009); Critical Skills with relevant degree €40,904 (recent graduates €36,848); Critical Skills other occupations €68,911; Intra-Company Transfer and Contract for Services €49,523; ICT trainee €36,605; healthcare assistants, home carers, care workers, meat and horticulture operatives €32,691 (€16.12/hour).
-- Previous rates: GEP €34,000, CSEP €38,000 / €64,000, ICT/CFS €46,000, care/agri €30,000. Most rose 7.66%.
-- Only basic salary and employer-paid health insurance count (plus board and accommodation for Contract for Services); bonuses and overtime do not. Thresholds assume a 39-hour week.
-- From 2027 to 2030 thresholds are reviewed annually in line with CSO average weekly earnings; lower-paid care/agri-food rates phased out by 2030. No 2027 figures announced as of November 2026.
-- Pages: [Checker](https://tavion.ie/work-permit/), [2026 minimums](https://tavion.ie/work-permit/salary-thresholds.html), [GEP](https://tavion.ie/work-permit/general-employment-permit.html), [Critical Skills](https://tavion.ie/work-permit/critical-skills-permit.html), [Renewals](https://tavion.ie/work-permit/renewals.html), [FAQ](https://tavion.ie/work-permit/faq.html). Source: enterprise.gov.ie.
-
-## Auto-enrolment: key facts
-
-- MyFutureFund (Ireland's auto-enrolment pension) started 1 January 2026, run by NAERSA. Auto-enrolled: employees aged 23-60 earning €20,000+ a year (or €5,000+ in 13 weeks) without a payroll pension. Opt-in: employees 18-66.
-- Contributions on gross pay up to €80,000: 2026-2028 1.5% employee / 1.5% employer / 0.5% State; 2029-2031 3/3/1; 2032-2034 4.5/4.5/1.5; 2035+ 6/6/2. No tax relief; State top-up equals 25%.
-- Opt out only in months 7-8 after enrolment (and after each rate increase); own contributions refunded; re-enrolled after 2 years. Pause (suspend) any time after 6 months for at least 12 months.
-- Access at State Pension age (66); early only for ill-health; up to 25% tax-free lump sum, remainder taxed as income.
-- Pages: [Calculator](https://tavion.ie/auto-enrolment/), [Rates by year](https://tavion.ie/auto-enrolment/contribution-rates.html), [By salary](https://tavion.ie/auto-enrolment/by-salary.html), [Opt out](https://tavion.ie/auto-enrolment/opt-out.html), [FAQ](https://tavion.ie/auto-enrolment/faq.html). Source: Citizens Information, myfuturefund.ie.
-
-## CAO points: key facts
-
-- CAO points: best six Leaving Cert subjects, one sitting. Higher: H1 100, H2 88, H3 77, H4 66, H5 56, H6 46, H7 37, H8 0. Ordinary: O1 56, O2 46, O3 37, O4 28, O5 20, O6 12. Higher Maths +25 for H6 or above. Max 625. LCVP: Distinction 66, Merit 46, Pass 28. Foundation F1 20, F2 12 (some colleges only).
-- 2027 CAO: opens 5 Nov 2026; €35 fee to 20 Jan 2027; closes 1 Feb 2027; Change of Mind 5 May-1 Jul 2027; HEAR/DARE forms by 1 Mar, documents by 10 Mar.
-- Medicine 2027: minimum 480 points + HPAT; Leaving Cert above 550 no longer moderated; HPAT weighted to max 150 (was 300).
-- QQI FET: distinction 3/merit 2/pass 1 x credits, best 120 credits x 13/12, max 390.
-- 1,475 courses at 29 colleges for 2027. Pages: [Calculator](https://tavion.ie/cao/), [All courses with points](https://tavion.ie/cao/all-courses.html), [Points table](https://tavion.ie/cao/points-table.html), [Colleges](https://tavion.ie/cao/colleges.html), [By points](https://tavion.ie/cao/courses-by-points.html), [Dates 2027](https://tavion.ie/cao/dates-2027.html). Data: [courses.json](https://tavion.ie/cao/data/courses.json). Source: cao.ie.
-
-## Bank holidays: key facts
-
-- Ireland has 10 public holidays (St Brigid's Day added 2023: first Monday in February, or 1 February if a Friday). Good Friday, Christmas Eve and Halloween are not public holidays.
-- 2027: New Year's Day 2027-01-01; St Brigid's Day 2027-02-01; St Patrick's Day 2027-03-17; Easter Monday 2027-03-29; May Bank Holiday 2027-05-03; June Bank Holiday 2027-06-07; August Bank Holiday 2027-08-02; October Bank Holiday 2027-10-25; Christmas Day 2027-12-25; St Stephen's Day 2027-12-26. Christmas Day and St Stephen's Day 2027 fall on a weekend: employees still get the benefit (paid day off within a month, extra day of annual leave, or extra day's pay) but no automatic next-day off.
-- Entitlement: full-time immediately; part-time after 40 hours in the previous 5 weeks (non-working day = one-fifth of weekly pay). Ask 21 days before which option applies.
-- Annual leave: 4 working weeks; or 1/3 week per month with 117+ hours; or 8% of hours worked (max 4 weeks), whichever is greater.
-- School holidays 2026/27 (Circular 0018/2026): October mid-term 26-30 Oct 2026; Christmas: last day 22 Dec 2026, reopen 6 Jan 2027; February mid-term 15-19 Feb 2027 (primary must close 18-19 Feb); Easter: last day 19 Mar 2027, reopen 5 Apr 2027.
-- Pages: [2027 & planner](https://tavion.ie/bank-holidays/), [Leave planner 2027](https://tavion.ie/bank-holidays/leave-planner-2027.html), [School holidays](https://tavion.ie/bank-holidays/school-holidays.html), [Rights](https://tavion.ie/bank-holidays/public-holiday-rights.html), [Calendar file (.ics)](https://tavion.ie/bank-holidays/ireland-public-holidays.ics). Source: citizensinformation.ie, gov.ie.
-
-## Solar panels: key facts
-
-- SEAI solar PV grant (homes): €700/kWp for the first 2 kWp, €200/kWp up to 4 kWp, max €1,800. €600 battery grant for 5 kWh+ (from 6 Oct 2026). Homes built and occupied before 2025 (was pre-2021). Apply and get the offer before work; 8 months to complete; post-works BER required; paid 4-6 weeks after documents.
-- Enhanced grant for qualifying welfare recipients: €3,350/kWp to 2 kWp, €850/kWp to 4 kWp, max €8,400, €9,000 with battery. Warmer Homes: solar + battery fully funded.
-- Clean Export Guarantee rates Nov 2026: 15.2c-19.5c/kWh (SSE Airtricity, Electric Ireland 19.5c). Export income tax-free up to €400/yr (2024-2028), €600 from 2027 (Budget 2027).
-- 0% VAT on solar supply and installation for homes since 1 May 2023. Rooftop solar on houses exempt from planning with no area limit since Oct 2022.
-- PVGIS yield (south, 35°): Wexford 1081 to Donegal 847 kWh/kWp/yr; average 935.
-- Pages: [Calculator](https://tavion.ie/solar/), [SEAI grant](https://tavion.ie/solar/seai-solar-grant.html), [How to apply](https://tavion.ie/solar/how-to-apply.html), [Battery grant](https://tavion.ie/solar/battery-grant.html), [Export rates](https://tavion.ie/solar/selling-electricity.html), [By county](https://tavion.ie/solar/by-county.html), [FAQ](https://tavion.ie/solar/faq.html).
-
-## Tax refunds: key facts
-
-- Four-year rule: refunds can be claimed for the last four years; 2022 claims close 31 December 2026. Claim in Revenue myAccount (Review your tax for the previous 4 years > Statement of Liability > Income Tax Return).
-- Rent Tax Credit: 20% of rent, max €500 (2022-2023), €1,000 (2024-2026), €1,150 (2027-2028 per Budget 2027); double for jointly assessed couples. Not for HAP/RAS/Rent Supplement. Parents can claim for a student child.
-- Health expenses: 20% relief (nursing homes at marginal rate). Includes GP, consultant, prescriptions, physio (referred), IVF, non-routine dental (crowns, braces, root canal, implants; Med 2), gluten-free food for coeliacs and diabetic products (doctor's letter). Not routine dental, eye tests, glasses, cosmetic.
-- Remote working relief: 30% of electricity, heating and broadband x days worked at home / days in year, minus employer €3.20/day allowance, at marginal rate.
-- Flat-rate expenses: fixed yearly allowances for ~68 job categories (Revenue list); must be claimed each year.
-- Other: Home Carer credit €1,950 (2026), €2,050 (2027); SPCCC €1,900; Incapacitated Child €3,800; Dependent Relative €305; Mortgage Interest credit up to €1,250 (2023-25) / €625 (2026); landlords RPRIR €1,000 (2026); Rent-a-Room €14,000 (€16,000 from 2027); microgeneration €400 (€600 per Budget 2027); tuition 20% above €3,000 disregard.
-- Pages: [Checker](https://tavion.ie/tax-refund/), [All reliefs](https://tavion.ie/tax-refund/all-reliefs.html), [2022 deadline](https://tavion.ie/tax-refund/deadline-2022.html), [Flat-rate expenses by job](https://tavion.ie/tax-refund/flat-rate-expenses.html), [Can I claim…?](https://tavion.ie/tax-refund/can-i-claim.html). Source: revenue.ie.
-
 ## Mortgages: key facts
 
 - Central Bank limits: first-time buyers 4x gross income, second and subsequent buyers 3.5x; 90% loan-to-value (10% deposit) for homes, 70% for buy-to-let; lenders may exceed limits for 15% of lending (10% BTL). April 2026: bridging loans up to 18 months exempt from the income limit.
@@ -128,6 +63,22 @@
 - Christmas Bonus 2026: 100% of the weekly payment, minimum €20, week starting 7 December 2026, long-term payments only (not Fuel Allowance).
 - Jobseeker's Pay-Related Benefit (unemployed from 31 March 2025): 60% of earnings up to €450 (weeks 1-13), 55% up to €375 (14-26), 50% up to €300 (27-39); minimum €125.
 - Pages: [Calculator](https://tavion.ie/welfare/), [Rates 2027](https://tavion.ie/welfare/rates-2027.html), [Christmas Bonus](https://tavion.ie/welfare/christmas-bonus.html), [Child Benefit dates](https://tavion.ie/welfare/child-benefit-payment-dates.html), [All payments](https://tavion.ie/welfare/all-payments.html). Source: Department of Social Protection Budget 2027 factsheet, Citizens Information.
+
+## Auto-enrolment: key facts
+
+- MyFutureFund (Ireland's auto-enrolment pension) started 1 January 2026, run by NAERSA. Auto-enrolled: employees aged 23-60 earning €20,000+ a year (or €5,000+ in 13 weeks) without a payroll pension. Opt-in: employees 18-66.
+- Contributions on gross pay up to €80,000: 2026-2028 1.5% employee / 1.5% employer / 0.5% State; 2029-2031 3/3/1; 2032-2034 4.5/4.5/1.5; 2035+ 6/6/2. No tax relief; State top-up equals 25%.
+- Opt out only in months 7-8 after enrolment (and after each rate increase); own contributions refunded; re-enrolled after 2 years. Pause (suspend) any time after 6 months for at least 12 months.
+- Access at State Pension age (66); early only for ill-health; up to 25% tax-free lump sum, remainder taxed as income.
+- Pages: [Calculator](https://tavion.ie/auto-enrolment/), [Rates by year](https://tavion.ie/auto-enrolment/contribution-rates.html), [By salary](https://tavion.ie/auto-enrolment/by-salary.html), [Opt out](https://tavion.ie/auto-enrolment/opt-out.html), [FAQ](https://tavion.ie/auto-enrolment/faq.html). Source: Citizens Information, myfuturefund.ie.
+
+## Stamp duty & LPT: key facts
+
+- Residential stamp duty: 1% up to €1,000,000; 2% from €1m to €1.5m; 6% above €1.5m. New homes: charged on the price excluding 13.5% VAT. 10+ homes in 12 months: 15%. No first-time buyer exemption.
+- Typical buying costs on a €350,000 second-hand home: about €8,700 (stamp duty €3,500, solicitor ~€3,075, Land Registry ~€1,150, searches, valuation, survey) plus a 10% deposit.
+- LPT 2026-2030: band set by value on 1 November 2025; 19 bands from €95 (up to €240,000) to €3,110 (€1,995,001-€2,100,000); over €2.1m: 0.0906% / 0.25% / 0.3% on slices. Councils adjust by -15% to +25%.
+- LPT Local Adjustment Factors 2027: Carlow County Council +15%, Cavan County Council +25%, Clare County Council +15%, Cork City Council +15%, Cork County Council +15%, Donegal County Council +15%, Dublin City Council +0%, DÃºn Laoghaire-Rathdown County Council -15%, Fingal County Council -5%, Galway City Council +15%, Galway County Council +15%, Kerry County Council +10%, Kildare County Council +10%, Kilkenny County Council +15%, Laois County Council +20%, Leitrim County Council +25%, Limerick City and County Council +15%, Longford County Council +15%, Louth County Council +0%, Mayo County Council +10%, Meath County Council +0%, Monaghan County Council +15%, Offaly County Council +15%, Roscommon County Council +15%, Sligo County Council +25%, South Dublin County Council -7.5%, Tipperary County Council +15%, Waterford City and County Council +15%, Westmeath County Council +15%, Wexford County Council +15%, Wicklow County Council +6%.
+- Pages: [Stamp duty calculator](https://tavion.ie/stamp-duty/), [LPT calculator](https://tavion.ie/stamp-duty/lpt.html), [Stamp duty by price](https://tavion.ie/stamp-duty/prices.html), [LPT bands](https://tavion.ie/stamp-duty/lpt-bands.html), [LPT by council](https://tavion.ie/stamp-duty/lpt-councils.html), [FAQ](https://tavion.ie/stamp-duty/faq.html).
 
 ## Optional
 

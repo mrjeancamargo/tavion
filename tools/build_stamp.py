@@ -80,7 +80,40 @@ def share_html(text, url, label):
             f'<a class="btn wa" data-track="share" data-method="whatsapp" data-label="{label}" target="_blank" rel="noopener" href="{wa}">{WA_SVG}WhatsApp</a>'
             f'<a class="btn fb" data-track="share" data-method="facebook" data-label="{label}" target="_blank" rel="noopener" href="{fb}">{FB_SVG}Facebook</a></div>')
 
+
+# ---------------------------------------------------------------- engagement: next step + quick checks
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sitekit import engage, quick_check
+CTY = ["carlow", "cavan", "clare", "cork", "donegal", "dublin", "galway", "kerry", "kildare", "kilkenny", "laois", "leitrim", "limerick", "longford", "louth", "mayo",
+       "meath", "monaghan", "offaly", "roscommon", "sligo", "tipperary", "waterford", "westmeath", "wexford", "wicklow"]
+def _cty(slug):
+    for c in CTY:
+        if slug == c or slug.startswith(c + "-"): return c
+    return None
+def _eur(n): return "€" + f"{n:,.0f}"
+
+def NEXT_STEP(fn):
+    if fn == "index.html": return None
+    m = re.match(r"stamp-duty-(\d+)\.html", fn)
+    if m:
+        p = int(m.group(1))
+        return [(f"Can you borrow enough for {_eur(p)}?", "Mortgage, deposit and repayments", f"../mortgage/?price={p}", "stamp_to_mortgage"),
+                ("Your property tax (LPT) at this price", "Every band and council rate", "lpt.html", "stamp_to_lpt")]
+    m = re.match(r"lpt-([a-z-]+)\.html", fn)
+    c = _cty(m.group(1)) if m else None
+    if c:
+        return [(f"House prices in {c.title()}", "What homes sell for and the salary you need", f"../mortgage/mortgage-{c}.html", "lpt_to_mortgage"),
+                ("Work out your LPT", "Your valuation band and council rate", "lpt.html", "lpt_calc")]
+    out = [("Stamp duty and buying costs", "Every cost of buying, to the euro", "./", "stamp_calc"),
+           ("How much can you borrow?", "Mortgage calculator", "../mortgage/", "stamp_to_mortgage")]
+    return out
+CHECKS = {"prices.html": quick_check("stamp_newbuild", "Is it a new build?", [
+    ("Yes", "Stamp duty is charged on the price <strong>without VAT</strong> (13.5%), so it's lower than on a second-hand home at the same price. Help to Buy may also apply. <a href='./'>Work it out →</a>"),
+    ("No – second-hand", "Stamp duty is <strong>1%</strong> of the price up to €1 million, plus solicitor, valuation and registry fees. <a href='./'>See every cost →</a>")])}
+
 def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot="content", scripts=(), share_text=None, h1=None, sources=("rev_sd", "ci_sd"), price=None):
+    body = engage(body, filename, NEXT_STEP, CHECKS)
     url = BASE if filename == "index.html" else BASE + filename
     on = ' class="on"'
     tabs = "".join(f'<a href="{href}"{on if label == active else ""}>{label}</a>' for href, label in TABS)

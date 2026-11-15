@@ -51,6 +51,38 @@ def faq_html(pairs):
 def key_facts(items):
     return '<div class="facts-box"><h2 class="tl">Key facts</h2><ul>' + "".join(f"<li>{i}</li>" for i in items) + "</ul></div>"
 
+def next_card(items, title="Next step"):
+    """items: [(title, subtitle, href, label)] – a prominent next-step card (styled by /assets/tavion.js)."""
+    return ('<div class="tv-next"><span class="tl">' + title + '</span>' + "".join(
+        f'<a href="{h}" data-track="next_step" data-label="{lab}"><span><b>{t}</b>' + (f'<small>{sub}</small>' if sub else '') + '</span><i>→</i></a>'
+        for t, sub, h, lab in items if t) + '</div>')
+
+def quick_check(cid, question, options):
+    """options: [(button label, answer html)] – a one-tap question with instant answers (no page reload)."""
+    btns = "".join(f'<button type="button" data-a="{i}">{lab}</button>' for i, (lab, _) in enumerate(options))
+    ans = "".join(f'<div class="tv-ans" data-for="{i}" hidden><p>{a}</p></div>' for i, (_, a) in enumerate(options))
+    return f'<div class="tv-check" data-check="{cid}"><p class="q">{question}</p><div class="opts">{btns}</div>{ans}</div>'
+
+def insert_next(body, card):
+    """Put the card straight after the Key facts box (or after the lead paragraph)."""
+    if not card: return body
+    i = body.find('<div class="facts-box">')
+    if i >= 0:
+        j = body.find("</ul></div>", i)
+        if j >= 0: return body[:j + 11] + card + body[j + 11:]
+    j = body.find("</p>")
+    return body[:j + 4] + card + body[j + 4:] if j >= 0 else card + body
+
+def engage(body, filename, next_fn=None, checks=None):
+    """For builders with their own page(): add the next-step card and any quick check to a page body."""
+    nx = next_fn(filename) if next_fn else None
+    if nx: body = insert_next(body, next_card(nx))
+    chk = (checks or {}).get(filename)
+    if chk:
+        k = body.find('<div class="ad"')
+        body = body[:k] + chk + body[k:] if k >= 0 else body + chk
+    return body
+
 def node(engine_path, script, q):
     p = subprocess.run(["node", "-e", script, engine_path], input=json.dumps(q), capture_output=True, text=True, check=True)
     return json.loads(p.stdout)
@@ -85,8 +117,14 @@ class App:
                 f'<a class="btn fb" data-track="share" data-method="facebook" data-label="{label}" target="_blank" rel="noopener" href="{fb}">{FB_SVG}Facebook</a></div>')
 
     def page(self, filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot="content", scripts=(), share_text=None, h1=None,
-             sources=(), cross=None, cross_over=None, priority="0.6"):
+             sources=(), cross=None, cross_over=None, priority="0.6", next=None):
         url = self.BASE if filename == "index.html" else self.BASE + filename
+        nx = next if next is not None else (self.next_for(filename) if hasattr(self, "next_for") else None)
+        if nx: body = insert_next(body, next_card(nx))
+        chk = getattr(self, "checks", {}).get(filename)
+        if chk:
+            k = body.find('<div class="ad"')
+            body = body[:k] + chk + body[k:] if k >= 0 else body + chk
         on = ' class="on"'
         tabs = "".join(f'<a href="{href}"{on if label == active else ""}>{label}</a>' for href, label in self.tabs)
         crumb_html = ""

@@ -174,6 +174,7 @@
       encodeURIComponent("I worked out my take-home pay for " + c.year + " with this free Irish calculator: " + location.origin + location.pathname) + '">Share on WhatsApp</a></div>';
     h += '<p class="muted small">Estimate for a full tax year. Your payslip can differ (emergency tax, benefit-in-kind, health insurance, overtime, starting mid-year).</p>';
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "How much could you borrow on " + fmt(r.gross, 0) + "?", s: "Your mortgage limit, deposit and repayments", href: "../mortgage/?inc1=" + Math.round(r.gross), label: "salary_to_mortgage" }, { t: "Are you owed a tax refund?", s: "Rent, medical, working from home – claim back 4 years", href: "../tax-refund/", label: "salary_to_taxrefund" }]);
 
     var sn = $("seeNext");
     if (sn) sn.addEventListener("click", function (e) { e.preventDefault(); setRadio("year", sn.getAttribute("data-y")); go(true); });

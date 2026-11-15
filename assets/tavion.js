@@ -91,6 +91,99 @@ window.TAVION = {
 })();
 
 /*
+ * Engagement helpers (tiny, no extra requests):
+ *  - TAVION.next(container, [{t, s, href, label}])  → "Next step" card after a calculator result
+ *  - static <div class="tv-next"> cards from the page builders get the same look
+ *  - quick checks: <div class="tv-check" data-check="id"> with <button data-a="0"> … and <div class="tv-ans" data-for="0" hidden>
+ *  - "Continue where you left off" strip on the home page (last pages viewed, stored only in this browser)
+ *  - "Copy link" button added to every share box
+ * Tracked as next_step, quick_check, continue_click and copy_link.
+ */
+(function () {
+  var head = document.head;
+  var st = document.createElement("style");
+  st.textContent =
+    ".tv-next{border:2px solid var(--brand,#0369a1);border-radius:14px;padding:12px 14px;margin:16px 0;background:var(--card,#fff)}" +
+    ".tv-next .tl{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand,#0369a1);margin:0 0 6px}" +
+    ".tv-next a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text,#15202b);padding:8px 0;border-top:1px solid var(--line,#dde3ea)}" +
+    ".tv-next a:first-of-type{border-top:0}.tv-next a span{flex:1}.tv-next a b{display:block;font-size:16px}.tv-next a small{display:block;color:var(--muted,#5a6776);font-size:14px}" +
+    ".tv-next a i{font-style:normal;font-weight:700;color:var(--brand,#0369a1);font-size:20px}" +
+    ".tv-check{background:var(--brand-soft,#e0f2fe);border-radius:14px;padding:14px;margin:16px 0}.tv-check .q{font-weight:700;margin:0 0 10px;font-size:17px}" +
+    ".tv-check .opts{display:flex;flex-wrap:wrap;gap:8px}.tv-check button{font:inherit;font-size:15px;font-weight:600;border:1px solid var(--line,#dde3ea);background:var(--card,#fff);color:var(--text,#15202b);border-radius:99px;padding:8px 14px;cursor:pointer;min-height:40px}" +
+    ".tv-check button.on{background:var(--brand,#0369a1);border-color:var(--brand,#0369a1);color:var(--brand-ink,#fff)}.tv-check .tv-ans{margin-top:12px;background:var(--card,#fff);border-radius:10px;padding:10px 12px}.tv-check .tv-ans p{margin:0}" +
+    ".tv-recent{margin:14px 0}.tv-recent .tl{font-size:13px;font-weight:700;color:var(--muted,#5a6776);margin:0 0 6px}.tv-recent div{display:flex;gap:8px;flex-wrap:wrap}" +
+    ".tv-recent a{background:var(--card,#fff);border:1px solid var(--line,#dde3ea);border-radius:99px;padding:6px 12px;font-size:14px;text-decoration:none;color:var(--text,#15202b);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+    ".tv-copy{font:inherit;font-weight:600;cursor:pointer}";
+  head.appendChild(st);
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function track(n, p) { if (window.TAVION && TAVION.track) TAVION.track(n, p || {}); }
+  var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+
+  // Next-step card for calculators: TAVION.next(resultEl, [{ t: "Title", s: "subtitle", href: "...", label: "id" }])
+  window.TAVION = window.TAVION || {};
+  TAVION.nextHtml = function (items, title) {
+    return '<div class="tv-next"><span class="tl">' + esc(title || "Next step") + '</span>' + items.filter(Boolean).map(function (x) {
+      return '<a href="' + esc(x.href) + '" data-track="next_step" data-label="' + esc(x.label || x.href) + '"><span><b>' + x.t + '</b>' + (x.s ? '<small>' + x.s + '</small>' : '') + '</span><i>→</i></a>';
+    }).join("") + '</div>';
+  };
+  TAVION.next = function (el, items, title) {
+    if (!el) return;
+    var old = el.querySelector(":scope > .tv-next.js"); if (old) old.remove();
+    var w = document.createElement("div"); w.innerHTML = TAVION.nextHtml(items, title);
+    var card = w.firstChild; card.classList.add("js");
+    // Put it straight after the first headline result block if there is one, otherwise at the end.
+    var anchor = el.querySelector(".verdict-box, .net-hero, .hero-num, .periods, .earliest");
+    if (anchor && anchor.parentNode === el) {
+      var after = anchor.nextElementSibling;
+      while (after && /net-hero|periods|hero-num/.test(after.className)) { anchor = after; after = after.nextElementSibling; }
+      el.insertBefore(card, anchor.nextSibling);
+    } else el.appendChild(card);
+  };
+
+  // Quick checks
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".tv-check button[data-a]");
+    if (!b) return;
+    var box = b.closest(".tv-check"), a = b.getAttribute("data-a");
+    box.querySelectorAll("button[data-a]").forEach(function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    box.querySelectorAll(".tv-ans").forEach(function (x) { x.hidden = x.getAttribute("data-for") !== a; });
+    track("quick_check", { label: box.getAttribute("data-check") || "check", result: b.textContent.trim().slice(0, 40) });
+  });
+
+  // Remember recently viewed pages (this browser only) and show them on the home page.
+  var path = location.pathname, isHome = path === "/" || path === "/index.html";
+  var recent = []; try { recent = JSON.parse(store.get("tavion_recent") || "[]"); } catch (e) {}
+  document.addEventListener("DOMContentLoaded", function () {
+    if (isHome) {
+      var list = recent.filter(function (r) { return r.p !== path; }).slice(0, 4);
+      var host = document.querySelector("[data-recent]");
+      if (list.length && host) {
+        host.innerHTML = '<div class="tv-recent"><p class="tl">Continue where you left off</p><div>' + list.map(function (r) {
+          return '<a href="' + esc(r.p + (r.q || "")) + '" data-track="continue_click" data-label="' + esc(r.p) + '">' + esc(r.t) + '</a>';
+        }).join("") + '</div></div>';
+      }
+    } else if (!/404|offline/.test(path)) {
+      var t = (document.querySelector("h1") || {}).textContent || document.title.split(/ [–|-] /)[0];
+      t = t.trim().slice(0, 60);
+      recent = [{ p: path, q: location.search.length < 120 ? location.search.replace(/[?&]utm_[^&]*/g, "").replace(/^&/, "?") : "", t: t }].concat(recent.filter(function (r) { return r.p !== path; })).slice(0, 8);
+      store.set("tavion_recent", JSON.stringify(recent));
+    }
+    // "Copy link" in every share box
+    document.querySelectorAll(".share").forEach(function (box) {
+      if (box.querySelector(".tv-copy") || !navigator.clipboard) return;
+      var btn = document.createElement("button"); btn.type = "button"; btn.className = "btn tv-copy"; btn.textContent = "🔗 Copy link";
+      btn.addEventListener("click", function () {
+        var u = location.origin + location.pathname + "?utm_source=share&utm_medium=copy_link";
+        navigator.clipboard.writeText(u).then(function () { btn.textContent = "✓ Link copied"; setTimeout(function () { btn.textContent = "🔗 Copy link"; }, 2500); });
+        track("copy_link", { label: path });
+      });
+      box.appendChild(btn);
+    });
+  });
+})();
+
+/*
  * Installable app (PWA): manifest + service worker + a small, dismissible install bar.
  * Android/desktop Chrome & Edge: uses the browser's own install prompt.
  * iPhone/iPad Safari: shows a one-line tip (Share → Add to Home Screen) – Apple has no install prompt.

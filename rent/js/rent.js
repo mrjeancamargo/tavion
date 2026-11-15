@@ -72,6 +72,7 @@
     h += '<div class="res-actions"><a class="btn" href="notice-period.html">Check a notice to leave →</a><a class="btn wa" target="_blank" rel="noopener" data-track="share" data-method="whatsapp" data-label="rent_result" href="https://wa.me/?text=' +
       encodeURIComponent("Check if a rent increase is legal in Ireland – free calculator with the 2026 rules: " + location.origin + location.pathname) + '">Share on WhatsApp</a></div>';
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Is it cheaper to buy in " + $("county").options[$("county").selectedIndex].text + "?", s: "House prices, deposit and repayments vs your rent", href: "../mortgage/mortgage-" + county.replace(/-city$/, "") + ".html", label: "rent_to_mortgage" }, { t: "Claim the Rent Tax Credit", s: "Up to €1,000 a year back – and for past years", href: "../tax-refund/", label: "rent_to_taxrefund" }]);
     return r;
   }
 

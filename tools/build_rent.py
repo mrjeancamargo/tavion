@@ -146,7 +146,30 @@ def share_html(text, url, label):
             f'<a class="btn wa" data-track="share" data-method="whatsapp" data-label="{label}" target="_blank" rel="noopener" href="{wa}">{WA_SVG}WhatsApp</a>'
             f'<a class="btn fb" data-track="share" data-method="facebook" data-label="{label}" target="_blank" rel="noopener" href="{fb}">{FB_SVG}Facebook</a></div>')
 
+
+# ---------------------------------------------------------------- engagement: next step + quick checks
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sitekit import engage, quick_check
+CTY = ["carlow", "cavan", "clare", "cork", "donegal", "dublin", "galway", "kerry", "kildare", "kilkenny", "laois", "leitrim", "limerick", "longford", "louth", "mayo",
+       "meath", "monaghan", "offaly", "roscommon", "sligo", "tipperary", "waterford", "westmeath", "wexford", "wicklow"]
+def _cty(slug):
+    for c in CTY:
+        if slug == c or slug.startswith(c + "-"): return c
+    return None
+def _eur(n): return "€" + f"{n:,.0f}"
+
+def NEXT_STEP(fn):
+    if fn == "index.html": return None
+    m = re.match(r"rent-increase-([a-z-]+)\.html", fn)
+    c = _cty(m.group(1)) if m else None
+    first = (f"Is it cheaper to buy in {c.title()}?", "House prices, deposit and repayments vs rent", f"../mortgage/mortgage-{c}.html", "rent_to_mortgage") if c else \
+            ("Is it cheaper to buy than rent?", "House prices and the salary you need, by county", "../mortgage/counties.html", "rent_to_mortgage")
+    return [first, ("Claim the Rent Tax Credit", "Up to €1,000 a year back – and for past years", "../tax-refund/", "rent_to_taxrefund")]
+CHECKS = {}
+
 def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot="content", scripts=(), share_text=None, h1=None, sources=("rtb_rent", "rtb_changes", "ci_rent")):
+    body = engage(body, filename, NEXT_STEP, CHECKS)
     url = BASE if filename == "index.html" else BASE + filename
     on = ' class="on"'
     tabs = "".join(f'<a href="{href}"{on if label == active else ""}>{label}</a>' for href, label in TABS)

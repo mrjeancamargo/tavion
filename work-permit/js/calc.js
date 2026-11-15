@@ -60,6 +60,7 @@
     h += '<ul class="issues">' + tips.map(function (t) { return '<li class="' + t[0] + '">' + t[1] + '</li>'; }).join("") + '</ul>';
     h += '<p class="muted small">Based on DETE minimum annual remuneration from ' + P.EFFECTIVE + '. Your permit can still be refused for other reasons (for example the Labour Market Needs Test or the 50:50 rule). Always check enterprise.gov.ie before you apply.</p>';
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "When can you apply for Irish citizenship?", s: "Time on Stamp 1 counts – work out your date", href: "../citizenship/", label: "permit_to_citizenship" }, { t: "Your take-home pay on " + eur(sal), s: "After tax, USC and PRSI", href: "../salary/?gross=" + Math.round(sal), label: "permit_to_salary" }]);
     return r;
   }
   function band(x) { return x < 33000 ? "<33k" : x < 37000 ? "33-37k" : x < 41000 ? "37-41k" : x < 50000 ? "41-50k" : x < 69000 ? "50-69k" : "69k+"; }

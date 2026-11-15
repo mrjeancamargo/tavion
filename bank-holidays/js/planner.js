@@ -44,6 +44,7 @@
     h += '<div class="btn-row"><a class="btn" href="ireland-public-holidays.ics" download data-track="ics_download" data-label="planner">📆 Add bank holidays to your calendar</a></div>';
     h += '<p class="small">Your employer decides when leave is taken and must consult you at least a month before – ask early. <a href="annual-leave.html">Annual leave rules →</a></p>';
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Your take-home pay for the year", s: "After tax, USC and PRSI – Budget 2027", href: "../salary/", label: "holidays_to_salary" }, { t: "Are you owed a tax refund?", s: "Most people never claim – check in 2 minutes", href: "../tax-refund/", label: "holidays_to_taxrefund" }]);
     if (scroll) out.scrollIntoView({ behavior: "smooth", block: "start" });
     return p;
   }

@@ -709,6 +709,13 @@ def build_guides():
              f'<p class="lead">Common CAO questions, answered simply.</p><p class="updated">Checked {CHECKED}</p>' + faq_html(FAQ),
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("CAO points", "./"), ("FAQ", None)], h1="CAO points FAQ", sources=("grid", "dates", "ci"), cross=CROSS, priority="0.8")
 
+# ---------------------------------------------------------------- engagement
+def _cao_next(fn):
+    if fn == "index.html": return None
+    return [("Work out your CAO points", "Enter your grades – see the courses they get you", "./", "cao_calc"),
+            ("Learning to drive? Free theory test practice", "Real-style questions and road signs", "../driving/", "cao_to_driving")]
+app.next_for = _cao_next
+
 if __name__ == "__main__":
     write_json()
     build_index(); build_points_table(); build_course_pages(); build_colleges(); build_counties(); build_subjects(); build_bands(); build_all_and_changes(); build_guides()

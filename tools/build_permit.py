@@ -431,6 +431,22 @@ def build_faq():
              f'<p class="lead">Common questions about work permit minimum salaries.</p><p class="updated">Checked {CHECKED}</p>' + faq_html(FAQ) + cta(),
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Work permits", "./"), ("FAQ", None)], h1="Work permit salary FAQ", sources=("dete_news", "gep", "csep", "ci"), cross=CROSS, priority="0.8")
 
+import re
+# ---------------------------------------------------------------- engagement
+from sitekit import quick_check
+def _permit_next(fn):
+    if fn == "index.html": return None
+    m = re.match(r"salary-(\d+)\.html", fn)
+    first = ("Check with your own details", "Graduate rate, hours and health insurance", f"./?salary={m.group(1)}" if m else "./", "permit_checker")
+    return [first, ("When can you apply for Irish citizenship?", "Time on Stamp 1 counts – work out your date", "../citizenship/", "permit_to_citizenship")]
+app.next_for = _permit_next
+_GQ = quick_check("permit_graduate", "Did you graduate (Level 8 degree or higher) in the last 12 months?", [
+    ("Yes", f"You can use the graduate rate: {eur(PERMITS['gep']['grad'])} for a General Employment Permit (Irish college) or {eur(PERMITS['csep']['grad'])} for Critical Skills. <a href='graduate-rates.html'>Graduate rates →</a>"),
+    ("No", f"The standard minimums apply: {eur(M('gep'))} for a General Employment Permit and {eur(M('csep'))} for Critical Skills. <a href='./'>Check your salary →</a>")])
+app.checks = {"salary-thresholds.html": _GQ, "general-employment-permit.html": _GQ, "renewals.html": quick_check("permit_renewal", "When does your permit expire?", [
+    ("Within 4 months", "You can apply to renew now on Employment Permits Online – and your pay must meet the new minimum."),
+    ("Later than that", "You can't renew yet (the window opens 4 months before expiry), but check your pay now so there's time to ask for a raise. <a href='./'>Check your salary →</a>")])}
+
 if __name__ == "__main__":
     build_index(); build_thresholds(); build_permit_pages(); build_guides(); build_salary_pages(); build_faq()
     og_image(os.path.join(app.root, "og.png"), "WORK PERMITS 2026", "Is your salary", "high enough?", f"GEP {eur(M('gep'))} · Critical Skills {eur(M('csep'))}", "New minimums from 1 March 2026",

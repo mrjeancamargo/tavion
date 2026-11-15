@@ -75,6 +75,7 @@
     if (r.tips.length) h += '<ul class="issues">' + r.tips.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>";
     h += '<div id="finder"><p class="muted">Loading courses…</p></div>';
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Courses you could get with " + r.total + " points", s: "Search every CAO course", href: "all-courses.html", label: "cao_to_courses" }, { t: "Learning to drive? Free theory test practice", s: "Real-style questions and road signs", href: "../driving/", label: "cao_to_driving" }]);
     loadData().then(function () { var f = $("finder"); if (f) f.innerHTML = finderHtml(r.total); }).catch(function () { var f = $("finder"); if (f) f.innerHTML = '<p>Couldn\'t load the course list – <a href="all-courses.html">see all courses</a>.</p>'; });
     if (scroll) out.scrollIntoView({ behavior: "smooth", block: "start" });
     return r;

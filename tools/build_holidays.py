@@ -359,6 +359,15 @@ def build_guides():
              f'<p class="lead">Common questions about Irish bank holidays.</p><p class="updated">Checked {CHECKED}</p>' + faq_html(FAQ),
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Bank holidays", "./"), ("FAQ", None)], h1="Bank holidays FAQ", sources=("ci", "wrc"), cross=CROSS, priority="0.8")
 
+import re
+# ---------------------------------------------------------------- engagement
+from sitekit import quick_check
+def _hol_next(fn):
+    if fn == "index.html": return None
+    return [("Plan your annual leave for 2027", "Turn your leave into the most days off", "./", "holidays_planner"),
+            ("Your take-home pay for 2027", "After Budget 2027 tax changes", "../salary/", "holidays_to_salary")]
+app.next_for = _hol_next
+
 if __name__ == "__main__":
     build_index(); build_years(); build_holidays(); build_planner_pages(); build_school(); build_guides()
     with open(os.path.join(app.root, "ireland-public-holidays.ics"), "w", encoding="utf-8", newline="") as f:

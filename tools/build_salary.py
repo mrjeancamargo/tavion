@@ -125,7 +125,38 @@ def key_facts(items):
     """A short, answer-first summary block. Search engines and AI assistants quote these."""
     return '<div class="facts-box"><h2 class="tl">Key facts</h2><ul>' + "".join(f"<li>{i}</li>" for i in items) + "</ul></div>"
 
+
+# ---------------------------------------------------------------- engagement: next step + quick checks
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sitekit import engage, quick_check
+CTY = ["carlow", "cavan", "clare", "cork", "donegal", "dublin", "galway", "kerry", "kildare", "kilkenny", "laois", "leitrim", "limerick", "longford", "louth", "mayo",
+       "meath", "monaghan", "offaly", "roscommon", "sligo", "tipperary", "waterford", "westmeath", "wexford", "wicklow"]
+def _cty(slug):
+    for c in CTY:
+        if slug == c or slug.startswith(c + "-"): return c
+    return None
+def _eur(n): return "€" + f"{n:,.0f}"
+
+def NEXT_STEP(fn):
+    if fn == "index.html": return None
+    m = re.match(r"(\d+)-after-tax\.html", fn)
+    if m:
+        a = int(m.group(1)); b = min(150000, max(30000, round(a / 5000) * 5000))
+        return [(f"How much could you borrow on {_eur(a)}?", "Your mortgage limit, deposit and repayments", f"../mortgage/borrow-{b}.html", "salary_to_mortgage"),
+                ("Are you owed a tax refund?", "Rent, medical, working from home – claim back 4 years", "../tax-refund/", "salary_to_taxrefund")]
+    return [("Work out your take-home pay", "Weekly, monthly and yearly – Budget 2027", "./", "salary_calc"),
+            ("Are you owed a tax refund?", "Most people never claim – check in 2 minutes", "../tax-refund/", "salary_to_taxrefund")]
+CHECKS = {"public-holidays.html": quick_check("ph_parttime", "Do you work part-time?", [
+    ("Yes", "You're entitled to public holiday benefit if you've worked at least <strong>40 hours in the 5 weeks</strong> before the public holiday."),
+    ("No – full-time", "You're entitled to public holiday benefit from day one: a paid day off, an extra day's pay, an extra day of annual leave or a paid day off within a month – your employer chooses."),
+    ("I work on the day", "You're still entitled to a benefit for that public holiday – usually an extra day's pay or a paid day off, as your employer chooses.")]),
+    "tax-rates.html": quick_check("rent_credit", "Do you pay rent for your home?", [
+    ("Yes", "You can claim the <strong>Rent Tax Credit</strong> – up to €1,000 a year in 2026 (€1,150 from 2027), and for past years too. <a href='../tax-refund/'>Check what you're owed →</a>"),
+    ("No", "Check other reliefs most people miss: medical expenses, working from home and flat-rate job expenses. <a href='../tax-refund/'>Am I owed a refund? →</a>")])}
+
 def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot="content", scripts=(), share_text=None, h1=None):
+    body = engage(body, filename, NEXT_STEP, CHECKS)
     url = BASE if filename == "index.html" else BASE + filename
     on = ' class="on"'
     tabs = "".join(f'<a href="{href}"{on if label == active else ""}>{label}</a>' for href, label in TABS)

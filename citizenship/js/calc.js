@@ -260,6 +260,7 @@
       '<a class="btn wa" data-track="share" data-method="whatsapp" data-label="citizenship_result" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent("I just worked out when I can apply for Irish citizenship with this free calculator 🇮🇪 https://tavion.ie/citizenship/") + '">Share on WhatsApp</a></div>';
 
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Applied already? Track your application", s: "How long it is taking and what comes next", href: "tracker.html", label: "citizenship_to_tracker" }, { t: "On a work permit? Check your salary", s: "New minimum salaries for renewals from March 2026", href: "../work-permit/", label: "citizenship_to_permit" }]);
     var ue = document.getElementById("useEarliest");
     if (ue) ue.onclick = function (ev) { ev.preventDefault(); state.appDate = toStr(r.earliest.D); document.getElementById("appDate").value = state.appDate; save(); renderResult(true); };
     if (scroll) out.scrollIntoView({ behavior: "smooth", block: "start" });

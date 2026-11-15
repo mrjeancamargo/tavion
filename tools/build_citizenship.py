@@ -200,7 +200,35 @@ def share_html(text, url, label):
             f'<a class="btn wa" data-track="share" data-method="whatsapp" data-label="{label}" target="_blank" rel="noopener" href="{wa}">{WA_SVG}WhatsApp</a>'
             f'<a class="btn fb" data-track="share" data-method="facebook" data-label="{label}" target="_blank" rel="noopener" href="{fb}">{FB_SVG}Facebook</a></div>')
 
+
+# ---------------------------------------------------------------- engagement: next step + quick checks
+import os, re, sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sitekit import engage, quick_check
+CTY = ["carlow", "cavan", "clare", "cork", "donegal", "dublin", "galway", "kerry", "kildare", "kilkenny", "laois", "leitrim", "limerick", "longford", "louth", "mayo",
+       "meath", "monaghan", "offaly", "roscommon", "sligo", "tipperary", "waterford", "westmeath", "wexford", "wicklow"]
+def _cty(slug):
+    for c in CTY:
+        if slug == c or slug.startswith(c + "-"): return c
+    return None
+def _eur(n): return "€" + f"{n:,.0f}"
+
+def NEXT_STEP(fn):
+    if fn == "index.html": return None
+    if fn.startswith("stamp"):
+        return [("When can you apply for citizenship?", "Add your stamps – see your earliest date", "./", "citizenship_calc"),
+                ("On a work permit? Check your salary", "New minimums for renewals from March 2026", "../work-permit/", "citizenship_to_permit")]
+    out = [("When can you apply for citizenship?", "Free residence calculator", "./", "citizenship_calc"),
+           ("Track your application", "How long it's taking and what's next", "tracker.html", "citizenship_tracker"),
+           ("Which stamps count?", "Every stamp explained", "stamps.html", "citizenship_stamps")]
+    return [o for o in out if o[2] != fn][:2]
+_SQ = quick_check("stamp2", "Were you ever on Stamp 2 (student)?", [
+    ("Yes", "Student time on Stamp 2 and 2A <strong>doesn't count</strong> towards citizenship. Your clock starts with your first permission that counts, such as Stamp 1G or Stamp 1. <a href='./'>Work out your date →</a>"),
+    ("No", "Good – check that every permission you've held counts and that there are no gaps. <a href='./'>Add your stamps →</a>")])
+CHECKS = {"stamps.html": _SQ, "stamp-2.html": _SQ, "stamp-1g.html": _SQ, "requirements.html": _SQ}
+
 def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot="content", scripts=(), share_text=None, h1=None):
+    body = engage(body, filename, NEXT_STEP, CHECKS)
     url = BASE if filename == "index.html" else BASE + filename
     on = ' class="on"'
     tabs = "".join(f'<a href="{href}"{on if label == active else ""}>{label}</a>' for href, label in TABS)

@@ -680,6 +680,14 @@ def build_hubs():
              f'<p class="lead">Common tax refund questions, answered simply.</p><p class="updated">Checked {CHECKED}</p>' + faq_html(FAQ) + CTA,
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Tax refunds", "./"), ("FAQ", None)], h1="Tax refund FAQ", sources=("four", "return", "health_claim"), cross=CROSS, priority="0.8")
 
+# ---------------------------------------------------------------- engagement
+from sitekit import quick_check
+def _tr_next(fn):
+    if fn == "index.html": return None
+    return [("Check what you're owed", "Rent, medical, working from home and your job – 2 minutes", "./", "taxrefund_check"),
+            ("Your take-home pay for 2027", "After Budget 2027 tax changes", "../salary/", "taxrefund_to_salary")]
+app.next_for = _tr_next
+
 if __name__ == "__main__":
     build_guides(); build_index(); build_claims(); build_jobs(); build_rent_pages(); build_hubs()
     og_image(os.path.join(app.root, "og.png"), "REVENUE REFUNDS", "Am I owed", "a tax refund?", "Rent · medical · work from home · your job", "2022 claims close 31 December 2026",

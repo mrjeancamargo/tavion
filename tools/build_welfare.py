@@ -522,6 +522,31 @@ def build_faq():
              f'<p class="lead">Common questions about social welfare payments in Ireland.</p><p class="updated">Checked {CHECKED}</p>' + faq_html(FAQ),
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Welfare", "./"), ("FAQ", None)], h1="Social welfare FAQ", sources=("dsp27", "ci_rates27", "ci_xmas"), cross=["salary", "pension", "mortgage"])
 
+import re
+# ---------------------------------------------------------------- engagement: next step + quick checks
+from sitekit import quick_check
+def _welfare_next(fn):
+    if fn == "index.html": return None
+    X = ("Your Christmas Bonus 2026", "Paid in the week of 7 December – check if you qualify", "christmas-bonus.html", "welfare_xmas")
+    D = ("Christmas and New Year payment dates", "Early payments and the January gap", "christmas-payment-dates.html", "welfare_xmasdates")
+    key = fn[:-5]
+    C = ("What will you get from January 2027?", "Your rate with a partner, children, Living Alone and Fuel", "./" + ("?p=" + key if key in P else ""), "welfare_calc")
+    L = ("Is there an autumn bonus or lump sum this year?", "What is – and isn't – being paid", "lump-sum-payments.html", "welfare_lumps")
+    order = [X, C] if key in P else [X, D, C, L]
+    return [i for i in order if i[2] != fn][:2]
+app.next_for = _welfare_next
+_XQ = quick_check("xmas_qualify", "Which payment do you get?", [
+    ("State Pension", "✅ Yes – you get the 100% Christmas Bonus in the week of 7 December 2026, with your normal payment."),
+    ("Disability / Carer's", "✅ Yes – Disability Allowance, Invalidity Pension, Carer's Allowance (including half-rate) and Carer's Benefit all get the Christmas Bonus."),
+    ("One-Parent / JST", "✅ Yes – One-Parent Family Payment and Jobseeker's Transitional Payment both qualify straight away."),
+    ("Jobseeker's Allowance", "⏳ Only if you've been getting it for 12 months (312 days) or more by the bonus week."),
+    ("Jobseeker's Benefit", "❌ No – Jobseeker's Benefit and Pay-Related Benefit don't get the Christmas Bonus (but you may still get two weeks paid together before Christmas)."),
+    ("Child Benefit only", "❌ No – Child Benefit doesn't get a Christmas double payment. December's payment is on Tuesday 1 December.")])
+app.checks = {"christmas-payment-dates.html": _XQ, "payment-dates.html": _XQ, "lump-sum-payments.html": _XQ,
+    "fuel-allowance-payment-dates.html": quick_check("fuel_qualify", "Are you 66 or over?", [
+        ("Yes", "You can get Fuel Allowance without another payment if you pass the means test – €653 a week for a single person from January 2027 (€534 now). <a href='fuel-allowance.html'>Who qualifies →</a>"),
+        ("No", "You need a qualifying long-term payment (such as Disability Allowance, One-Parent Family Payment, Carer's Allowance or Jobseeker's Allowance after 12 months) and to pass the means test. <a href='fuel-allowance.html'>Full list →</a>")])}
+
 if __name__ == "__main__":
     build_index(); payment_pages(); build_hubs(); build_xmas(); build_xmas_dates(); build_dates(); build_extras(); build_faq()
     og_image(os.path.join(app.root, "og.png"), "BUDGET 2027", "Social welfare", "rates 2027", "State Pension · Jobseeker's · Carer's · Child Benefit", "Christmas Bonus 2026 · payment dates",

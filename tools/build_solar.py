@@ -710,6 +710,27 @@ def build_guides():
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Solar", "./"), ("FAQ", None)], h1="Solar panels: questions answered", sources=("seai_pv", "ceg", "rev", "plan"), cross=CROSS)
 
 
+import re
+# ---------------------------------------------------------------- engagement
+from sitekit import quick_check
+def _solar_next(fn):
+    if fn == "index.html": return None
+    m = re.match(r"solar-panels-([a-z]+)\.html", fn)
+    if m:
+        c = m.group(1)
+        return [(f"Your payback in {c.title()}", "Your roof, your bill – with the SEAI grant", f"./?county={c}", "solar_calc_county"),
+                ("How to apply for the SEAI grant", "Apply before any work starts", "how-to-apply.html", "solar_apply")]
+    out = [("Check your own payback", "Your county, roof and bill – free, no sign-up", "./", "solar_calc"),
+           ("How to apply for the SEAI grant", "Step by step", "how-to-apply.html", "solar_apply"),
+           ("Pay for it with a low-rate loan", "Home Energy Upgrade Loan", "home-energy-upgrade-loan.html", "solar_loan")]
+    return [o for o in out if o[2] != fn][:2]
+app.next_for = _solar_next
+app.checks = {"roof-direction.html": quick_check("solar_roof", "Which way does your roof face?", [
+    ("South", "☀️ The best direction – you'll get the most out of every panel."),
+    ("South-west / South-east", "👍 Still very good – usually only a few percent less than due south."),
+    ("East-west", "👍 Works well: panels on both sides make power morning and evening, when you're more likely to use it."),
+    ("North", "⚠️ Much less output. Panels can still work on a shallow north roof, but check the payback first. <a href='./'>Check your payback →</a>")])}
+
 if __name__ == "__main__":
     build_index(); build_grants(); build_export(); build_money(); build_counties(); build_guides()
     og_image(os.path.join(app.root, "og.png"), "SOLAR · IRELAND", "Solar panel", "payback calculator", "SEAI grant €1,800 + €600 battery", "Savings & payback for your county",

@@ -110,6 +110,7 @@
     h += '<div class="res-actions"><a class="btn" href="../stamp-duty/?price=' + o.price + (inp.newBuild ? "&new=1" : "") + '" data-track="cross_app" data-label="stamp_from_mortgage">Stamp duty &amp; fees breakdown →</a><a class="btn wa" target="_blank" rel="noopener" data-track="share" data-method="whatsapp" data-label="mortgage_result" href="https://wa.me/?text=' +
       encodeURIComponent("See how much you can borrow for a mortgage in Ireland – free calculator: " + location.origin + location.pathname) + '">Share on WhatsApp</a></div>';
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [((o.maxPrice || o.maxLoan) ? { t: "Stamp duty and fees on " + eur(Math.round((o.maxPrice || o.maxLoan / 0.9) / 1000) * 1000), s: "Every cost of buying, to the euro", href: "../stamp-duty/?price=" + Math.round((o.maxPrice || o.maxLoan / 0.9) / 1000) * 1000, label: "mortgage_to_stamp" } : null), ($("county").value ? { t: "House prices in " + $("county").options[$("county").selectedIndex].text, s: "What homes really sell for and the salary you need", href: "mortgage-" + $("county").value + ".html", label: "mortgage_to_county" } : null)]);
     return o;
   }
 

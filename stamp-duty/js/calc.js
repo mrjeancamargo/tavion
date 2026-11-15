@@ -61,6 +61,7 @@
       h += '<div class="cta"><h2>Can you borrow ' + eur(price - dep) + '?</h2><p>See your maximum mortgage, repayments and Help to Buy.</p><a class="btn" href="../mortgage/?price=' + price + '" data-track="cross_app" data-label="mortgage_from_stamp">How much could I borrow?</a></div>';
       h += '<p class="muted small">Fees are typical estimates – get quotes. Stamp duty rates from Revenue. Not tax advice.</p>';
       out.innerHTML = h;
+      if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Can you borrow enough for " + eur(price) + "?", s: "Mortgage, deposit and repayments", href: "../mortgage/?price=" + Math.round(price), label: "stamp_to_mortgage" }, { t: "Your property tax (LPT)", s: "Every band and council rate", href: "lpt.html", label: "stamp_to_lpt" }]);
       return c;
     }
     var tracked = "";

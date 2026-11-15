@@ -46,6 +46,7 @@
     h += '<ul class="issues">' + tips.map(function (t) { return '<li class="' + t[0] + '">' + t[1] + '</li>'; }).join("") + '</ul>';
     h += '<p class="muted small">Projection is an illustration (growth ' + ($("growth").value || 4) + '%, charges ' + ($("charge").value || 0.5) + '%, pay rises ' + ($("payRise").value || 2.5) + '%, inflation 2%). Investments can fall as well as rise. Check your real fund in the MyFutureFund portal.</p>';
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Your take-home pay on " + eur(sal), s: "After tax, USC, PRSI and auto-enrolment", href: "../salary/?gross=" + Math.round(sal), label: "ae_to_salary" }, { t: "Your State Pension at 66", s: "Paid on top of MyFutureFund", href: "../welfare/state-pension-contributory.html", label: "ae_to_pension" }]);
     return { sal: sal, el: el };
   }
   function band(x) { return x < 30000 ? "<30k" : x < 45000 ? "30-45k" : x < 60000 ? "45-60k" : x < 80000 ? "60-80k" : "80k+"; }

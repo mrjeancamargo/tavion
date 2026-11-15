@@ -136,6 +136,7 @@
     h += '<p class="muted small">Estimate only. Generation from PVGIS (EU Joint Research Centre) for ' + r.countyName + " with " + Math.round(S.factor(o.facing, o.tilt) * 100) + "% for your roof" + (o.shading ? " and " + o.shading + "% shading" : "") +
       ". Prices rise " + (o.priceRise === null ? S.DEFAULTS.priceRise : o.priceRise) + "% a year, panels lose 0.5% a year and the inverter is replaced in year 12. Get at least 3 quotes from SEAI-registered companies.</p>";
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "How to apply for the SEAI grant", s: "Step by step – apply before any work starts", href: "how-to-apply.html", label: "solar_to_apply" }, { t: "Pay for it with a low-rate loan", s: "Home Energy Upgrade Loan from about 3%", href: "home-energy-upgrade-loan.html", label: "solar_to_loan" }]);
     hookHover(r, c);
     last = r;
     return r;

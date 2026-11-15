@@ -38,6 +38,7 @@
         '<li>Thinking about work? <a href="jobseekers-vs-working.html">Compare welfare with take-home pay →</a></li></ul>';
       h += '<p class="muted small">Maximum rates – you may get less depending on your PRSI record or means. Confirm with the Department of Social Protection or on MyWelfare.ie.</p>';
       out.innerHTML = h;
+      if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Your Christmas Bonus 2026", s: "Week of 7 December – check if you qualify", href: "christmas-bonus.html", label: "welfare_to_xmas" }, { t: "Christmas and New Year payment dates", s: "Early payments and the January gap", href: "christmas-payment-dates.html", label: "welfare_to_xmasdates" }]);
       return r;
     }
     form.addEventListener("input", render); form.addEventListener("change", render);
@@ -59,6 +60,8 @@
     xf.addEventListener("input", function () { xr(false); }); xf.addEventListener("change", function () { xr(false); });
     xf.addEventListener("submit", function (e) { e.preventDefault(); xr(true); });
     var amtEl = $("xAmt"); amtEl.addEventListener("input", function () { var raw = amtEl.value.replace(/[^\d.]/g, ""); if (raw && raw.indexOf(".") < 0) amtEl.value = Number(raw).toLocaleString("en-IE"); });
+    var xq = new URLSearchParams(location.search).get("pay");
+    if (xq && $("xPay").querySelector('option[value="' + xq + '"]')) $("xPay").value = xq;
     xr(false);
   }
 })();

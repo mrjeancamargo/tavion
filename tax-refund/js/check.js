@@ -16,6 +16,9 @@
   try { var s = JSON.parse(localStorage.getItem(KEY)); if (s) { NUM.forEach(function (k) { if (s[k]) $(k).value = s[k]; }); BOX.forEach(function (k) { $(k).checked = !!s[k]; });
     if (s.job) sel.value = s.job; if (s.status) { var r = form.querySelector('input[name=status][value="' + s.status + '"]'); if (r) r.checked = true; } } } catch (e) {}
 
+  // Pre-fill from links, e.g. ?rent=1200 (a month), ?medical=800, ?wfh=100 (days a year)
+  (function () { var q = new URLSearchParams(location.search), m = { rent: "rentMonthly", medical: "medical", dental: "dental", wfh: "wfhDays" };
+    Object.keys(m).forEach(function (k) { var v = q.get(k); if (v && !isNaN(+v)) $(m[k]).value = +v; }); })();
   function toggles() { $("mortgageRow").hidden = !$("mortgage").checked; $("carerIncomeRow").hidden = !$("homeCarer").checked; }
   function answers() {
     var o = { couple: form.querySelector("input[name=status]:checked").value === "couple" };
@@ -47,6 +50,7 @@
     tips.push("See your Budget 2027 take-home pay: <a href='../salary/' data-track='cross_app' data-label='salary_from_refund'>pay calculator →</a>");
     h += '<ul class="issues">' + tips.map(function (t) { return "<li>" + t + "</li>"; }).join("") + "</ul>";
     out.innerHTML = h;
+    if (window.TAVION && TAVION.next) TAVION.next(out, [{ t: "Your take-home pay for 2027", s: "After Budget 2027 tax changes", href: "../salary/", label: "taxrefund_to_salary" }, { t: "Renting? Check your rent increase is legal", s: "Rent rules for your county", href: "../rent/", label: "taxrefund_to_rent" }]);
     if (scroll) out.scrollIntoView({ behavior: "smooth", block: "start" });
     return r;
   }

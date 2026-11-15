@@ -108,7 +108,41 @@ def share_html(text, url, label):
             f'<a class="btn wa" data-track="share" data-method="whatsapp" data-label="{label}" target="_blank" rel="noopener" href="{wa}">{WA_SVG}WhatsApp</a>'
             f'<a class="btn fb" data-track="share" data-method="facebook" data-label="{label}" target="_blank" rel="noopener" href="{fb}">{FB_SVG}Facebook</a></div>')
 
+
+# ---------------------------------------------------------------- engagement: next step + quick checks
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sitekit import engage, quick_check
+CTY = ["carlow", "cavan", "clare", "cork", "donegal", "dublin", "galway", "kerry", "kildare", "kilkenny", "laois", "leitrim", "limerick", "longford", "louth", "mayo",
+       "meath", "monaghan", "offaly", "roscommon", "sligo", "tipperary", "waterford", "westmeath", "wexford", "wicklow"]
+def _cty(slug):
+    for c in CTY:
+        if slug == c or slug.startswith(c + "-"): return c
+    return None
+def _eur(n): return "€" + f"{n:,.0f}"
+
+def NEXT_STEP(fn):
+    if fn == "index.html": return None
+    m = re.match(r"mortgage-([a-z]+)\.html", fn)
+    if m:
+        k = m.group(1)
+        return [("Can you afford a home here? Check with your income", "Your income and savings – free, no sign-up", f"./?county={k}", "mortgage_county_calc"),
+                (f"Renting in {k.title()} while you save?", "Check your rent increase is legal", f"../rent/rent-increase-{k}.html", "mortgage_to_rent")]
+    m = re.match(r"borrow-(\d+)\.html", fn)
+    if m:
+        a = int(m.group(1))
+        return [(f"Your take-home pay on {_eur(a)}", "After tax, USC and PRSI", f"../salary/{a}-after-tax.html", "mortgage_to_salary"),
+                ("House prices by county", "Where can you afford to buy?", "counties.html", "mortgage_counties")]
+    out = [("How much can you borrow?", "Your income and savings – free calculator", "./", "mortgage_calc"),
+           ("House prices by county", "What homes sell for and the salary you need", "counties.html", "mortgage_counties"),
+           ("Salary needed to buy a house", "Every county ranked", "salary-needed-to-buy-a-house.html", "mortgage_salary_needed")]
+    return [o for o in out if o[2] != fn][:2]
+CHECKS = {f"mortgage-{k}.html": quick_check("mortgage_ftb", "Are you a first-time buyer?", [
+    ("Yes", "You can borrow up to <strong>4 times</strong> your gross income with a <strong>10% deposit</strong>, and you may get up to €35,000 from Help to Buy on a new home. <a href='schemes.html'>Help to Buy and First Home Scheme →</a>"),
+    ("No – I'm moving", "Second and later buyers can borrow up to <strong>3.5 times</strong> income with a <strong>10% deposit</strong> for a home they'll live in. Your current home's equity usually funds the deposit. <a href='moving-home.html'>Moving home →</a>")]) for k in CTY}
+
 def page(filename, title, desc, body, active=None, jsonld=(), crumbs=None, slot="content", scripts=(), share_text=None, h1=None, sources=("cbi", "stamp", "htb"), cross=True):
+    body = engage(body, filename, NEXT_STEP, CHECKS)
     url = BASE if filename == "index.html" else BASE + filename
     on = ' class="on"'
     tabs = "".join(f'<a href="{href}"{on if label == active else ""}>{label}</a>' for href, label in TABS)
@@ -412,7 +446,7 @@ def county_figures(k):
     d = CSO_A[main]; P = d["median"]
     pay, stamp = batch([{"kind": "pay", "loan": P * 0.9, "rate": R["avgRate"], "term": 30}, {"kind": "stamp", "price": P, "nb": False}])
     fees = sum(FEES.values())
-    return dict(main=main, extra=extra, d=d, P=P, pay=pay, stamp=stamp, fees=fees, ftb_inc=P * 0.9 / 4, mover_inc=P * 0.8 / 3.5,
+    return dict(main=main, extra=extra, d=d, P=P, pay=pay, stamp=stamp, fees=fees, ftb_inc=P * 0.9 / 4, mover_inc=P * 0.9 / 3.5,
                 cash=P * 0.1 + stamp + fees, chg=(P / d["median_prev_year"] - 1) * 100 if d["median_prev_year"] else 0)
 
 def build_counties():
@@ -444,7 +478,7 @@ def build_counties():
         for mult, lab in ((0.8, "20% below median"), (1, "Median"), (1.2, "20% above median")):
             pp = round(P * mult / 5000) * 5000
             pm = batch([{"kind": "pay", "loan": pp * 0.9, "rate": R["avgRate"], "term": 30}])[0]
-            inc_rows.append([f"{lab}: {eur(pp)}", eur(pp * 0.1), eur(pp * 0.9 / 4), eur(pp * 0.8 / 3.5), eur(pm)])
+            inc_rows.append([f"{lab}: {eur(pp)}", eur(pp * 0.1), eur(pp * 0.9 / 4), eur(pp * 0.9 / 3.5), eur(pm)])
         htb_new = d["new"] <= 500000
         neigh = [x for x in sorted(NAMES, key=lambda x: abs(F[x]["P"] - P)) if x != k][:5]
         body = f"""<p class="lead">How much does a house cost in {n}, and what salary do you need to buy one? Real sale prices from the CSO, with the deposit, stamp duty, mortgage repayments and how it compares with renting.</p>
@@ -455,7 +489,7 @@ def build_counties():
 {table(["", where], rows)}
 {areas_tab}
 <h2>Salary needed to buy in {n}</h2>
-{table(["Price", "10% deposit", "Income – first-time buyer (4×)", "Income – mover (3.5×, 20% deposit)", "Monthly repayment"], inc_rows)}
+{table(["Price", "10% deposit", "Income – first-time buyer (4×)", "Income – mover (3.5×)", "Monthly repayment"], inc_rows)}
 <p class="muted small">Income is gross, single or combined. Repayments over 30 years at {R['avgRate']}% (Central Bank average new mortgage rate, {R['rateMonth']}) on a 90% mortgage.</p>
 <div class="ad" data-slot="content"></div>
 <h2>Cash you need to buy at the median</h2>
@@ -499,7 +533,7 @@ First Home Scheme ceiling: {eur(house)} for houses{'' if apt == house else ', ' 
     # salary needed ranking
     rows = [[f'<a href="mortgage-{k}.html">{NAMES[k]}</a>', eur(F[k]["P"]), eur(F[k]["ftb_inc"]), eur(F[k]["ftb_inc"] / 2), eur(F[k]["cash"])] for k in order]
     sal_faq = [("What salary do you need to buy a house in Ireland?", f"About {eur(nat['median'] * 0.9 / 4)} gross for a first-time buyer at the national median price of {eur(nat['median'])}, with a 10% deposit. It ranges from {eur(F[bot]['ftb_inc'])} in {NAMES[bot]} to {eur(F[top]['ftb_inc'])} in {NAMES[top]}."),
-               ("How is the salary needed worked out?", "First-time buyers can borrow up to 4 times their gross income and need a 10% deposit, so the income needed is 90% of the price divided by 4. Second and later buyers can borrow 3.5 times income with a 20% deposit.")]
+               ("How is the salary needed worked out?", "First-time buyers can borrow up to 4 times their gross income and need a 10% deposit, so the income needed is 90% of the price divided by 4. Second and later buyers can borrow 3.5 times income, also with a 10% deposit (often funded by equity in their current home).")]
     body = f"""<p class="lead">What income do you need to buy an average home in each county? Ranked from the most affordable to the least.</p>
 <p class="updated">CSO {CSO_PERIOD} · Central Bank rules · Checked {CHECKED}</p>
 {key_facts([f"Nationally you need about <strong>{eur(nat['median'] * 0.9 / 4)}</strong> to buy at the median of {eur(nat['median'])} as a first-time buyer – {eur(nat['median'] * 0.9 / 8)} each for a couple.",

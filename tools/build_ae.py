@@ -247,6 +247,24 @@ def build_guides():
              f'<p class="lead">Common questions about auto-enrolment.</p><p class="updated">Checked {CHECKED}</p>' + faq_html(FAQ),
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Auto-enrolment", "./"), ("FAQ", None)], h1="Auto-enrolment FAQ", sources=("ci", "mff_faq", "mff_guide"), cross=CROSS)
 
+import re
+# ---------------------------------------------------------------- engagement
+from sitekit import quick_check
+def _ae_next(fn):
+    if fn == "index.html": return None
+    m = re.match(r"salary-(\d+)\.html", fn)
+    if m:
+        s = int(m.group(1))
+        return [(f"Your take-home pay on {eur(s)}", "After tax, USC, PRSI and auto-enrolment", f"../salary/{s}-after-tax.html" if s <= 100000 and s % 1000 == 0 else f"../salary/?gross={s}", "ae_to_salary"),
+                ("Your State Pension at 66", "MyFutureFund is paid on top", "../welfare/state-pension-contributory.html", "ae_to_pension")]
+    return [("Work out your own contributions", "Your salary, your age – what goes in and what you'll have", "./", "ae_calc"),
+            ("Your take-home pay for 2027", "After Budget 2027 tax changes", "../salary/", "ae_to_salary")]
+app.next_for = _ae_next
+app.checks = {"am-i-enrolled.html": quick_check("ae_enrolled", "Do you pay into a pension through your payroll at work?", [
+    ("Yes", "Then you're not auto-enrolled for that job – your workplace pension takes its place."),
+    ("No", "If you're 23–60 and earn €20,000+ a year, you're auto-enrolled in MyFutureFund. <a href='./'>See what it costs you →</a>"),
+    ("Not sure", "Check your payslip for a pension deduction, or ask your payroll team. <a href='./'>Work out what auto-enrolment would cost →</a>")])}
+
 if __name__ == "__main__":
     build_index(); build_rates(); build_salary_pages(); build_age_pages(); build_guides()
     og_image(os.path.join(app.root, "og.png"), "MYFUTUREFUND", "Auto-enrolment", "pension calculator", "What you pay · what's added · your pot at 66", "Opt-out windows · rates to 2035",
