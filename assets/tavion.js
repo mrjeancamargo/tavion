@@ -133,8 +133,8 @@ window.TAVION = {
     ".tv-check{background:var(--brand-soft,#e0f2fe);border-radius:14px;padding:14px;margin:16px 0}.tv-check .q{font-weight:700;margin:0 0 10px;font-size:17px}" +
     ".tv-check .opts{display:flex;flex-wrap:wrap;gap:8px}.tv-check button{font:inherit;font-size:15px;font-weight:600;border:1px solid var(--line,#dde3ea);background:var(--card,#fff);color:var(--text,#15202b);border-radius:99px;padding:8px 14px;cursor:pointer;min-height:40px}" +
     ".tv-check button.on{background:var(--brand,#0369a1);border-color:var(--brand,#0369a1);color:var(--brand-ink,#fff)}.tv-check .tv-ans{margin-top:12px;background:var(--card,#fff);border-radius:10px;padding:10px 12px}.tv-check .tv-ans p{margin:0}" +
-    ".tv-recent{margin:14px 0}.tv-recent .tl{font-size:13px;font-weight:700;color:var(--muted,#5a6776);margin:0 0 6px}.tv-recent div{display:flex;gap:8px;flex-wrap:wrap}" +
-    ".tv-recent a{background:var(--card,#fff);border:1px solid var(--line,#dde3ea);border-radius:99px;padding:6px 12px;font-size:14px;text-decoration:none;color:var(--text,#15202b);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
+    ".tv-recent{margin:14px 0}.tv-recent .tl{font-size:13px;font-weight:700;opacity:.75;margin:0 0 6px}.tv-recent div{display:flex;gap:8px;flex-wrap:wrap}" +
+    ".tv-recent a{background:rgba(127,127,127,.14);border:1px solid rgba(127,127,127,.38);border-radius:99px;padding:6px 12px;font-size:14px;text-decoration:none;color:inherit;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}" +
     ".tv-copy{font:inherit;font-weight:600;cursor:pointer}";
   head.appendChild(st);
 
@@ -175,7 +175,7 @@ window.TAVION = {
 
   // Remember recently viewed pages (this browser only) and show them on the home page.
   var path = location.pathname, isHome = path === "/" || path === "/index.html";
-  var recent = []; try { recent = JSON.parse(store.get("tavion_recent") || "[]"); } catch (e) {}
+  var recent = []; try { recent = JSON.parse(store.get("tavion_recent2") || "[]"); } catch (e) {}
   document.addEventListener("DOMContentLoaded", function () {
     if (isHome) {
       var list = recent.filter(function (r) { return r.p !== path; }).slice(0, 4);
@@ -185,11 +185,12 @@ window.TAVION = {
           return '<a href="' + esc(r.p + (r.q || "")) + '" data-track="continue_click" data-label="' + esc(r.p) + '">' + esc(r.t) + '</a>';
         }).join("") + '</div></div>';
       }
-    } else if (!/404|offline/.test(path)) {
-      var t = (document.querySelector("h1") || {}).textContent || document.title.split(/ [–|-] /)[0];
+    } else if (!/404|offline|question|results|privacy/.test(path)) {
+      // The page title is fixed; some h1s change while the page is used (quiz questions, results).
+      var t = document.title.split(/ [–|-] /)[0] || (document.querySelector("h1") || {}).textContent || "";
       t = t.trim().slice(0, 60);
       recent = [{ p: path, q: location.search.length < 120 ? location.search.replace(/[?&]utm_[^&]*/g, "").replace(/^&/, "?") : "", t: t }].concat(recent.filter(function (r) { return r.p !== path; })).slice(0, 8);
-      store.set("tavion_recent", JSON.stringify(recent));
+      store.set("tavion_recent2", JSON.stringify(recent));
     }
     // "Copy link" in every share box
     document.querySelectorAll(".share").forEach(function (box) {
