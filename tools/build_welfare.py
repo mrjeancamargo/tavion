@@ -356,8 +356,8 @@ def build_dates():
 <div class="ad" data-slot="content"></div>
 <h2>Child Benefit questions</h2>{faq_html(cb_faq)}
 <p>Also for families: <a href="child-support-payment.html">Child Support Payment</a> · <a href="working-family-payment.html">Working Family Payment</a> · <a href="back-to-school-allowance.html">Back to School Allowance</a> · <a href="one-parent-family-payment.html">One-Parent Family Payment</a> · <a href="payment-dates.html">All payment dates</a></p>"""
-    app.page("child-benefit-payment-dates.html", "Child Benefit Payment Dates 2026 & 2027 Ireland – Every Date (€140, First Tuesday)",
-             f"Child Benefit payment dates 2026 and 2027: first Tuesday of every month, €140 per child. December 2026: {short(dec26)}; January 2027: {short(jan27)}. No double payment in 2026.",
+    app.page("child-benefit-payment-dates.html", f"Child Benefit Payment Dates Dec 2026 & 2027 – Next: {short(dec26)}",
+             f"When is Child Benefit paid in December 2026? Next payment {short(dec26)}, then {short(jan27)}. See every 2027 date, how bank holidays move it and whether there's a Christmas double payment.",
              body, active="Payment dates", jsonld=[faq_ld(cb_faq)],
              crumbs=[("Welfare", "./"), ("Payment dates", "payment-dates.html"), ("Child Benefit dates", None)], h1="Child Benefit payment dates 2026 and 2027",
              sources=("ci_child-benefit", "dsp27"), cross=["salary", "mortgage", "rent"], priority="0.9")
