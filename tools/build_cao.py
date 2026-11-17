@@ -418,7 +418,7 @@ def build_course_pages():
             app.SRC["off_" + c["code"]] = (f"{col[0]} – official {c['title']} course page", c["url"]); srcs.append("off_" + c["code"])
         app.page(c["slug"], title, desc, body, active=None, jsonld=[course_ld, faq_ld(faqs)],
                  crumbs=[("CAO points", "./"), (col[0], f"college-{col[1]}.html"), (c["code"], None)], h1=f"{c['code']} {c['title']} – CAO points",
-                 sources=srcs, cross=CROSS, priority="0.6", noindex=not hist,
+                 sources=srcs, cross=CROSS, priority="0.6", noindex=not hist and c["slug"] not in EARNING,
                  share_text=f"{c['code']} {c['title']} ({col[0]}) needed {show(p26.get('r1'))} CAO points in 2026 – check your points here:")
 
 def strip_html(s): return re.sub(r"<[^>]+>", "", s).replace("&amp;", "&")
@@ -715,6 +715,10 @@ def _cao_next(fn):
     return [("Work out your CAO points", "Enter your grades – see the courses they get you", "./", "cao_calc"),
             ("Learning to drive? Free theory test practice", "Real-style questions and road signs", "../driving/", "cao_to_driving")]
 app.next_for = _cao_next
+
+# Course pages with no points history are noindex (thin), except ones Google already
+# sends visitors to (from Search Console). Add a slug here when one starts earning clicks.
+EARNING = {"mh102-arts-with-education-studies-maynooth-university.html"}
 
 if __name__ == "__main__":
     write_json()
