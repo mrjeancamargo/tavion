@@ -281,3 +281,9 @@ ul.todo li::before { content: "☐"; position: absolute; left: 4px; top: 5px; co
 .meter { height: 12px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 8px 0 4px; }
 .meter span { display: block; height: 100%; background: var(--ok); }
 .meter.warn span { background: var(--warn); } .meter.bad span { background: var(--bad); }
+/* entitlement checker */
+.ent-form{display:grid;gap:10px;margin:16px 0}
+.ent-q{border:1px solid var(--line,#dde3ea);border-radius:12px;padding:10px 14px;margin:0}
+.ent-q legend{font-weight:600;padding:0 4px}
+.ent-q label{display:inline-flex;align-items:center;gap:6px;margin-right:18px;min-height:36px;cursor:pointer}
+.ent-form .btn{justify-self:start}

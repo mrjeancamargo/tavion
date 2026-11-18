@@ -8724,8 +8724,8 @@
 "h": "8d70b5898a391cc37fb3562047b2b0c2e4e3e6d2"
 },
 "https://tavion.ie/tax-refund/can-i-claim-dental-cleaning.html": {
-"d": "2026-11-15",
-"h": "8b857f849917e1541e0e9f469230928c916703f9"
+"d": "2026-11-18",
+"h": "db2ed77c1830bd0a428aa440c10b36af27b8e1cd"
 },
 "https://tavion.ie/tax-refund/can-i-claim-dental-implants.html": {
 "d": "2026-11-15",
@@ -8744,16 +8744,16 @@
 "h": "6e84f589a06fa16d5c966fa7717a6d6f782a1ac1"
 },
 "https://tavion.ie/tax-refund/can-i-claim-eye-test.html": {
-"d": "2026-11-15",
-"h": "c73cb43dfc0e3430ba97ab0e34a0ebb5396a2654"
+"d": "2026-11-18",
+"h": "e15fe9471c02646c157a58c2d6d043c379925e14"
 },
 "https://tavion.ie/tax-refund/can-i-claim-fillings.html": {
 "d": "2026-11-15",
 "h": "5b4e13db50abf7028de60a888183458b815df69b"
 },
 "https://tavion.ie/tax-refund/can-i-claim-glasses.html": {
-"d": "2026-11-15",
-"h": "3ec0a3ec482427a62e7ec882bf2c46aee8cbbbae"
+"d": "2026-11-18",
+"h": "ea906fce5e4761811ea5503e10fb6dfc114ae0b7"
 },
 "https://tavion.ie/tax-refund/can-i-claim-gluten-free-food.html": {
 "d": "2026-11-15",
@@ -8772,8 +8772,8 @@
 "h": "0293683c55e4448a522b68bfd2c4535e030919ff"
 },
 "https://tavion.ie/tax-refund/can-i-claim-hearing-aids.html": {
-"d": "2026-11-15",
-"h": "d563a41b16a3b48bfa20af4e1d4f6da7a9afb347"
+"d": "2026-11-18",
+"h": "c52164ba20d89dc91165204c0eb1f8acffdd83e3"
 },
 "https://tavion.ie/tax-refund/can-i-claim-ivf.html": {
 "d": "2026-11-15",
@@ -9340,16 +9340,20 @@
 "h": "96be27e5dec241a957de06002b2eac1cd8501c49"
 },
 "https://tavion.ie/welfare/": {
-"d": "2026-11-15",
-"h": "459ff5a258c36167e19f89175b3fbfa41610aa05"
+"d": "2026-11-18",
+"h": "dbfb3bc2f51dca15a2a47d662b1442b39bfc5a34"
+},
+"https://tavion.ie/welfare/additional-needs-payment.html": {
+"d": "2026-11-18",
+"h": "e4ca9cd99e5f505f4d837168e4ee806e2c78a404"
 },
 "https://tavion.ie/welfare/adoptive-benefit.html": {
 "d": "2026-11-15",
 "h": "808efb1bd2d67f7dbe048e9ce30300ada9c3405a"
 },
 "https://tavion.ie/welfare/all-payments.html": {
-"d": "2026-11-15",
-"h": "8367e53842d45b5962b32d455763cf51c8c2bc33"
+"d": "2026-11-18",
+"h": "968bca46a6fbec387503c2168b355d5fd567cb53"
 },
 "https://tavion.ie/welfare/back-to-school-allowance.html": {
 "d": "2026-11-15",
@@ -9396,8 +9400,8 @@
 "h": "572aa28905b0f66c6bec9527492961e2167faafe"
 },
 "https://tavion.ie/welfare/christmas-payment-dates.html": {
-"d": "2026-11-15",
-"h": "7befa4a2e2ab65855efe9bab399467b6004c2224"
+"d": "2026-11-18",
+"h": "64f6c69d68cb5c65624e6cce220fb224b85f5961"
 },
 "https://tavion.ie/welfare/cost-of-disability-payment.html": {
 "d": "2026-11-15",
@@ -9423,6 +9427,14 @@
 "d": "2026-11-15",
 "h": "f3f4aad8508f4988fda0493a594bddd47581ddbb"
 },
+"https://tavion.ie/welfare/free-dental-check.html": {
+"d": "2026-11-18",
+"h": "5e34240f47bb92e8ba5fe765e5b5c8d74d510768"
+},
+"https://tavion.ie/welfare/free-eye-test.html": {
+"d": "2026-11-18",
+"h": "e1d84e90881097cd42d42d0c8438d283c92a3e30"
+},
 "https://tavion.ie/welfare/fuel-allowance-payment-dates.html": {
 "d": "2026-11-15",
 "h": "4efeb5e2772d578d9a16bd30a68757c5cf589125"
@@ -9434,6 +9446,10 @@
 "https://tavion.ie/welfare/guardians-payment.html": {
 "d": "2026-11-15",
 "h": "ab8613dd0b9d8ee0506c3497ce127ab291d5a4a6"
+},
+"https://tavion.ie/welfare/hearing-aid-grant.html": {
+"d": "2026-11-18",
+"h": "e356b644c53947fa2fbc0e5b6dd1cc4890a744a0"
 },
 "https://tavion.ie/welfare/household-benefits-package.html": {
 "d": "2026-11-15",
@@ -9510,6 +9526,22 @@
 "https://tavion.ie/welfare/supplementary-welfare-allowance.html": {
 "d": "2026-11-15",
 "h": "df4860b923a2289134312e1abdcca9adcbc84563"
+},
+"https://tavion.ie/welfare/telephone-support-allowance.html": {
+"d": "2026-11-18",
+"h": "e7df7969a410df36782cf636f5bb65c47ed7ba97"
+},
+"https://tavion.ie/welfare/treatment-benefit.html": {
+"d": "2026-11-18",
+"h": "c90196f4f0e9a561fd76603b56a5784056fd897d"
+},
+"https://tavion.ie/welfare/what-am-i-entitled-to.html": {
+"d": "2026-11-18",
+"h": "e88e5ac69051badfe1ea130c5ef315b893ff42d4"
+},
+"https://tavion.ie/welfare/what-does-prsi-cover.html": {
+"d": "2026-11-18",
+"h": "a257ecda934670162e6cea946d901ad42a72cab0"
 },
 "https://tavion.ie/welfare/working-family-payment.html": {
 "d": "2026-11-15",

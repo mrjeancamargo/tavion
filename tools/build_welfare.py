@@ -238,7 +238,8 @@ def build_index():
 <div class="ad" data-slot="result"></div>
 <h2>Popular payments</h2>
 <div class="stamp-grid">{"".join(f'<a class="stamp-card" href="{k}.html"><strong>{P[k]["name"]}</strong><p>{rate_txt(P[k], 2027)} in 2027</p></a>' for k in ("state-pension-contributory", "jobseekers-allowance", "carers-allowance", "disability-allowance", "one-parent-family-payment", "child-benefit", "illness-benefit", "fuel-allowance"))}</div>
-<div class="cta"><h2>🎄 Christmas Bonus 2026</h2><p>A double payment in the week starting 7 December. See if you qualify and how much you'll get.</p><a class="btn" href="christmas-bonus.html">Check my Christmas Bonus</a></div>"""
+<div class="cta"><h2>🎄 Christmas Bonus 2026</h2><p>A double payment in the week starting 7 December. See if you qualify and how much you'll get.</p><a class="btn" href="christmas-bonus.html">Check my Christmas Bonus</a></div>
+<div class="cta"><h2>🔍 What else am I entitled to?</h2><p>Free eye test, dental check-up, hearing aid grant, tax credits – see what you might be missing in 1 minute.</p><a class="btn" href="what-am-i-entitled-to.html" data-track="cross_app" data-label="welfare_index_checker">Check what I could get</a></div>"""
     ld = {"@context": "https://schema.org", "@type": "WebApplication", "name": "Irish Social Welfare Rates Calculator", "url": app.BASE, "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "Any", "isAccessibleForFree": True, "inLanguage": "en-IE", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
           "description": "Weekly social welfare rates for 2026 and 2027 (Budget 2027) with qualified adult, children, Living Alone Increase, Fuel Allowance and Christmas Bonus."}
@@ -257,7 +258,8 @@ def build_hubs():
     body = '<p class="lead">Every Irish social welfare payment with its 2027 rate. Tap one for who qualifies, family rates and the Christmas Bonus.</p>'
     for c in order:
         body += f"<h2>{c}</h2><div class='stamp-grid'>" + "".join(f'<a class="stamp-card" href="{k}.html"><strong>{P[k]["name"]}</strong><p>{rate_txt(P[k], 2027)}</p></a>' for k in cats.get(c, [])) + "</div>"
-    body += "<h2>Other supports</h2><div class='stamp-grid'><a class='stamp-card' href='back-to-school-allowance.html'><strong>Back to School Clothing and Footwear Allowance</strong><p>€160 / €285 per child</p></a><a class='stamp-card' href='household-benefits-package.html'><strong>Household Benefits Package &amp; Free Travel</strong><p>For pensioners and people with disabilities</p></a><a class='stamp-card' href='christmas-bonus.html'><strong>Christmas Bonus</strong><p>100% double week, December 2026</p></a></div>"
+    body += "<h2>Other supports</h2><div class='stamp-grid'><a class='stamp-card' href='back-to-school-allowance.html'><strong>Back to School Clothing and Footwear Allowance</strong><p>€160 / €285 per child</p></a><a class='stamp-card' href='household-benefits-package.html'><strong>Household Benefits Package &amp; Free Travel</strong><p>For pensioners and people with disabilities</p></a><a class='stamp-card' href='christmas-bonus.html'><strong>Christmas Bonus</strong><p>100% double week, December 2026</p></a><a class='stamp-card' href='additional-needs-payment.html'><strong>Additional Needs Payment</strong><p>Help with essential once-off costs</p></a><a class='stamp-card' href='telephone-support-allowance.html'><strong>Telephone Support Allowance</strong><p>€2.50 a week if you live alone</p></a></div>"
+    body += "<h2>PRSI benefits most people miss</h2><div class='stamp-grid'><a class='stamp-card' href='what-am-i-entitled-to.html'><strong>What am I entitled to?</strong><p>Free checker – 1 minute</p></a><a class='stamp-card' href='treatment-benefit.html'><strong>Treatment Benefit</strong><p>Free eye test, dental &amp; hearing aids</p></a><a class='stamp-card' href='free-eye-test.html'><strong>Free eye test &amp; glasses</strong><p>Every 2 years with PRSI</p></a><a class='stamp-card' href='free-dental-check.html'><strong>Free dental check-up</strong><p>Every year with PRSI</p></a><a class='stamp-card' href='hearing-aid-grant.html'><strong>Hearing aid grant</strong><p>€500 per aid</p></a><a class='stamp-card' href='what-does-prsi-cover.html'><strong>What PRSI pays for</strong><p>Class A and Class S</p></a></div>"
     app.page("all-payments.html", "All Social Welfare Payments Ireland 2027 – Rates for Every Payment",
              "A list of every Irish social welfare payment with Budget 2027 rates: pensions, jobseeker's, illness and disability, carer's, family payments, Fuel Allowance and more.",
              body, active="All payments", crumbs=[("Welfare", "./"), ("All payments", None)], h1="All social welfare payments", sources=("dsp27", "ci_rates27"), cross=["salary", "pension", "mortgage"], priority="0.8")
@@ -446,7 +448,7 @@ def build_xmas_dates():
          ("Are social welfare payments paid early at Christmas?", "Usually, yes. In recent years payments due over Christmas and New Year were paid in advance, so many people got two weeks' payment together before Christmas and nothing in the first week of January. The Department confirms the 2026 schedule in December."),
          ("Will I get paid in the first week of January 2027?", "If your New Year payment is paid early in December (as in previous years), you may get nothing that week – plan your money for the gap. Your first payment at the new Budget 2027 rate (+€10) comes in January."),
          ("When is Child Benefit paid in December 2026?", "On Tuesday 1 December 2026, then Tuesday 5 January 2027. Child Benefit doesn't get a Christmas double payment."),
-         ("What if I need help with Christmas costs?", "If you're on a low income and not getting the Christmas Bonus, ask your Community Welfare Officer (through your Intreo office) about an Exceptional Needs Payment.")]
+         ("What if I need help with Christmas costs?", "If you're on a low income and not getting the Christmas Bonus, apply for an Additional Needs Payment (it replaced the Exceptional Needs Payment) on MyWelfare.ie or through your Intreo office.")]
     body = f"""<p class="lead">How will social welfare be paid over Christmas and New Year 2026? The Christmas Bonus, payments paid early, the January gap and the first payments at the new 2027 rates.</p>
 <p class="updated">Checked {CHECKED} · We'll update this page when the Department confirms the 2026 Christmas schedule</p>
 {key_facts(["<strong>Week starting 7 December 2026:</strong> normal payment <strong>plus the 100% Christmas Bonus</strong> (a double payment) for long-term payments. <a href='christmas-bonus.html'>Do I qualify?</a>",
@@ -522,6 +524,208 @@ def build_faq():
              f'<p class="lead">Common questions about social welfare payments in Ireland.</p><p class="updated">Checked {CHECKED}</p>' + faq_html(FAQ),
              active="FAQ", jsonld=[faq_ld(FAQ)], crumbs=[("Welfare", "./"), ("FAQ", None)], h1="Social welfare FAQ", sources=("dsp27", "ci_rates27", "ci_xmas"), cross=["salary", "pension", "mortgage"])
 
+# ---------------------------------------------------------------- PRSI extras: Treatment Benefit, PRSI, other supports, entitlement checker
+GOV = "https://www.gov.ie/en/department-of-social-protection"
+SRC.update({
+    "gov_tb": ("gov.ie – Treatment Benefit Scheme (updated 13 October 2026)", GOV + "/services/treatment-benefit-scheme/"),
+    "gov_prsi_classes": ("gov.ie – The different classes of PRSI", GOV + "/publications/the-different-classes-of-pay-related-social-insurance-prsi/"),
+    "gov_prsi_family": ("gov.ie – PRSI and family employment (benefits covered by each class)", GOV + "/publications/prsi-and-family-employment/"),
+    "gov_tsa": ("gov.ie – Telephone Support Allowance", GOV + "/services/telephone-support-allowance/"),
+    "gov_anp": ("gov.ie – Additional Needs Payment (updated 7 October 2026)", GOV + "/services/additional-needs-payment/"),
+})
+TB_WHO = ["You need <strong>PRSI class A, E, P, H or S</strong> contributions – most employees (class A) and the self-employed (class S).",
+          "<strong>Under 21:</strong> at least 39 paid contributions at any time.",
+          "<strong>Aged 21–28:</strong> 39 paid contributions, plus 39 paid or credited in the <em>governing year</em> (2025 for claims in 2027; 2024 for claims in 2026) – or 26 paid in each of the second and third last years.",
+          "<strong>Aged 29–65:</strong> at least <strong>260 paid contributions</strong> (about 5 years' work), plus the same governing-year test.",
+          "<strong>66 and over:</strong> 260 paid contributions and enough in the years before you turned 66. Qualify at 60–65 and you <strong>keep it for life</strong>.",
+          "Out of work or sick? Credited contributions from Jobseeker's Benefit or Illness Benefit can keep you covered."]
+TB_SPOUSE = ("A <strong>spouse, civil partner or cohabitant</strong> who earns <strong>€100 a week or less</strong> and doesn't get a social welfare payment "
+             "(Child Benefit, Carer's Benefit and a few others are fine) can claim on your PRSI as a dependant. You both fill in a dependant spouse form, which goes to the Treatment Benefit Section.")
+TB_HOW = ["Book with an optician, dentist or hearing aid supplier that's <strong>on the Department's panel</strong> – ask when you book.",
+          "Give them your <strong>PPS number and date of birth</strong>. They check online that you qualify <strong>before</strong> treatment.",
+          "Sign the consent form. They claim the money from the Department – you only pay any balance.",
+          "No application form, no MyWelfare – the provider does it."]
+TB_CONTACT = "Treatment Benefit Section, Department of Social Protection, Letterkenny · 0818 300 600 · treatmentenquiries@welfare.ie"
+MORE = '<p><a href="free-eye-test.html">Free eye test →</a> · <a href="free-dental-check.html">Free dental check-up →</a> · <a href="hearing-aid-grant.html">Hearing aid grant →</a> · <a href="what-am-i-entitled-to.html">What else am I entitled to? →</a></p>'
+
+def build_prsi_extras():
+    cr = [("Welfare", "./"), ("All payments", "all-payments.html")]
+    # 1. Treatment Benefit hub
+    q = [("What is Treatment Benefit?", "A PRSI benefit that pays for a free eye test, glasses or contact lenses, a free dental check-up, money towards a scale and polish, and up to €500 per hearing aid. Most people who work and pay PRSI qualify."),
+         ("How do I know if I qualify for Treatment Benefit?", "Ask your optician, dentist or hearing aid supplier – they check online with your PPS number and date of birth before you're treated. From age 29 you need 260 paid PRSI contributions plus enough in the governing year."),
+         ("Is the eye test free with PRSI?", "Yes. You get a free eye test once every second calendar year, and money towards glasses or contact lenses. Basic frames are free."),
+         ("Is the dental check-up free with PRSI?", "Yes. One free oral examination every calendar year. The Department pays €50 towards a scale and polish, and the dentist can charge you no more than €15 on top."),
+         ("How much is the hearing aid grant?", "Up to €500 per hearing aid (€1,000 for a pair) once every four calendar years, plus up to €100 towards one repair per aid."),
+         ("Can my wife or husband use my PRSI?", "Yes, if they're your dependant – earning €100 a week or less and not getting most social welfare payments. You both complete a dependant spouse form."),
+         ("Do I need a medical card for this?", "No. Treatment Benefit is based on PRSI, not on income. The medical card is a separate HSE scheme.")]
+    rows = [['<a href="free-eye-test.html">Eye test</a>', "Free", "Every 2nd calendar year"],
+            ['<a href="free-eye-test.html">Glasses or contact lenses</a>', "Basic frames free, or €42 towards dearer frames", "Every 2nd calendar year"],
+            ['<a href="free-dental-check.html">Dental check-up</a>', "Free", "Every calendar year"],
+            ['<a href="free-dental-check.html">Scale and polish</a>', "€50 paid – you pay at most €15 more", "Every calendar year"],
+            ['<a href="hearing-aid-grant.html">Hearing aids</a>', "Up to €500 each (€1,000 a pair)", "Every 4 calendar years"],
+            ['<a href="hearing-aid-grant.html">Hearing aid repair</a>', "Up to €100 per aid", "Once in 4 years"],
+            ["Medical contact lenses", "Up to €500 per lens (ophthalmologist's recommendation)", "Every 2nd calendar year"],
+            ["Hair replacement (cancer or alopecia)", "Up to €500", "Every calendar year"]]
+    body = f"""<p class="lead">If you work and pay PRSI, you've already paid for a free eye test, a free dental check-up and up to €1,000 towards hearing aids. Most people never use them.</p>
+<p class="updated">gov.ie · Checked {CHECKED}</p>
+{table(["What you get", "How much", "How often"], rows)}
+<h2>Who qualifies</h2>{lis(TB_WHO)}
+<div class="ad" data-slot="content"></div>
+<h2>Your spouse or partner</h2><p>{TB_SPOUSE}</p>
+<h2>How to claim</h2>{lis(TB_HOW)}
+<p class="muted">{TB_CONTACT}</p>
+<div class="cta"><h2>What else are you entitled to?</h2><p>Answer a few questions – see the benefits, payments and tax credits you might be missing.</p><a class="btn" href="what-am-i-entitled-to.html" data-track="cross_app" data-label="tb_to_checker">Check in 1 minute</a></div>
+<h2>Questions</h2>{faq_html(q)}"""
+    app.page("treatment-benefit.html", "Treatment Benefit 2026 – Free Eye Test, Dental Check & €1,000 Hearing Aids with PRSI",
+             "Treatment Benefit in Ireland: a free eye test every 2 years, free dental check-up every year, €50 towards a scale and polish and up to €500 per hearing aid. Who qualifies on PRSI and how to claim.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("Treatment Benefit", None)], h1="Treatment Benefit: free eye test, dental and hearing aids",
+             sources=("gov_tb",), cross=["taxrefund", "salary"], priority="0.8",
+             share_text="If you pay PRSI you can get a free eye test, free dental check-up and up to €1,000 for hearing aids – most people never claim:")
+
+    # 2. Eye test
+    q = [("How often can I get a free eye test with PRSI?", "Once every second calendar year – for example once in 2026 and again in 2028."),
+         ("Are glasses free with PRSI?", "Basic frames and lenses are free. If you choose more expensive frames, the Department pays €42 towards them and you pay the rest."),
+         ("Can I get contact lenses instead of glasses?", "Yes – one pair of glasses or contact lenses (including disposables) every second calendar year, for sight only, not cosmetic lenses."),
+         ("Is a driving licence eye test covered?", "No. Sight tests for driving licences or for computer screen (VDU) work aren't covered."),
+         ("Can I claim tax relief on glasses?", "Routine eye tests and glasses don't get health expenses tax relief. Use Treatment Benefit instead.")]
+    body = f"""<p class="lead">Your PRSI pays for a free eye test every two years and towards glasses or contact lenses. You just need an optician on the Department's panel.</p>
+<p class="updated">gov.ie · Checked {CHECKED}</p>
+{key_facts(["<strong>Free eye test</strong> once every second calendar year.", "<strong>Glasses</strong>: one pair (reading, distance, bifocal or varifocal) every second calendar year. <strong>Basic frames are free</strong>; €42 towards dearer frames.",
+            "Or <strong>contact lenses</strong>, including disposables – for sight, not cosmetic reasons.",
+            "<strong>Not covered:</strong> driving licence and computer-screen (VDU) eye tests.", "Medical contact lenses: up to €500 per lens with an ophthalmologist's recommendation."])}
+<h2>Do you qualify?</h2>{lis(TB_WHO[:4])}<p><a href="treatment-benefit.html">Full rules, including over-66s and spouses →</a></p>
+<div class="ad" data-slot="content"></div>
+<h2>How to claim</h2>{lis(TB_HOW)}
+<h2>Questions</h2>{faq_html(q)}
+{MORE}"""
+    app.page("free-eye-test.html", "Free Eye Test with PRSI Ireland 2026 – Free Glasses & Contact Lenses (Treatment Benefit)",
+             "Get a free eye test every 2 years with PRSI in Ireland, plus free basic glasses or contact lenses. Who qualifies for Optical Benefit and how to claim at your optician.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("Treatment Benefit", "treatment-benefit.html"), ("Free eye test", None)], h1="Free eye test and glasses with PRSI",
+             sources=("gov_tb",), cross=["taxrefund", "salary"], priority="0.7")
+
+    # 3. Dental
+    q = [("Is the dental check-up free with PRSI?", "Yes – one oral examination every calendar year, paid in full by the Department."),
+         ("How much is a scale and polish with PRSI?", "The Department pays €50 and your dentist can charge you at most €15 on top."),
+         ("What about gum treatment?", "If clinically necessary, the Department pays €42 towards periodontal treatment instead of a scale and polish. There's no cap on the balance the dentist charges."),
+         ("Are fillings covered by PRSI?", "No. Fillings and other treatment aren't covered by Treatment Benefit, but non-routine dental work such as crowns can get 20% tax relief."),
+         ("Do all dentists do PRSI check-ups?", "No – only private dentists on the Department's panel. Ask when you book.")]
+    body = f"""<p class="lead">Your PRSI pays for a free dental check-up every year and most of a scale and polish.</p>
+<p class="updated">gov.ie · Checked {CHECKED}</p>
+{key_facts(["<strong>Free oral examination</strong> once every calendar year.", "<strong>Scale and polish:</strong> the Department pays €50 – your dentist can charge you <strong>at most €15</strong> more.",
+            "Or <strong>€42</strong> towards periodontal (gum) treatment if clinically necessary.", "Fillings, extractions and other work aren't covered – but <a href='../tax-refund/medical-expenses.html'>non-routine dental work gets 20% tax relief</a>.",
+            "Only dentists on the Department's panel – ask when you book."])}
+<h2>Do you qualify?</h2>{lis(TB_WHO[:4])}<p><a href="treatment-benefit.html">Full rules, including over-66s and spouses →</a></p>
+<div class="ad" data-slot="content"></div>
+<h2>How to claim</h2>{lis(TB_HOW)}
+<h2>Questions</h2>{faq_html(q)}
+{MORE}"""
+    app.page("free-dental-check.html", "Free Dental Check-Up with PRSI Ireland 2026 – Scale & Polish for €15 (Treatment Benefit)",
+             "Free dental check-up every year with PRSI in Ireland, and a scale and polish for at most €15. Who qualifies for Dental Benefit and how to claim.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("Treatment Benefit", "treatment-benefit.html"), ("Free dental check-up", None)], h1="Free dental check-up with PRSI",
+             sources=("gov_tb",), cross=["taxrefund", "salary"], priority="0.7")
+
+    # 4. Hearing aids
+    q = [("How much is the hearing aid grant in Ireland?", "Up to €500 per hearing aid – €1,000 for a pair – once every four calendar years, through Treatment Benefit."),
+         ("Can I get hearing aid repairs paid for?", "Yes – one repair per aid in a four-year period, up to €100 per aid."),
+         ("Do I need a medical card for a hearing aid grant?", "No. Treatment Benefit is based on your PRSI. Medical card holders can get hearing aids through the HSE instead."),
+         ("Can I claim tax relief on the rest?", "Yes. Hearing aids qualify for 20% health expenses tax relief on the amount you pay yourself after the grant."),
+         ("Where do I get the grant?", "From a hearing aid supplier with a contract with the Department. They check you qualify and claim the €500 for you.")]
+    body = f"""<p class="lead">If you've paid PRSI, the Department pays up to €500 per hearing aid – €1,000 for a pair – every four years.</p>
+<p class="updated">gov.ie · Checked {CHECKED}</p>
+<div class="hero-num"><div><span class="tl">Per hearing aid</span><strong>€500</strong><span class="muted">every 4 years</span></div><div><span class="tl">For a pair</span><strong>€1,000</strong><span class="muted">every 4 years</span></div></div>
+{key_facts(["Up to <strong>€500 towards each hearing aid</strong>, once every four calendar years.", "Plus <strong>one repair per aid</strong> in four years, up to <strong>€100</strong> per aid.",
+            "Only from suppliers with a contract with the Department – they check and claim for you.", "Pay more than €500? Claim <a href='../tax-refund/can-i-claim-hearing-aids.html'>20% tax relief</a> on what you paid yourself."])}
+<h2>Do you qualify?</h2>{lis(TB_WHO)}
+<div class="ad" data-slot="content"></div>
+<h2>How to claim</h2>{lis(TB_HOW)}
+<h2>Questions</h2>{faq_html(q)}
+{MORE}"""
+    app.page("hearing-aid-grant.html", "Hearing Aid Grant Ireland 2026 – €500 per Aid (€1,000 a Pair) with PRSI",
+             "Hearing aid grant in Ireland: up to €500 per hearing aid (€1,000 a pair) every 4 years and €100 towards repairs through Treatment Benefit. Who qualifies and how to claim.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("Treatment Benefit", "treatment-benefit.html"), ("Hearing aid grant", None)], h1="Hearing aid grant: €500 per aid",
+             sources=("gov_tb",), cross=["taxrefund", "pension"], priority="0.7")
+
+    # 5. What does PRSI pay for
+    rows = [["State Pension (Contributory)", "✅", "✅"], ["Maternity, Paternity, Parent's and Adoptive Benefit", "✅", "✅"], ["Treatment Benefit (eye, dental, hearing)", "✅", "✅"],
+            ["Invalidity Pension", "✅", "✅"], ["Partial Capacity Benefit", "✅", "✅"], ["Carer's Benefit", "✅", "✅ (from 2025)"], ["Widow's, Widower's or Surviving Civil Partner's Pension", "✅", "✅"],
+            ["Guardian's Payment (Contributory)", "✅", "✅"], ["Jobseeker's Benefit", "✅", "Jobseeker's Benefit (Self-Employed)"], ["Benefit for 65 year olds", "✅", "✅"],
+            ["Illness Benefit", "✅", "❌"], ["Occupational Injuries (accidents at work)", "✅", "❌"]]
+    q = [("What does PRSI pay for in Ireland?", "Class A PRSI (most employees) covers every social insurance benefit: State Pension (Contributory), Jobseeker's Benefit, Illness Benefit, Maternity and Paternity Benefit, Treatment Benefit and more."),
+         ("What benefits do self-employed people get from PRSI?", "Class S covers the State Pension (Contributory), Maternity, Paternity, Parent's and Adoptive Benefit, Treatment Benefit, Invalidity Pension, Partial Capacity Benefit, Carer's Benefit, Jobseeker's Benefit (Self-Employed) and others – but not Illness Benefit."),
+         ("What PRSI class am I?", "Most employees earning €38 a week or more are Class A. Self-employed people with income of €5,000 or more a year are Class S. Your class is on your payslip."),
+         ("How do I check my PRSI contributions?", "Log in to MyWelfare.ie with your MyGovID and request a statement of your social insurance record.")]
+    body = f"""<p class="lead">Every week you pay PRSI, you're paying for benefits – a pension, sick pay, parent's leave pay, a free eye test. Here's what your class gets you.</p>
+<p class="updated">gov.ie · Checked {CHECKED}</p>
+{key_facts(["<strong>Class A</strong> – most employees (pay of €38 a week or more): covers <strong>all</strong> social insurance benefits and pensions.",
+            "<strong>Class S</strong> – self-employed, farmers, some company directors (income €5,000+ a year): covers most benefits but <strong>not Illness Benefit</strong>.",
+            "Easy to miss: <strong>Treatment Benefit</strong> – a <a href='free-eye-test.html'>free eye test</a>, <a href='free-dental-check.html'>free dental check-up</a> and <a href='hearing-aid-grant.html'>up to €1,000 for hearing aids</a>.",
+            "Check your record any time on <strong>MyWelfare.ie</strong>."])}
+<h2>What Class A and Class S cover</h2>{table(["Benefit", "Class A (employees)", "Class S (self-employed)"], rows)}
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(q)}
+<div class="cta"><h2>How much PRSI do you pay?</h2><p>See your PRSI, tax and USC on any salary.</p><a class="btn" href="../salary/" data-track="cross_app" data-label="prsi_to_salary">Take-home pay calculator</a></div>"""
+    app.page("what-does-prsi-cover.html", "What Does PRSI Pay For? Benefits by PRSI Class (A and S) Ireland 2026",
+             "What your PRSI gets you in Ireland: Class A covers every benefit (pension, Illness, Jobseeker's, Maternity, Treatment Benefit); Class S self-employed cover explained.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("What PRSI pays for", None)], h1="What does PRSI pay for?",
+             sources=("gov_prsi_family", "gov_prsi_classes", "gov_tb", "mywelfare"), cross=["salary", "pension", "taxrefund"], priority="0.7")
+
+    # 6. Telephone Support Allowance
+    q = [("How much is Telephone Support Allowance?", "€2.50 a week – €130 a year – on top of your main payment, Living Alone Increase and Fuel Allowance."),
+         ("Do I need to apply for Telephone Support Allowance?", "No. It's paid automatically if you get a qualifying payment plus both the Living Alone Increase and Fuel Allowance."),
+         ("I think I qualify but don't get it – what do I do?", "Contact the office that pays your main payment: Longford (0818 927 770) for Disability Allowance, Invalidity or Blind Pension; Sligo (0818 200 400) for the State Pension.")]
+    body = f"""<p class="lead">An extra €2.50 a week for people who live alone and get Living Alone Increase and Fuel Allowance – paid automatically.</p>
+<p class="updated">gov.ie · Checked {CHECKED}</p>
+{key_facts(["<strong>€2.50 a week</strong> (€130 a year), on top of your main payment.", "You must get <strong>both</strong> the <a href='living-alone-increase.html'>Living Alone Increase</a> and <a href='fuel-allowance.html'>Fuel Allowance</a>.",
+            "Plus one of: State Pension (Contributory or Non-Contributory), Bereaved Partner's Pension, Invalidity Pension, Disability Allowance, Blind Pension, Incapacity Supplement or Deserted Wife's Benefit.",
+            "<strong>No form</strong> – it's paid automatically. Missing? Ring Longford (0818 927 770) or Sligo (0818 200 400)."])}
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(q)}
+<p><a href="household-benefits-package.html">Household Benefits Package →</a> · <a href="what-am-i-entitled-to.html">What else am I entitled to? →</a></p>"""
+    app.page("telephone-support-allowance.html", "Telephone Support Allowance Ireland – €2.50 a Week, Who Qualifies",
+             "Telephone Support Allowance: €2.50 a week (€130 a year) for people living alone who get Living Alone Increase and Fuel Allowance. Paid automatically – who qualifies.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("Telephone Support Allowance", None)], h1="Telephone Support Allowance",
+             sources=("gov_tsa",), cross=["pension", "salary"], priority="0.6")
+
+    # 7. Additional Needs Payment
+    q = [("What is the Additional Needs Payment?", "A once-off payment from the Community Welfare Service for an essential cost you can't pay from your weekly income or savings – such as a big heating bill, a rent deposit or a funeral. It used to be called the Exceptional Needs Payment."),
+         ("Can I get an Additional Needs Payment if I'm working?", "Yes. You don't need to be on social welfare – people working on a low income can qualify, however many hours they work."),
+         ("How much is the Additional Needs Payment?", "There's no set rate. A Community Welfare Officer looks at your household income, savings, expenses and the cost you need help with."),
+         ("How do I apply?", "Online at MyWelfare.ie, or with form SWA1 at any Intreo Centre or Branch Office. Phone 0818 607080 for help.")]
+    body = f"""<p class="lead">Big bill you can't cover? The Additional Needs Payment helps with essential once-off costs – and you don't have to be on social welfare.</p>
+<p class="updated">gov.ie · Checked {CHECKED}</p>
+{key_facts(["For <strong>anyone on social welfare or a low income</strong> – working people can apply too.", "<strong>No set amount</strong>: a Community Welfare Officer looks at your income, savings and the cost.",
+            "Apply on <strong>MyWelfare.ie</strong> or at an Intreo office (form SWA1). Help line: <strong>0818 607080</strong>.", "It replaced the <strong>Exceptional Needs Payment</strong>."])}
+<h2>What it can help with</h2>{lis(["Heating and electricity bills", "Essential repairs, and replacing appliances or furniture", "A <strong>deposit</strong> for private rented accommodation", "Setting up a home for the first time",
+    "Funeral costs", "Regular travel to hospital appointments or to visit relatives in hospital", "Prams, buggies, cots and child safety equipment", "Food, clothes and accommodation after an emergency such as a house fire"])}
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(q)}
+<p><a href="supplementary-welfare-allowance.html">Supplementary Welfare Allowance →</a> · <a href="what-am-i-entitled-to.html">What else am I entitled to? →</a></p>"""
+    app.page("additional-needs-payment.html", "Additional Needs Payment Ireland 2026 – Help with Bills, Deposits & Funerals (Exceptional Needs)",
+             "Additional Needs Payment (formerly Exceptional Needs Payment): once-off help with heating bills, rent deposits, funerals and essential costs – for people on welfare or a low income. How to apply.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("Additional Needs Payment", None)], h1="Additional Needs Payment",
+             sources=("gov_anp", "ci_supplementary-welfare-allowance"), cross=["rent", "salary"], priority="0.7")
+
+    # 8. Entitlement checker (logic in welfare/js/entitled.js)
+    qs = [("prsi", "Do you work and pay PRSI – or did in the last 2 years?"), ("spouse", "Does your spouse or partner pay PRSI while you earn €100 a week or less?"),
+          ("rent", "Do you rent privately (not on HAP, RAS or Rent Supplement)?"), ("medical", "Have you paid for GP visits, prescriptions, a consultant or non-routine dental work since 2022?"),
+          ("kids", "Do you have children under 18?"), ("lowpay", "Do you (or your partner) work at least 19 hours a week on a low income, with children?"),
+          ("carer", "Do you care for someone full-time?"), ("age66", "Are you 66 or over?"), ("alone", "Do you live alone and get a pension or disability payment?"),
+          ("bill", "Do you have a big essential cost you can't pay – a heating bill, deposit, funeral or appliance?")]
+    form = "".join(f'<fieldset class="ent-q"><legend>{t}</legend><label><input type="radio" name="{k}" value="y"> Yes</label> <label><input type="radio" name="{k}" value="n" checked> No</label></fieldset>' for k, t in qs)
+    q = [("What benefits am I entitled to in Ireland?", "It depends on your PRSI, family, age and income. Most workers can get a free eye test and dental check-up through Treatment Benefit; renters can claim the Rent Tax Credit; families get Child Benefit. Use the checker above to see yours."),
+         ("What benefits do workers miss most often?", "Treatment Benefit (free eye test, dental check and hearing aid grant), the Rent Tax Credit, medical expenses tax relief and Working Family Payment for low-paid parents."),
+         ("Is this checker official?", "No. It's a free, independent guide. Your entitlement depends on your full circumstances – confirm with the Department of Social Protection or Revenue.")]
+    body = f"""<p class="lead">Answer 10 quick questions and see the benefits, payments and tax credits you might be missing – free, no sign-up, nothing stored.</p>
+<form id="entForm" class="ent-form">{form}<button type="submit" class="btn">Show what I could get</button></form>
+<div id="entOut" aria-live="polite"></div>
+<div class="ad" data-slot="content"></div>
+<h2>Questions</h2>{faq_html(q)}"""
+    app.page("what-am-i-entitled-to.html", "What Am I Entitled To? Free Irish Benefits Checker 2026 – Welfare, PRSI & Tax Credits",
+             "Free checker: answer 10 questions and see the Irish benefits you could be missing – free eye test and dental check with PRSI, Rent Tax Credit, Child Benefit, Working Family Payment, Carer's and more.",
+             body, active="All payments", jsonld=[faq_ld(q)], crumbs=cr + [("What am I entitled to?", None)], h1="What am I entitled to?", scripts=["js/entitled.js"],
+             sources=("gov_tb", "gov_anp", "gov_tsa", "dsp27", "ci_rates27"), cross=["taxrefund", "salary", "rent"], priority="0.9",
+             share_text="Free checker: see the Irish benefits and tax credits you might be missing (most workers can get a free eye test and dental check):")
+
 import re
 # ---------------------------------------------------------------- engagement: next step + quick checks
 from sitekit import quick_check
@@ -548,7 +752,7 @@ app.checks = {"christmas-payment-dates.html": _XQ, "payment-dates.html": _XQ, "l
         ("No", "You need a qualifying long-term payment (such as Disability Allowance, One-Parent Family Payment, Carer's Allowance or Jobseeker's Allowance after 12 months) and to pass the means test. <a href='fuel-allowance.html'>Full list →</a>")])}
 
 if __name__ == "__main__":
-    build_index(); payment_pages(); build_hubs(); build_xmas(); build_xmas_dates(); build_dates(); build_extras(); build_faq()
+    build_index(); payment_pages(); build_hubs(); build_xmas(); build_xmas_dates(); build_dates(); build_extras(); build_prsi_extras(); build_faq()
     og_image(os.path.join(app.root, "og.png"), "BUDGET 2027", "Social welfare", "rates 2027", "State Pension · Jobseeker's · Carer's · Child Benefit", "Christmas Bonus 2026 · payment dates",
              "tavion.ie/welfare  ·  free, no sign-up", (125, 211, 252), (3, 105, 161), (5, 40, 60))
     app.update_sitemap()

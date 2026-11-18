@@ -463,6 +463,13 @@ CLAIMS = [  # slug, item, yes/no/maybe, answer, related page
     ("health-insurance", "health insurance premiums", "no", "Not as a health expense – relief is already given at source on the premium.", "health-insurance-tax-relief.html"),
     ("gym-membership", "gym membership", "no", "Gym membership isn't a health expense, even if recommended.", "medical-expenses.html"),
 ]
+# Where PRSI's Treatment Benefit pays instead of (or before) tax relief
+PRSI_TIP = {
+    "glasses": ("free-eye-test.html", "you can get <strong>free basic glasses or contact lenses every 2 years</strong> through Treatment Benefit"),
+    "eye-test": ("free-eye-test.html", "you can get a <strong>free eye test every 2 years</strong> through Treatment Benefit"),
+    "dental-cleaning": ("free-dental-check.html", "you get a <strong>free dental check-up every year</strong> and a <strong>scale and polish for €15 or less</strong>"),
+    "hearing-aids": ("hearing-aid-grant.html", "the Department pays <strong>up to €500 per hearing aid</strong> every 4 years – claim tax relief only on the rest"),
+}
 ANS = {"yes": ("✅ Yes", "good"), "no": ("❌ No", "bad"), "maybe": ("⚠️ Sometimes", "neutral")}
 def build_claims():
     rows = []
@@ -471,8 +478,10 @@ def build_claims():
         rows.append([f'<a href="can-i-claim-{slug}.html">{item[0].upper() + item[1:]}</a>', lab])
         others = [c for c in CLAIMS if c[0] != slug and c[4] == rel][:8]
         ex = "" if yn == "no" else f"<p>Example: €1,000 spent on {item} = <strong>€200 back</strong> – or <strong>€800</strong> if you claim the same each year for four years.</p>"
+        tip = PRSI_TIP.get(slug)
+        tip = f'<div class="callout">💡 <strong>Pay PRSI?</strong> Then {tip[1]}. <a href="../welfare/{tip[0]}" data-track="cross_app" data-label="taxrefund_to_tb">How to claim →</a></div>' if tip else ""
         body = f"""<div class="verdict {cls}"><h2>{lab}</h2><p>{ans}</p></div>
-{ex}
+{tip}{ex}
 <div class="ad" data-slot="content"></div>
 <h2>The rules</h2>
 {lis(["Relief is 20% of what you paid that wasn't refunded by insurance, the HSE or compensation.", "The care must be given or advised by a registered practitioner.", "Keep receipts for six years – you don't send them unless asked.", "You can claim back four years: 2022 closes on 31 December 2026."])}
