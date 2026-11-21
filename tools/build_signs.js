@@ -26,7 +26,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-1290266452162223">
+<meta name="google-adsense-account" content="ca-pub-1899156597455780">
 <script src="/assets/tavion.js"></script>
 <title>Irish Road Signs and Meanings – Learn for the Theory Test</title>
 <meta name="description" content="Learn Irish road signs and their meanings for the driver theory test: stop, yield, speed limits, mandatory and warning signs. Quiz yourself, then practise sign questions free.">

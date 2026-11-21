@@ -8,7 +8,7 @@
 window.TAVION = {
   gtmId: "",                                 // Google Tag Manager container ID (e.g. "GTM-N3GQGR49") – leave empty while using gaId
   gaId: "G-Q9DV6F3296",                      // Google Analytics 4 Measurement ID (stream "tavion", https://tavion.ie)
-  adsenseClient: "ca-pub-1290266452162223"   // Google AdSense publisher ID
+  adsenseClient: "ca-pub-1899156597455780"   // Google AdSense publisher ID
 };
 
 (function () {

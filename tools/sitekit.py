@@ -144,7 +144,7 @@ class App:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="google-adsense-account" content="ca-pub-1290266452162223">
+<meta name="google-adsense-account" content="ca-pub-1899156597455780">
 <script src="/assets/tavion.js"></script>
 <title>{title}</title>
 <meta name="description" content="{desc}">
