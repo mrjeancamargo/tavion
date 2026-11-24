@@ -24,8 +24,11 @@ def path_for(url):
     if rel == "" or rel.endswith("/"): rel += "index.html"
     return os.path.join(REPO, *rel.split("/"))
 
+AD_ID = re.compile(r"pub-\d{16}")
+
 def fingerprint(html):
-    return hashlib.sha1(DATE_LD.sub('"dateModified": ""', html).encode("utf-8")).hexdigest()
+    # Ignore build dates and the AdSense publisher ID (swapping ad accounts isn't a content change).
+    return hashlib.sha1(AD_ID.sub("pub-", DATE_LD.sub('"dateModified": ""', html)).encode("utf-8")).hexdigest()
 
 def run(today=None, quiet=False):
     today = today or datetime.date.today().isoformat()

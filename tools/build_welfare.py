@@ -115,8 +115,8 @@ INFO = {
 }
 
 TITLES = {
-    "cost-of-disability-payment": ("€500 Cost of Disability Payment 2027 – Paid Week of 15 February | Who Gets It",
-        "The €500 Cost of Disability payment is paid in the week starting 15 February 2027 to people on Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit. Automatic – no need to apply."),
+    "cost-of-disability-payment": ("€500 Disability Payment 2027 – Paid 15 Feb | Who Gets It (DCA & Carers?)",
+        "When is the €500 Cost of Disability payment paid, and will you get it? Check which payments qualify, whether DCA and Carer's Allowance are included, and if you need to apply."),
     "fuel-allowance": ("Fuel Allowance 2026/2027 Ireland – €38, €43 from January | Who Qualifies & Lump Sums",
         "Fuel Allowance is €38 a week, rising to €43 from 4 January 2027. Season from 28 September 2026 to April 2027 (€1,134). Lump sums €532 and €602, who qualifies and the means test."),
     "child-benefit": ("Child Benefit Ireland 2026–2027 – €140 a Month, Payment Dates & Who Qualifies",
@@ -135,7 +135,9 @@ EXTRA_FAQ = {
                          ("Can I get Carer's Allowance and my own State Pension?", "Yes. If you get another social welfare payment, such as your own State Pension, you can keep a half-rate Carer's Allowance on top, and you still get the €2,000 Carer's Support Grant."),
                          ("Do carers get the Christmas Bonus?", "Yes – Carer's Allowance, Carer's Benefit and half-rate Carer's Allowance all get the 100% Christmas Bonus in the week starting 7 December 2026.")],
     "cost-of-disability-payment": [("When is the €500 disability payment paid?", "In the week starting 15 February 2027, on your usual payment day, with your qualifying payment."),
-                                   ("Do I need to apply for the €500 Cost of Disability payment?", "No. It's paid automatically with your Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit.")],
+                                   ("Do families on Domiciliary Care Allowance get the €500?", "No – as announced, it's for adults on long-term disability payments, and Domiciliary Care Allowance isn't on the list. DCA families do get the Christmas Bonus, and DCA rises to €380 a month from January 2027. <a href='domiciliary-care-allowance.html'>DCA rates →</a>"),
+        ("Do carers get the €500 Cost of Disability payment?", "Not on Carer's Allowance alone – it's paid with Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit. Carers get the €2,000 Carer's Support Grant in June instead. <a href='carers-support-grant.html'>Carer's Support Grant →</a>"),
+        ("Do I need to apply for the €500 Cost of Disability payment?", "No. It's paid automatically with your Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit.")],
     "fuel-allowance": [("When is Fuel Allowance paid?", "Weekly from the week of 28 September 2026 to April 2027, or as two lump sums: €532 in the week of 28 September 2026 and €602 in January 2027."),
                        ("Is there a Fuel Allowance bonus or €300 lump sum this year?", "No. Budget 2027 increased the weekly rate by €5 (to €43 from January) instead.")],
     "child-benefit": [("When is Child Benefit paid?", "On the first Tuesday of every month – Tuesday 1 December 2026 and Tuesday 5 January 2027."),
@@ -417,8 +419,8 @@ def build_dates():
 <div class="ad" data-slot="content"></div>
 <h2>Fuel Allowance questions</h2>{faq_html(fa_faq)}
 <p><a href="fuel-allowance.html">Who qualifies for Fuel Allowance →</a> · <a href="household-benefits-package.html">Household Benefits Package →</a> · <a href="payment-dates.html">All payment dates →</a></p>"""
-    app.page("fuel-allowance-payment-dates.html", "Fuel Allowance Payment Dates 2026/2027 – Lump Sum Dates, €38 to €43",
-             "Fuel Allowance 2026/2027: season from the week of 28 September 2026 to April 2027. €38 a week, €43 from 4 January 2027. Lump sums €532 (September) and €602 (January). No €300 lump sum.",
+    app.page("fuel-allowance-payment-dates.html", "Fuel Allowance Payment Dates 2026/2027 – Next Lump Sum, €43 from January & No €300 Bonus?",
+             "When is the next Fuel Allowance lump sum paid? See the January 2027 date, when the rate rises to €43, how much you get for the season and whether there's a €300 bonus this year.",
              body, active="Payment dates", jsonld=[faq_ld(fa_faq)], crumbs=[("Welfare", "./"), ("Payment dates", "payment-dates.html"), ("Fuel Allowance dates", None)], h1="Fuel Allowance payment dates 2026/2027",
              sources=("ci_fuel-allowance", "dsp27"), cross=["salary", "rent", "solar"], priority="0.9")
 

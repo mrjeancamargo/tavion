@@ -127,14 +127,12 @@ def build_index():
     ld = {"@context": "https://schema.org", "@type": "WebApplication", "name": "Irish Bank Holidays & Annual Leave Planner", "url": app.BASE, "applicationCategory": "UtilitiesApplication",
           "operatingSystem": "Any", "isAccessibleForFree": True, "inLanguage": "en-IE", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
           "description": f"Irish public holidays {y} with a leave planner that finds the best days to book off for the most consecutive days off."}
-    events = [{"@context": "https://schema.org", "@type": "Event", "name": f"{h['name']} {y} (public holiday, Ireland)", "startDate": h["date"], "endDate": h["date"],
-               "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Country", "name": "Ireland"},
-               "description": ABOUT[h["key"]][1][:150]} for h in HOL[y]]
+    # No Event markup: a public holiday isn't an event (no organiser/performer/offers), and Google flags it.
     faqs = [(f"How many bank holidays are there in Ireland in {y}?", f"10. {s27['weekdayHolidays']} fall on weekdays; Christmas Day and St Stephen's Day {y} fall on a weekend."),
             (f"When is the next bank holiday in Ireland?", f"See the countdown above. In {y} they are: " + "; ".join(f"{h['name']} {nice(h['date'], False)}" for h in HOL[y]) + ".")]
     app.page("index.html", f"Bank Holidays Ireland {y} – All 10 Dates + Annual Leave Planner",
              f"Irish bank holidays {y}: New Year's Day, St Brigid's Day 1 Feb, St Patrick's Day, Easter Monday 29 Mar, May, June, August, October, Christmas. Plan your leave for the most days off.",
-             body, active="2027 & planner", jsonld=[ld, faq_ld(faqs)] + events, slot="calculator", scripts=["js/holidays.js", "js/planner.js"], h1=f"Bank holidays Ireland {y}",
+             body, active="2027 & planner", jsonld=[ld, faq_ld(faqs)], slot="calculator", scripts=["js/holidays.js", "js/planner.js"], h1=f"Bank holidays Ireland {y}",
              sources=("ci", "school", "act"), cross=CROSS, priority="1.0",
              share_text=f"All the Irish bank holidays for {y} – and a planner that turns 9 days of leave into {p9['daysOff']} days off:")
 
@@ -199,11 +197,9 @@ def build_holidays():
 <h2>About {NAMES[k]}</h2><p>{about}</p>
 <h2>All bank holidays {y}</h2>{table(["Holiday", "Date", ""], hol_rows(y))}
 <div class="btn-row">{ICS_LINK}</div>"""
-            ev = {"@context": "https://schema.org", "@type": "Event", "name": f"{NAMES[k]} {y} (Ireland)", "startDate": h["date"], "endDate": h["date"],
-                  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "eventStatus": "https://schema.org/EventScheduled", "location": {"@type": "Country", "name": "Ireland"}, "description": about[:200]}
             app.page(f"{SLUG[k]}-{y}.html", f"{NAMES[k]} {y} Ireland – {wd} {x.day} {x.strftime('%B')} | Bank Holiday",
                      f"{NAMES[k]} {y} in Ireland is {wd} {x.day} {x.strftime('%B %Y')}. Whether it's a long weekend, the best days to book off, and what the day means.",
-                     body, jsonld=[ev, faq_ld([(f"When is {NAMES[k]} {y}?", f"{wd} {x.day} {x.strftime('%B %Y')}.")])], crumbs=[("Bank holidays", "./"), (NAMES[k], f"{SLUG[k]}.html"), (str(y), None)],
+                     body, jsonld=[faq_ld([(f"When is {NAMES[k]} {y}?", f"{wd} {x.day} {x.strftime('%B %Y')}.")])], crumbs=[("Bank holidays", "./"), (NAMES[k], f"{SLUG[k]}.html"), (str(y), None)],
                      h1=f"{NAMES[k]} {y}", sources=("ci",), cross=CROSS, priority="0.7" if y == FOCUS else "0.5")
 
 # ---------- Leave planner pages ----------
