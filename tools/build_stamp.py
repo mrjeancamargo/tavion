@@ -24,6 +24,7 @@ SRC = {
     "rev_lpt_bands": ("Revenue – LPT valuation bands and rates 2026–2030", "https://www.revenue.ie/en/property/local-property-tax/valuing-your-property/valuation-bands-rates.aspx"),
     "rev_lpt_2026": ("Revenue – LPT: what you need to do for 2026", "https://www.revenue.ie/en/property/local-property-tax/what-to-do/valuing-your-property.aspx"),
     "rev_lpt_calc": ("Revenue – LPT calculator", "https://lpt.revenue.ie/lpt-web/reckoner/lpt.html"),
+    "rev_lpt_dates": ("Revenue – LPT payment dates for 2027", "https://www.revenue.ie/en/property/local-property-tax/paying-your-lpt/payment-dates.aspx"),
     "rev_lpt": ("Revenue – Local Property Tax", "https://www.revenue.ie/en/property/local-property-tax/index.aspx"),
     "ci_sd": ("Citizens Information – Stamp duty on property", "https://www.citizensinformation.ie/en/money-and-tax/tax/housing-taxes-and-reliefs/stamp-duty-on-property/"),
     "ci_lpt": ("Citizens Information – Local Property Tax", "https://www.citizensinformation.ie/en/housing/owning-a-home/home-owner-supports/local-property-tax/"),
@@ -44,7 +45,7 @@ let raw = ""; process.stdin.on("data", d => raw += d).on("end", () => {
 });
 """
 def engine(q):
-    p = subprocess.run(["node", "-e", NODE, ENGINE], input=json.dumps(q), capture_output=True, text=True, check=True)
+    p = subprocess.run(["node", "-e", NODE, ENGINE], input=json.dumps(q), capture_output=True, text=True, encoding="utf-8", check=True)
     return json.loads(p.stdout)
 META = engine([])
 BANDS, COUNCILS, FEES = META["bands"], META["councils"], META["fees"]
@@ -256,7 +257,8 @@ def build_index():
 <div class="ad" data-slot="result"></div>
 <h2>LPT valuation bands 2026–2030</h2>
 {table(["Band", "Value on 1 November 2025", "Basic annual LPT"], rows)}
-<p class="muted small">Your council can raise the basic rate by up to 25% or cut it by up to 15% (the Local Adjustment Factor). <a href="lpt-councils.html">See every council →</a></p>"""
+<p class="muted small">Your council can raise the basic rate by up to 25% or cut it by up to 15% (the Local Adjustment Factor). <a href="lpt-councils.html">See every council →</a></p>
+<p>📅 <a href="lpt-payment-dates-2027.html" data-track="next_step" data-label="lpt_to_dates">LPT payment dates 2027 – when is it due?</a></p>"""
     faqs = [("How is LPT calculated for 2026?", "Your home's value on 1 November 2025 sets your band for 2026 to 2030. Each band has a basic annual charge (€95 to €3,110), adjusted up or down by your council's Local Adjustment Factor."),
             ("Do I have to revalue my home for LPT?", "The valuation date was 1 November 2025; that value applies until 2030. If you bought or built after that, you value the home as at 1 November 2025.")]
     write("lpt.html", page("lpt.html", "LPT Calculator 2026 & 2027 – Local Property Tax Bands Ireland",
@@ -391,6 +393,35 @@ def build_lpt_pages():
                                     "Local Property Tax Local Adjustment Factors for every Irish council in 2026 and 2027 – from −15% in Dún Laoghaire-Rathdown to +25% in Cavan, Leitrim and Sligo.",
                                     body, active="Councils", crumbs=[("Stamp duty", "./"), ("Councils", None)], h1="LPT rates by council", sources=("rev_lpt_bands",)))
 
+# ---------------------------------------------------------------- LPT payment dates
+def build_lpt_dates():
+    faqs = [("When is property tax due for 2027?", "It depends on how you pay. Paying in full by card or through An Post or Payzone: by <strong>11 January 2027</strong>. Annual debit (ADI): taken on <strong>21 March 2027</strong>. Monthly direct debit: the 15th of every month from <strong>15 January 2027</strong>. Deduction from salary, pension or welfare: spread over the year from January."),
+            ("What's the deadline to choose how I pay LPT for 2027?", "<strong>2 December 2026</strong> if you want to spread your payments over 2027 or pay by annual debit. Choose it in the LPT online service on revenue.ie. If you don't, the method you used last year is usually carried forward."),
+            ("Can I pay LPT monthly?", "Yes – by monthly direct debit (from 15 January 2027, then the 15th of each month), by deduction from your salary, pension or social welfare payment, or by regular cash payments through An Post or Payzone."),
+            ("How much is LPT in 2027?", "It depends on your home's valuation band and your council. Band 1 (up to €240,000) is €95 a year before your council's adjustment. <a href='lpt.html'>Work out yours →</a>"),
+            ("What happens if I don't pay LPT?", "Revenue can deduct it from your salary or pension without your agreement, add interest, and refuse a tax clearance certificate. If you have unpaid LPT from earlier years, pay it straight away.")]
+    rows = [["January 2027", "Deduction from salary, pension or welfare starts; regular cash payments (An Post, Payzone) start"],
+            ["<strong>11 January 2027</strong>", "Last day to pay in full by card, or in full through An Post or Payzone"],
+            ["<strong>15 January 2027</strong>", "Monthly direct debit starts – then the 15th of every month"],
+            ["<strong>21 March 2027</strong>", "Annual Debit Instruction (ADI) – the full amount is taken from your bank account"]]
+    body = f"""<p class="lead">When you pay Local Property Tax for 2027 – every date, by payment method.</p>
+<p class="updated">Revenue · Checked {CHECKED}</p>
+{key_facts(["<strong>2 December 2026</strong>: last day to choose your payment method if you're spreading payments over 2027 or paying by annual debit.",
+            "Paying in full by card or at An Post / Payzone: by <strong>11 January 2027</strong>.",
+            "Monthly direct debit: the <strong>15th of every month</strong>, starting 15 January 2027.",
+            "Annual debit (ADI): taken on <strong>21 March 2027</strong>."])}
+<h2>LPT payment dates 2027</h2>
+{table(["Date", "What happens"], rows)}
+<div class="ad" data-slot="content"></div>
+<div class="cta"><h2>How much will you pay?</h2><p>Your 2027 LPT by valuation band and council.</p><a class="btn" href="lpt.html" data-track="next_step" data-label="lptdates_to_calc">LPT calculator</a></div>
+<h2>LPT 2027 questions</h2>{faq_html(faqs)}
+<p><a href="lpt-councils.html">Your council's rate for 2027 →</a> · <a href="lpt-bands.html">All LPT bands →</a></p>"""
+    write("lpt-payment-dates-2027.html", page("lpt-payment-dates-2027.html", "LPT Payment Dates 2027 – When Is Property Tax Due? (Deadline 2 Dec)",
+        "When is Local Property Tax due for 2027? See the deadline to choose how you pay, the January, monthly and March dates, and what happens if you miss them.",
+        body, active="Property tax", jsonld=[faq_ld(faqs)], crumbs=[("Stamp duty", "./"), ("Property tax", "lpt.html"), ("Payment dates 2027", None)],
+        h1="LPT payment dates 2027", sources=("rev_lpt_dates", "rev_lpt"),
+        share_text="When is property tax due for 2027? Every LPT date – and the 2 December deadline:"))
+
 # ---------------------------------------------------------------- guide + FAQ
 def build_guide():
     body = f"""<p class="lead">Everything buyers and homeowners need to know about stamp duty and Local Property Tax in Ireland.</p>
@@ -489,8 +520,8 @@ def update_llms():
 
 if __name__ == "__main__":
     os.makedirs(ROOT, exist_ok=True)
-    build_index(); build_prices(); build_lpt_pages(); build_guide(); build_og()
-    files = [("index.html", "0.9"), ("lpt.html", "0.9"), ("prices.html", "0.8"), ("lpt-bands.html", "0.8"), ("lpt-councils.html", "0.8"), ("guide.html", "0.7"), ("faq.html", "0.7"),
+    build_index(); build_prices(); build_lpt_pages(); build_lpt_dates(); build_guide(); build_og()
+    files = [("index.html", "0.9"), ("lpt.html", "0.9"), ("prices.html", "0.8"), ("lpt-bands.html", "0.8"), ("lpt-councils.html", "0.8"), ("lpt-payment-dates-2027.html", "0.8"), ("guide.html", "0.7"), ("faq.html", "0.7"),
              ("lpt-band-over-2-1-million.html", "0.5")] + [(pslug(p), "0.6") for p in PRICES] + [(f"lpt-band-{i + 1}.html", "0.6") for i in range(len(BANDS))] + \
             [(f"lpt-{k}.html", "0.6") for k in COUNCILS]
     update_sitemap(files); update_llms()

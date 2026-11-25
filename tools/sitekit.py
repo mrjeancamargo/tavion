@@ -84,7 +84,7 @@ def engage(body, filename, next_fn=None, checks=None):
     return body
 
 def node(engine_path, script, q):
-    p = subprocess.run(["node", "-e", script, engine_path], input=json.dumps(q), capture_output=True, text=True, check=True)
+    p = subprocess.run(["node", "-e", script, engine_path], input=json.dumps(q), capture_output=True, text=True, encoding="utf-8", check=True)
     return json.loads(p.stdout)
 
 class App:

@@ -115,6 +115,8 @@ INFO = {
 }
 
 TITLES = {
+    "bereaved-partners-pension": ("Widow's Pension 2027 Ireland (Bereaved Partner's Pension) – €269.50 a Week",
+        "How much is the widow's pension in Ireland? It's now called the Bereaved Partner's Pension: €269.50 a week from January 2027 under 66. Rates at 66 and 80, who qualifies and the Christmas Bonus."),
     "cost-of-disability-payment": ("€500 Disability Payment 2027 – Paid 15 Feb | Who Gets It (DCA & Carers?)",
         "When is the €500 Cost of Disability payment paid, and will you get it? Check which payments qualify, whether DCA and Carer's Allowance are included, and if you need to apply."),
     "fuel-allowance": ("Fuel Allowance 2026/2027 Ireland – €38, €43 from January | Who Qualifies & Lump Sums",
@@ -134,9 +136,12 @@ EXTRA_FAQ = {
     "carers-allowance": [("Can my spouse keep Carer's Allowance when I move to the State Pension?", "Yes. Carer's Allowance depends on the care the person needs, not on their payment, so it continues when the person cared for moves from Disability Allowance to the State Pension at 66. Because the means test counts the couple's combined income, a higher pension can reduce the Carer's Allowance rate – the first €2,000 a week of combined income is ignored (€2,300 from July 2027)."),
                          ("Can I get Carer's Allowance and my own State Pension?", "Yes. If you get another social welfare payment, such as your own State Pension, you can keep a half-rate Carer's Allowance on top, and you still get the €2,000 Carer's Support Grant."),
                          ("Do carers get the Christmas Bonus?", "Yes – Carer's Allowance, Carer's Benefit and half-rate Carer's Allowance all get the 100% Christmas Bonus in the week starting 7 December 2026.")],
+    "bereaved-partners-pension": [("Is the widow's pension the same as the Bereaved Partner's Pension?", "Yes. The Widow's, Widower's or Surviving Civil Partner's (Contributory) Pension is now called the Bereaved Partner's Pension. If you were already getting it, you didn't need to do anything."),
+                                  ("How much is the widow's pension in 2027?", "€269.50 a week from January 2027 if you're under 66 (up €10 from €259.50), with higher rates at 66 and 80. It also gets the Christmas Bonus.")],
     "cost-of-disability-payment": [("When is the €500 disability payment paid?", "In the week starting 15 February 2027, on your usual payment day, with your qualifying payment."),
                                    ("Do families on Domiciliary Care Allowance get the €500?", "No – as announced, it's for adults on long-term disability payments, and Domiciliary Care Allowance isn't on the list. DCA families do get the Christmas Bonus, and DCA rises to €380 a month from January 2027. <a href='domiciliary-care-allowance.html'>DCA rates →</a>"),
         ("Do carers get the €500 Cost of Disability payment?", "Not on Carer's Allowance alone – it's paid with Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit. Carers get the €2,000 Carer's Support Grant in June instead. <a href='carers-support-grant.html'>Carer's Support Grant →</a>"),
+        ("Is this the Disability Support Grant?", "Yes – it's the same idea. A once-off Disability Support Grant was paid in 2025; Budget 2027 brought it back as the €500 Cost of Disability Payment, paid in the week starting 15 February 2027."),
         ("Do I need to apply for the €500 Cost of Disability payment?", "No. It's paid automatically with your Disability Allowance, Blind Pension, Invalidity Pension or Partial Capacity Benefit.")],
     "fuel-allowance": [("When is Fuel Allowance paid?", "Weekly from the week of 28 September 2026 to April 2027, or as two lump sums: €532 in the week of 28 September 2026 and €602 in January 2027."),
                        ("Is there a Fuel Allowance bonus or €300 lump sum this year?", "No. Budget 2027 increased the weekly rate by €5 (to €43 from January) instead.")],

@@ -316,13 +316,17 @@ def build_guides():
                "Plus a standard rate band €4,000 wider than a single person's (€48,000 in 2026).", "You must not be married, in a civil partnership or <strong>cohabiting</strong>.",
                "Your child must live with you for most of the year and be under 18, or in full-time education.", "The main carer can give it up to the other parent (secondary claimant)."],
               table(["", "2022", "2023", "2024", "2025", "2026"], [["Credit"] + credits_row("spccc")[:5]]), ("spccc", "charts"), [], None, None))
-    G.append(("incapacitated-child-tax-credit.html", "Incapacitated Child Tax Credit 2026 – €3,800 a Year",
-              "Incapacitated Child Tax Credit: €3,800 a year for 2025–2026 for a child with a permanent disability. Who qualifies and how to claim back four years.",
+    G.append(("incapacitated-child-tax-credit.html", "Incapacitated Child Tax Credit 2026 – €3,800 a Year | ICC2 Form & How to Claim",
+              "Incapacitated Child Tax Credit: €3,800 a year for a child with a permanent disability. Who qualifies, what the ICC2 form is, and how to claim back four years.",
               "Incapacitated Child Tax Credit", "If your child has a permanent physical or mental disability, you could claim €3,800 a year – and backdate it four years.",
               [f"<strong>{eur(C['incapChild']['2026'])}</strong> a year for 2025 and 2026 ({eur(C['incapChild']['2022'])} for 2022–2023, {eur(C['incapChild']['2024'])} for 2024).",
                "For a child under 18 who is permanently incapacitated, or over 18 and unable to maintain themselves (incapacitated before 21, or while in full-time education).",
-               "A doctor's certificate is needed with your first claim.", "Four years backdated could be worth over <strong>€14,000</strong>."],
-              '<p>Also: <a href="../welfare/domiciliary-care-allowance.html">Domiciliary Care Allowance</a> · <a href="child-health-expenses.html">child health expenses</a></p>', ("incap", "charts"), [], None, None))
+               "Your child's doctor fills in <strong>Form ICC2</strong> (the medical certificate) with your first claim.", "Four years backdated could be worth over <strong>€14,000</strong>."],
+              '<p>Also: <a href="../welfare/domiciliary-care-allowance.html">Domiciliary Care Allowance</a> · <a href="child-health-expenses.html">child health expenses</a></p>', ("incap", "charts"),
+              [("What is the ICC2 form?", "Form ICC2 is the medical certificate for the Incapacitated Child Tax Credit. Your child's doctor (GP or consultant) completes it to confirm the child is permanently incapacitated. You only need it with your first claim."),
+               ("How do I claim the Incapacitated Child Tax Credit?", "In Revenue myAccount: choose 'You and your family', then 'Incapacitated Child Tax Credit', and upload the completed ICC2. If you can't use myAccount, fill in Form ICC1 and send it with the ICC2 to your Revenue office."),
+               ("Can I backdate the Incapacitated Child Tax Credit?", "Yes – you can claim for the previous four years, so a claim made now can go back to 2022."),
+               ("Can I get it as well as Domiciliary Care Allowance?", "Yes. Domiciliary Care Allowance is a social welfare payment and the Incapacitated Child Tax Credit is a tax credit – you can get both. <a href='../welfare/domiciliary-care-allowance.html'>DCA rates →</a>")], None, None))
     G.append(("dependent-relative-tax-credit.html", "Dependent Relative Tax Credit 2026 – €305 a Year",
               "Dependent Relative Tax Credit: €305 for 2025 and 2026 (€245 for 2022–2024) if you support an elderly or incapacitated relative whose income is under €18,548.",
               "Dependent Relative Tax Credit", "Supporting an elderly or incapacitated relative? There's a small credit you can claim back four years.",

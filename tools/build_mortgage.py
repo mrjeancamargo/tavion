@@ -58,7 +58,7 @@ let raw = ""; process.stdin.on("data", d => raw += d).on("end", () => {
 });
 """
 def engine(q):
-    p = subprocess.run(["node", "-e", NODE, ENGINE], input=json.dumps(q), capture_output=True, text=True, check=True)
+    p = subprocess.run(["node", "-e", NODE, ENGINE], input=json.dumps(q), capture_output=True, text=True, encoding="utf-8", check=True)
     return json.loads(p.stdout)
 
 META = engine([])
